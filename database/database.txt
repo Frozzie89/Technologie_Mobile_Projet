@@ -1,0 +1,2 @@
+Si on fait des changements importants à la base de données, il faut l'exporter sous format sql et la déposer dans ce dossier.
+On peut donc travailler tous sur cette meme base de données.

@@ -1,7 +1,9 @@
 <?php
-
 require "inc/header.php";
 require "inc/nav.php";
+
+$tags = $db->query("SELECT * FROM tags")->fetchAll();
+
 ?>
 <section id="homePage">
     <div class="container">

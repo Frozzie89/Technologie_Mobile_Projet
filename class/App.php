@@ -8,7 +8,7 @@ class App
     static function getDatabase(){
         // Si la connection à la BDD n'est pas initialisée, initialise-la.
         if(!self::$db){
-            self::$db = new Database('root','','localhost', 'nomDB');
+            self::$db = new Database('root','','localhost', 'projettm');
         }
         return self::$db;
     }
