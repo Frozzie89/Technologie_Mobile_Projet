@@ -1,10 +1,9 @@
+<!-- Canvas d'une page web, -->
 <?php
 require "inc/header.php";
 require "inc/nav.php";
-
-$tags = $db->query("SELECT * FROM tags")->fetchAll();
-
 ?>
+
 <section id="homePage">
     <div class="container">
         <div class="col-lg-12">
