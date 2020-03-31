@@ -1,27 +1,14 @@
 <?php
+/* Classe à INITIALISER ! */
+/*
+$db = App::getDatabase();
+$auth = App::getAuth();
+$admin = App::getAdmin();
+
+// Instancie les sessions
+$session = Session::getInstance();
+*/
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="/docs/4.1/assets/img/favicons/favicon.ico">
-
-    <title>Starter Template for Bootstrap</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.1/examples/starter-template/">
-
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
-</head>
-
-<body>
-
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,23 +41,3 @@
         </form>
     </div>
 </nav>
-
-<main role="main" class="container">
-
-    <div class="starter-template">
-        <h1 style="margin-top: 100px;">Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-    </div>
-
-</main><!-- /.container -->
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="assets/js/jquery-3.4.1.js"></script>
-<script>window.jQuery || document.write('<script src="assets/js/jquery-3.4.1.js"><\/script>')</script>
-<script src="assets/js/bootstrap.bundle.js"></script>
-<script src="assets/js/script.js"></script>
-</body>
-</html>
-
