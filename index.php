@@ -23,10 +23,24 @@ if (!empty($_POST['LoginEmail']) && !empty($_POST['LoginMDP']))
 {
     // vérifie si le mail et le mot de passe correspondent
     // $LoginExists = $db->query("select login_membres from membres")
+    echo "<script> alert(test)</script>";
 }
 
 empty($_POST);
 ?>
+
+<script type="text/javascript" src="assets/js/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // si lors de l'inscription, l'email est déjà pris, ré-afficher le modal d'inscription
+        if ($('#RegisterMailExists').length > 0) $('#registerModal').modal('show');
+
+        // si le login n'a pas fonctionné, ré-afficher le modal d'authentification
+        /* -- todo -- */
+    });
+
+
+</script>
 
 <section id="homePage">
     <div class="container">
@@ -47,7 +61,7 @@ empty($_POST);
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post">
+                <form method="POST" id="LoginForm">
                     <div class="form-group">
                         <label for="LoginEmail">Adresse Email</label>
                         <input type="text" class="form-control" id="LoginEmail" placeholder="" name="LoginEmail">
@@ -56,10 +70,10 @@ empty($_POST);
                         <label for="LoginMDP">Mot de passe</label>
                         <input type="password" class="form-control" id="LoginMDP" placeholder="" name="LoginMDP">
                     </div>
+                    <div class="modal-footer form-group">
+                        <button type="button" class="btn btn-primary" name="loginSubmit">S'authentifier</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" name="loginSubmit">S'authentifier</button>
             </div>
         </div>
     </div>
@@ -78,41 +92,41 @@ empty($_POST);
                 </button>
             </div>
             <div class="modal-body">
-                <div class="container">
-                    <form method="POST" id="registerForm">
-                        <div class="form-group">
-                            <label for="RegisterMail">Adresse Email</label>
-                            <input type="email" class="form-control" id="RegisterMail" placeholder="" name="RegisterEmail">
-                            <?php if (!empty($RegisterMailExists)) echo "<span style=\"color: red;\">Cette adresse mail est déjà prise</span>" ?>
-                        </div>
+                <form method="POST" id="RegisterForm">
+                    <div class="form-group">
+                        <label for="RegisterMail">Adresse Email</label>
+                        <input type="email" class="form-control" id="RegisterMail" placeholder="" name="RegisterEmail">
+                        <?php if (!empty($RegisterMailExists)) echo "<span id=\"RegisterMailExists\" style=\"color: red;\">Cette adresse mail est déjà prise</span>" ?>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="RegisterPseudo">Pseudonyme</label>
-                            <input type="text" class="form-control" id="RegisterPseudo" placeholder="" name="RegisterPseudo">
-                        </div>
+                    <div class="form-group">
+                        <label for="RegisterPseudo">Pseudonyme</label>
+                        <input type="text" class="form-control" id="RegisterPseudo" placeholder=""
+                            name="RegisterPseudo">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="RegisterMDP">Mot de passe</label>
-                            <label for="RegisterMDP" id="strongMDP"></label>
-                            <input type="password" class="form-control" id="RegisterMDP"
-                                placeholder="Doit contenir au moins un chiffre" name="RegisterMdp">
-                            <span id="mdpNoNum" style="display:none; color: red;">Le mot de passe doit contenir au moins
-                                un
-                                chiffre</span>
-                        </div>
+                    <div class="form-group">
+                        <label for="RegisterMDP">Mot de passe</label>
+                        <label for="RegisterMDP" id="strongMDP"></label>
+                        <input type="password" class="form-control" id="RegisterMDP"
+                            placeholder="Doit contenir au moins un chiffre" name="RegisterMdp">
+                        <span id="mdpNoNum" style="display:none; color: red;">Le mot de passe doit contenir au moins
+                            un
+                            chiffre</span>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="RegisterMDPVerif">Verification du mot de passe</label>
-                            <input type="password" class="form-control" id="RegisterMDPVerif" placeholder=""
-                                name="RegisterMdpVerif">
-                            <span id="mdpUnmatch" style="display:none; color: red;">Les mots de passes ne correspondent
-                                pas</span><br>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" id="registerSubmit">S'inscrire</button> <!-- a l'aide, le bouton marche pas ! :( -->
+                    <div class="form-group">
+                        <label for="RegisterMDPVerif">Verification du mot de passe</label>
+                        <input type="password" class="form-control" id="RegisterMDPVerif" placeholder=""
+                            name="RegisterMdpVerif">
+                        <span id="mdpUnmatch" style="display:none; color: red;">Les mots de passes ne correspondent
+                            pas</span><br>
+                    </div>
+
+                    <div class="modal-footer form-group">
+                        <button type="submit" class="btn btn-primary" id="registerSubmit">S'inscrire</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
