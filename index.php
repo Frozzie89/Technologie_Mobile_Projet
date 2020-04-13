@@ -2,6 +2,30 @@
 <?php
 require "inc/header.php";
 require "inc/nav.php";
+
+$db = new Database("root","","localhost","projettm");
+
+// enregistrement
+if (!empty($_POST['RegisterEmail']) && !empty($_POST['RegisterMdp']) && !empty($_POST['RegisterPseudo']))
+{
+    // vérifie si le mail existe déjà
+    $RegisterMailExists = $db->query("select login_membres from membres where login_membres=:RegisterMail", ["RegisterMail" => $_POST['RegisterEmail']])->fetch();
+
+    // si les mdp correspondent, inscription
+    if ($_POST['RegisterMdp'] == $_POST['RegisterMdpVerif'] && empty($RegisterMailExists))
+    {
+        $db->query('insert into membres(login_membres, motDePasse_membres, pseudo_membres) values (:RegisterEmail, :RegisterMdp, :RegisterPseudo)', ["RegisterEmail" => $_POST['RegisterEmail'], "RegisterMdp" =>$_POST['RegisterMdp'] , "RegisterPseudo" =>$_POST['RegisterPseudo']]);
+    }
+}
+
+// authentification
+if (!empty($_POST['LoginEmail']) && !empty($_POST['LoginMDP']))
+{
+    // vérifie si le mail et le mot de passe correspondent
+    // $LoginExists = $db->query("select login_membres from membres")
+}
+
+empty($_POST);
 ?>
 
 <section id="homePage">
@@ -12,6 +36,123 @@ require "inc/nav.php";
     </div>
 </section>
 
+<!-- modal login  -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginTitle"><strong>Authentifiez-vous</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div class="form-group">
+                        <label for="LoginEmail">Adresse Email</label>
+                        <input type="text" class="form-control" id="LoginEmail" placeholder="" name="LoginEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="LoginMDP">Mot de passe</label>
+                        <input type="password" class="form-control" id="LoginMDP" placeholder="" name="LoginMDP">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" name="loginSubmit">S'authentifier</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal register  -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="loginTitle" style="text-align: center;"><strong>Inscrivez-vous et rejoignez
+                        la communauté de <br> <i>The Good News</i></strong></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form method="POST" id="registerForm">
+                        <div class="form-group">
+                            <label for="RegisterMail">Adresse Email</label>
+                            <input type="email" class="form-control" id="RegisterMail" placeholder="" name="RegisterEmail">
+                            <?php if (!empty($RegisterMailExists)) echo "<span style=\"color: red;\">Cette adresse mail est déjà prise</span>" ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="RegisterPseudo">Pseudonyme</label>
+                            <input type="text" class="form-control" id="RegisterPseudo" placeholder="" name="RegisterPseudo">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="RegisterMDP">Mot de passe</label>
+                            <label for="RegisterMDP" id="strongMDP"></label>
+                            <input type="password" class="form-control" id="RegisterMDP"
+                                placeholder="Doit contenir au moins un chiffre" name="RegisterMdp">
+                            <span id="mdpNoNum" style="display:none; color: red;">Le mot de passe doit contenir au moins
+                                un
+                                chiffre</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="RegisterMDPVerif">Verification du mot de passe</label>
+                            <input type="password" class="form-control" id="RegisterMDPVerif" placeholder=""
+                                name="RegisterMdpVerif">
+                            <span id="mdpUnmatch" style="display:none; color: red;">Les mots de passes ne correspondent
+                                pas</span><br>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="registerSubmit">S'inscrire</button> <!-- a l'aide, le bouton marche pas ! :( -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="assets/js/jquery-3.4.1.js"></script>
+<script>
+
+    // jquery Modal Register
+    $('#RegisterMDPVerif').on('focusout', function () {
+        if ($('#RegisterMDP').val() != "" && $('#InscriptionMDPVerif').val() != "") {
+            if ($('#RegisterMDP').val() != $('#RegisterMDPVerif').val())
+                $('#mdpUnmatch').fadeIn()
+
+            else
+                $('#mdpUnmatch').fadeOut()
+        }
+    });
+
+    $('#RegisterMDP').on('focusout', function () {
+        var regexNumber = new RegExp("[0-9]")
+
+        if ($('#RegisterMDP').val() == $('#InscriptionMDPVerif').val())
+            $('#mdpUnmatch').fadeOut()
+
+        if (!regexNumber.test($('#RegisterMDP').val()))
+            $('#mdpNoNum').fadeIn()
+        else
+            $('#mdpNoNum').fadeOut()
+    });
+
+    $('#RegisterMDP').on('keyup', function () {
+        let mdpLen = $('#RegisterMDP').val().length
+        if (mdpLen == 0) $('#strongMDP').val()
+        else if (mdpLen >= 0 && mdpLen < 6) $('#strongMDP').text("- Faible").css("color", "red")
+        else if (mdpLen >= 6 && mdpLen < 12) $('#strongMDP').text("- Moyen").css("color", "grey")
+        else $('#strongMDP').text("- Fort").css("color", "green")
+    });
+
+</script>
 
 <?php
 require "inc/footer.php";

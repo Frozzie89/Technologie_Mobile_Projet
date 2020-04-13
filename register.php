@@ -26,7 +26,6 @@ empty($_POST);
     </div>
 </section><br>
 
-
 <div class="container" style="width: 500px;">
     <form method="post" action="register.php" id="registerForm">
         <div class="form-group">
