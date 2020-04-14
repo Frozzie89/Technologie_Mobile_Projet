@@ -16,14 +16,15 @@ if (!empty($_POST['RegisterEmail']) && !empty($_POST['RegisterMdp']) && !empty($
     {
         $db->query('insert into membres(login_membres, motDePasse_membres, pseudo_membres) values (:RegisterEmail, :RegisterMdp, :RegisterPseudo)', ["RegisterEmail" => $_POST['RegisterEmail'], "RegisterMdp" =>$_POST['RegisterMdp'] , "RegisterPseudo" =>$_POST['RegisterPseudo']]);
     }
+    else $RegisterError = true;
 }
 
 // authentification
+$LoginExists = "*";
 if (!empty($_POST['LoginEmail']) && !empty($_POST['LoginMDP']))
 {
     // vérifie si le mail et le mot de passe correspondent
-    // $LoginExists = $db->query("select login_membres from membres")
-    echo "<script> alert(test)</script>";
+    $LoginExists = $db->query('select login_membres, motDePasse_membres from membres where login_membres = :login and motDePasse_membres = :mdp', ["login" => $_POST['LoginEmail'], "mdp" => $_POST['LoginMDP']])->fetch();
 }
 
 empty($_POST);
@@ -32,11 +33,14 @@ empty($_POST);
 <script type="text/javascript" src="assets/js/jquery-3.4.1.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        // si lors de l'inscription, l'email est déjà pris, ré-afficher le modal d'inscription
-        if ($('#RegisterMailExists').length > 0) $('#registerModal').modal('show');
+        // si lors de l'inscription, l'email est déjà pris ou autre erreur, ré-afficher le modal d'inscription
+        if ($('#RegisterMailExists').length > 0 || $('#ErrorMDPRegister').length > 0) $('#registerModal').modal('show');
 
         // si le login n'a pas fonctionné, ré-afficher le modal d'authentification
-        /* -- todo -- */
+        if ($('#WrongLogin').length > 0) $('#loginModal').modal('show');
+
+
+        $('.toast').toast('show')
     });
 
 
@@ -60,18 +64,21 @@ empty($_POST);
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="background-color:rgb(238, 238, 238);">
                 <form method="POST" id="LoginForm">
                     <div class="form-group">
                         <label for="LoginEmail">Adresse Email</label>
                         <input type="text" class="form-control" id="LoginEmail" placeholder="" name="LoginEmail">
                     </div>
+
                     <div class="form-group">
                         <label for="LoginMDP">Mot de passe</label>
                         <input type="password" class="form-control" id="LoginMDP" placeholder="" name="LoginMDP">
+                        <?php if (empty($LoginExists)) echo "<span id=\"WrongLogin\" style=\"color: red;\">L'adresse email ou le mot de passe est erroné</span>" ?>
                     </div>
+
                     <div class="modal-footer form-group">
-                        <button type="button" class="btn btn-primary" name="loginSubmit">S'authentifier</button>
+                        <button type="submit" class="btn btn-primary" name="loginSubmit">S'authentifier</button>
                     </div>
                 </form>
             </div>
@@ -91,7 +98,7 @@ empty($_POST);
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="background-color:rgb(238, 238, 238);">
                 <form method="POST" id="RegisterForm">
                     <div class="form-group">
                         <label for="RegisterMail">Adresse Email</label>
@@ -120,7 +127,10 @@ empty($_POST);
                         <input type="password" class="form-control" id="RegisterMDPVerif" placeholder=""
                             name="RegisterMdpVerif">
                         <span id="mdpUnmatch" style="display:none; color: red;">Les mots de passes ne correspondent
-                            pas</span><br>
+                            pas</span>
+                        <?php if(isset($RegisterError))
+                        echo "<span id=\"ErrorMDPRegister\" style=\"color: red;\">Une erreur est survenue, l'inscription n'a pas pu être faite</span>" ?>
+                        <br>
                     </div>
 
                     <div class="modal-footer form-group">
@@ -128,6 +138,24 @@ empty($_POST);
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+
+<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+    <div class="toast" data-autohide="false" style="position: absolute; top: 0; right: 0;">
+        <div class="toast-header">
+            <svg class=" rounded mr-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+                <rect fill="#007aff" width="100%" height="100%" /></svg>
+            <strong class="mr-auto">Bootstrap</strong>
+            <small class="text-muted">11 mins ago</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            Hello, world! This is a toast message.
         </div>
     </div>
 </div>
