@@ -2,28 +2,6 @@
 <?php
 require "inc/header.php";
 require "inc/nav.php";
-
-// enregistrement
-if (!empty($_POST['RegisterEmail']) && !empty($_POST['RegisterMdp']) && !empty($_POST['RegisterPseudo']))
-{
-    // vérifie si le mail existe déjà
-    $RegisterMailExists = $db->query("select login_membres from membres where login_membres=:RegisterMail", ["RegisterMail" => $_POST['RegisterEmail']])->fetch();
-
-    // si les mdp correspondent, inscription
-    if ($_POST['RegisterMdp'] == $_POST['RegisterMdpVerif'] && empty($RegisterMailExists))
-    {
-        $db->query('insert into membres(login_membres, motDePasse_membres, pseudo_membres) values (:RegisterEmail, :RegisterMdp, :RegisterPseudo)', ["RegisterEmail" => $_POST['RegisterEmail'], "RegisterMdp" =>$_POST['RegisterMdp'] , "RegisterPseudo" =>$_POST['RegisterPseudo']]);
-    }
-    else $RegisterError = true;
-}
-
-// authentification
-if (!empty($_POST['LoginEmail']) && !empty($_POST['LoginMDP']))
-    $connexion = $auth->login($db, $_POST['LoginEmail'], $_POST['LoginMDP']);
-
-$UserData = (array)$_SESSION['auth'];
-
-empty($_POST);
 ?>
 
 <script type="text/javascript" src="assets/js/jquery-3.4.1.js"></script>
