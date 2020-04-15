@@ -32,13 +32,22 @@ class Auth
 
     // Vérifie si l'utilisateur a bien entré ses identifiants lors de la connexion
     public function login($db, $mail, $password){
-        $utilisateur = $db->query("SELECT * FROM Utilisateurs WHERE Mail_Utilisateurs = :mail", ['mail' => $mail])->fetch();
+        $utilisateur = "*";
+        $utilisateur = $db->query('select pseudo_membres, login_membres, motDePasse_membres from membres where login_membres = :login and motDePasse_membres = :mdp', ["login" => $mail, "mdp" => $password])->fetch();
 
-        if(password_verify($password, $utilisateur->Password_Utilisateurs)){
+        if ($utilisateur != "*")
+        {
             $this->connect($utilisateur);
             return $utilisateur;
         }
-        return false;
+        else return false;
+
+        // vieux code  : 
+        // if(password_verify($password, $utilisateur->Password_Utilisateurs)){
+        //     $this->connect($utilisateur);
+        //     return $utilisateur;
+        // }
+        // return false;
     }
 
     // Déconnecte l'utilisateur

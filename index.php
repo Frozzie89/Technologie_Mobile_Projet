@@ -3,8 +3,6 @@
 require "inc/header.php";
 require "inc/nav.php";
 
-$db = new Database("root","","localhost","projettm");
-
 // enregistrement
 if (!empty($_POST['RegisterEmail']) && !empty($_POST['RegisterMdp']) && !empty($_POST['RegisterPseudo']))
 {
@@ -20,12 +18,10 @@ if (!empty($_POST['RegisterEmail']) && !empty($_POST['RegisterMdp']) && !empty($
 }
 
 // authentification
-$LoginExists = "*";
 if (!empty($_POST['LoginEmail']) && !empty($_POST['LoginMDP']))
-{
-    // vérifie si le mail et le mot de passe correspondent
-    $LoginExists = $db->query('select login_membres, motDePasse_membres from membres where login_membres = :login and motDePasse_membres = :mdp', ["login" => $_POST['LoginEmail'], "mdp" => $_POST['LoginMDP']])->fetch();
-}
+    $connexion = $auth->login($db, $_POST['LoginEmail'], $_POST['LoginMDP']);
+
+$UserData = (array)$_SESSION['auth'];
 
 empty($_POST);
 ?>
@@ -34,16 +30,12 @@ empty($_POST);
 <script type="text/javascript">
     $(document).ready(function () {
         // si lors de l'inscription, l'email est déjà pris ou autre erreur, ré-afficher le modal d'inscription
-        if ($('#RegisterMailExists').length > 0 || $('#ErrorMDPRegister').length > 0) $('#registerModal').modal('show');
+        if ($('#RegisterMailExists').length > 0 || $('#ErrorMDPRegister').length > 0) $('#registerModal').modal('show')
 
         // si le login n'a pas fonctionné, ré-afficher le modal d'authentification
-        if ($('#WrongLogin').length > 0) $('#loginModal').modal('show');
-
-
-        $('.toast').toast('show')
+        if ($('#WrongLogin').length > 0) $('#loginModal').modal('show')
+        <?php if(isset($UserData['pseudo_membres'])) echo "$('.toast').toast('show')" ?>
     });
-
-
 </script>
 
 <section id="homePage">
@@ -74,7 +66,7 @@ empty($_POST);
                     <div class="form-group">
                         <label for="LoginMDP">Mot de passe</label>
                         <input type="password" class="form-control" id="LoginMDP" placeholder="" name="LoginMDP">
-                        <?php if (empty($LoginExists)) echo "<span id=\"WrongLogin\" style=\"color: red;\">L'adresse email ou le mot de passe est erroné</span>" ?>
+                        <?php if (!isset($UserData['pseudo_membres'])) echo "<span id=\"WrongLogin\" style=\"color: red;\">L'adresse email ou le mot de passe est erroné</span>" ?>
                     </div>
 
                     <div class="modal-footer form-group">
@@ -117,9 +109,7 @@ empty($_POST);
                         <label for="RegisterMDP" id="strongMDP"></label>
                         <input type="password" class="form-control" id="RegisterMDP"
                             placeholder="Doit contenir au moins un chiffre" name="RegisterMdp">
-                        <span id="mdpNoNum" style="display:none; color: red;">Le mot de passe doit contenir au moins
-                            un
-                            chiffre</span>
+                        <span id="mdpNoNum" style="display:none; color: red;">Le mot de passe doit contenir au moins un chiffre</span>
                     </div>
 
                     <div class="form-group">
@@ -142,27 +132,17 @@ empty($_POST);
     </div>
 </div>
 
+<!-- Notification : salue l'utilisateur qui vient de s'authentifier  -->
 <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
-    <div class="toast" data-autohide="false" style="position: absolute; top: 0; right: 0;">
-        <div class="toast-header">
-            <svg class=" rounded mr-2" width="20" height="20" xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
-                <rect fill="#007aff" width="100%" height="100%" /></svg>
-            <strong class="mr-auto">Bootstrap</strong>
-            <small class="text-muted">11 mins ago</small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="toast-body">
-            Hello, world! This is a toast message.
+    <div class="toast" data-delay="3000"
+        style="position: absolute; top: 0; right: 0;background-color: rgb(60, 196, 60); box-shadow: 7px 6px 5px -1px rgba(186,186,186,0.65); color: white;">
+        <div class=" toast-body">
+            <h7>Heureux de vous revoir <?php echo $UserData['pseudo_membres']?></h7>
         </div>
     </div>
 </div>
 
-<script src="assets/js/jquery-3.4.1.js"></script>
 <script>
-
     // jquery Modal Register
     $('#RegisterMDPVerif').on('focusout', function () {
         if ($('#RegisterMDP').val() != "" && $('#InscriptionMDPVerif').val() != "") {

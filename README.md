@@ -13,7 +13,6 @@ Chaque individu connaîtra ses tâches en consultant ce fichier (en restant libr
 N'oubliez pas de mettre ce fichier à jour pour que tout le monde soit au courant de ce qui est à faire.
 
 # Tâches de Lucien Joly
-- Créer la page login
 # Tâches de Linda Tatchou
 # Tâches de Nathan Lanzetti
 - Configurer BootSwatch
@@ -22,7 +21,8 @@ N'oubliez pas de mettre ce fichier à jour pour que tout le monde soit au couran
 - S'occuper de la partie admin
 
 # Tâches terminées
-- Créer la page register - Lucien Joly
+- Créer la partie inscription - Lucien Joly
+- Créer la page authentification - Lucien Joly
 
 ---
 ---
