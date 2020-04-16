@@ -1,0 +1,102 @@
+/***********404**********/
+.error-page {
+    margin: 100px 0 40px;
+    text-align: center;
+}
+.error-page__header-image {
+    width: 210px;
+}
+.error-page__title {
+    font-size: 25px;
+    color: rgba(42,55,68,.7);
+    font-weight: normal;
+}
+.error-page__subtitle {
+    font-size: 15px;
+    color: rgba(42,55,68,.7);
+    font-weight: normal;
+    margin-top: 0;
+}
+.error-page__subtitle a {
+    color: rgba(42,55,68,.7);
+    text-decoration: none;
+    font-weight: bold;
+}
+.error-page__message {
+    font-family: 'Lobster', cursive;
+    font-size: 30px;
+    margin: 30px 0 35px 0;
+    line-height: 40px;
+}
+@media (max-width:767px) {
+    .error-page {
+        margin: 0 0 40px;
+    }
+    .error-page__title {
+        font-size: 22px;
+    }
+    .error-page__subtitle {
+        font-size: 12px;
+    }
+    .error-page__message {
+        font-size: 25px;
+        margin: 30px 0 35px 0;
+        line-height: 40px;
+    }
+}
+
+/***********HELPERS**********/
+.mr-icon{
+    margin-right: 5px;
+}
+.ml-icon{
+    margin-left: 5px;
+}
+body
+{
+    background-color: white;
+    height: 100%;
+}
+*, p {
+    -webkit-transition: all 0.2s ease;
+    -moz-transition:    all 0.2s ease;
+    -ms-transition:     all 0.2s ease;
+    -o-transition:      all 0.2s ease;
+    transition:         all 0.2s ease;
+    font-family: 'Quicksand', sans-serif;
+}
+h1, h2, h3, h4, h5, h6{
+    font-weight: 500;
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+    background-color: #204689;
+    border: 1px solid #fcfafa;
+}
+.display-4{
+    font-weight: 500;
+}
+.msg-flash{
+    padding-left: 0;
+    padding-right: 0;
+    /*margin-top: 85px;*/
+    z-index: 9999;
+}
+.msg-flash .alert{
+    border-radius: 0;
+}
+
+.alert-succes{
+    background-color: #02B875;
+}
+
+.alert-danger{
+    background-color: #d9534f;
+}
+
+html{
+    scroll-behavior: smooth; /* not working ? */
+}
+nav{
+    /*
+    visibility: hidden;*/
+}
