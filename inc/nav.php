@@ -29,9 +29,9 @@ if (!empty($_POST['RegisterEmail']) && !empty($_POST['RegisterMdp']) && !empty($
 if (!empty($_POST['LoginEmail']) && !empty($_POST['LoginMDP']))
     $connexion = $auth->login($db, $_POST['LoginEmail'], $_POST['LoginMDP']);
 
-$UserData = (array)$_SESSION['auth'];
-
-empty($_POST);
+// déconnexion
+if (isset($_POST['btnDeco'])) $auth->logout("../index.php");
+unset($_POST);
 
 ?>
 
@@ -57,32 +57,27 @@ empty($_POST);
 
         <!-- affiche les boutons si pas authentifié, sinon, afficher pseudo et bouton de déconnexion -->
 
-        <form>
+        <form method="POST">
             <div class="input-group">
-                <?php if (empty($connexion)) : ?>
-                    <div class="input-group-prepend">
-                        <button class="btn btn-outline-light" type="button" data-toggle="modal"
-                            data-target="#loginModal">S'authentifier</button>
-                    </div><span aria-hidden="true">&nbsp;</span>
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-light" type="button" data-toggle="modal"
-                            data-target="#registerModal">S'enregistrer</button>
-                    </div>
+                <?php if (empty($_SESSION['auth']->pseudo_membres)) : ?>
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-light" type="button" data-toggle="modal"
+                        data-target="#loginModal">S'authentifier</button>
+                </div><span aria-hidden="true">&nbsp;</span>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-light" type="button" data-toggle="modal"
+                        data-target="#registerModal">S'enregistrer</button>
+                </div>
                 <?php else : ?>
-                    <div class="">
-                        <button class="btn btn-outline-light" type="button">Se déconnecter</button>
-                    </div>
+                <div class="">
+                    <label for="btnDeco" style="color: white; margin-right: 20px;">Connecté en tant que
+                        <strong><?php echo $_SESSION['auth']->pseudo_membres;?></strong>
+                    </label>
+                    <button name="btnDeco" class="btn btn-outline-light" type="submit">Se déconnecter</button>
+                </div>
                 <?php endif ;?>
             </div>
         </form>
-
-        <!-- <from>
-            <h4 style="color: white;">John Doe - <input type="submit"
-                    style="border: none;background-color: inherit;cursor: pointer;display: inline-block; color: teal;"
-                    value="Déconnexion"></h4>
-        </from> -->
-        
-
     </div>
 
 

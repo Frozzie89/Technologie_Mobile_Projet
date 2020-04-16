@@ -10,9 +10,10 @@
     </div>
 </footer>
 
-<script src="assets/js/jquery-3.4.1.js"></script>
-<script>window.jQuery || document.write('<script src="assets/js/jquery-3.4.1.js"><\/script>')</script>
-<script src="assets/js/bootstrap.bundle.js"></script>
-<script src="assets/js/script.js"></script>
+<script src="../assets/js/jquery-3.4.1.js"></script>
+<script>window.jQuery || document.write('<script src="../assets/js/jquery-3.4.1.js"><\/script>')</script>
+<script src="../assets/js/bootstrap.bundle.js"></script>
+<script src="../assets/js/script.js"></script>
 </body>
+
 </html>

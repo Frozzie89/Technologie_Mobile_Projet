@@ -1,11 +1,10 @@
 # Todo list
 Ceci est la liste des tâches à faire / en cours.
 
-Elle est divisée en 5 parties : 
+Elle est divisée en 4 parties : 
 - Tâches de Lucien Joly
 - Tâches de Linda Tatchou
 - Tâches de Nathan Lanzetti
-- Tâches non-attribuées
 - Tâches terminées
 
 Chaque individu connaîtra ses tâches en consultant ce fichier (en restant libre de choisir ce sur quoi il souhaite travailler).
@@ -13,12 +12,12 @@ Chaque individu connaîtra ses tâches en consultant ce fichier (en restant libr
 N'oubliez pas de mettre ce fichier à jour pour que tout le monde soit au courant de ce qui est à faire.
 
 # Tâches de Lucien Joly
+- page login admin
+- page création de post admin
 # Tâches de Linda Tatchou
 # Tâches de Nathan Lanzetti
 - Configurer BootSwatch
-# Tâches non-attribuées
-- Faire la page des posts likés
-- S'occuper de la partie admin
+- Fix les flashs
 
 # Tâches terminées
 - Créer la partie inscription - Lucien Joly
