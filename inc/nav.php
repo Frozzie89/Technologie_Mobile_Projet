@@ -59,7 +59,7 @@ empty($_POST);
 
         <form>
             <div class="input-group">
-                <?php if (!empty($connexion)) : ?>
+                <?php if (empty($connexion)) : ?>
                     <div class="input-group-prepend">
                         <button class="btn btn-outline-light" type="button" data-toggle="modal"
                             data-target="#loginModal">S'authentifier</button>
