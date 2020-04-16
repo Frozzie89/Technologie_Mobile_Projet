@@ -59,14 +59,20 @@ empty($_POST);
 
         <form>
             <div class="input-group">
-                <div class="input-group-prepend">
-                    <button class="btn btn-outline-light" type="button" data-toggle="modal"
-                        data-target="#loginModal">S'authentifier</button>
-                </div><span aria-hidden="true">&nbsp;</span>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-light" type="button" data-toggle="modal"
-                        data-target="#registerModal">S'enregistrer</button>
-                </div>
+                <?php if (!empty($connexion)) : ?>
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-light" type="button" data-toggle="modal"
+                            data-target="#loginModal">S'authentifier</button>
+                    </div><span aria-hidden="true">&nbsp;</span>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-light" type="button" data-toggle="modal"
+                            data-target="#registerModal">S'enregistrer</button>
+                    </div>
+                <?php else : ?>
+                    <div class="">
+                        <button class="btn btn-outline-light" type="button">Se déconnecter</button>
+                    </div>
+                <?php endif ;?>
             </div>
         </form>
 

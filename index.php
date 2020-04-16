@@ -4,7 +4,7 @@ require "inc/header.php";
 require "inc/nav.php";
 ?>
 
-<script type="text/javascript" src="assets/js/jquery-3.4.1.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         // si lors de l'inscription, l'email est déjà pris ou autre erreur, ré-afficher le modal d'inscription

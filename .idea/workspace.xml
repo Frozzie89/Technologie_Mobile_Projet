@@ -27,7 +27,7 @@
   <component name="ProjectId" id="1ZtDPKERDUiYZMeIfd60NwQBYVT" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../BTI/faa" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RunDashboard">
@@ -54,6 +54,10 @@
       <updated>1585649471314</updated>
       <workItem from="1585649472553" duration="8314000" />
       <workItem from="1585664305787" duration="1071000" />
+      <workItem from="1586452513960" duration="666000" />
+      <workItem from="1586693746425" duration="40000" />
+      <workItem from="1586949662469" duration="1182000" />
+      <workItem from="1587056009759" duration="935000" />
     </task>
     <servers />
   </component>
