@@ -52,6 +52,27 @@ class Auth
         // return false;
     }
 
+        public function loginAdmin($db, $mail, $password){
+        $utilisateur = "*";
+        $utilisateur = $db->query('SELECT pseudo_membres, login_membres, motDePasse_membres FROM membres where id_membres = (SELECT id_membres from administrateurs) and login_membres = :EmailAdmin and motDePasse_membres = :MdpAdmin', ["EmailAdmin" => $mail, "MdpAdmin" => $password])->fetch();
+
+        if ($utilisateur != "*")
+        {
+            $this->connect($utilisateur);
+            //$this->session->setFlash('success', "Vous êtes maintenant connecté");
+            return $utilisateur;
+        }
+        $this->session->setFlash('danger', "Une erreur est survenue");
+        return false;
+
+        // vieux code  : 
+        // if(password_verify($password, $utilisateur->Password_Utilisateurs)){
+        //     $this->connect($utilisateur);
+        //     return $utilisateur;
+        // }
+        // return false;
+    }
+
     // Déconnecte l'utilisateur
     public function logout($url){
         $this->session->delete('auth');
