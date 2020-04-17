@@ -33,7 +33,10 @@ require "inc/nav.php";
                     <div class="form-group">
                         <label for="LoginMDP">Mot de passe</label>
                         <input type="password" class="form-control" id="LoginMDP" placeholder="" name="LoginMDP">
-                        <?php if (isset($connexion) && $connexion == false) echo "<span id=\"WrongLogin\" style=\"color: red;\">L'adresse email ou le mot de passe est erroné</span>" ?>
+                        <?php if (isset($connexion) && $connexion == false)
+                            echo "<span id=\"WrongLogin\" style=\"color: red;\">
+                            L'adresse email ou le mot de passe est erroné</span>";
+                        ?>
                     </div>
 
                     <div class="modal-footer form-group">

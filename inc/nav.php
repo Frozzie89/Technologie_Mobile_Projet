@@ -9,6 +9,9 @@ $auth = App::getAuth();
 $session = Session::getInstance();
 $tags = $db->query("SELECT * FROM tags")->fetchAll();
 
+// Vérifie si la page a été refresh
+$pageRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
+
 // enregistrement
 if (!empty($_POST['RegisterEmail']) && !empty($_POST['RegisterMdp']) && !empty($_POST['RegisterPseudo']))
 {
@@ -37,15 +40,17 @@ if (!empty($_POST['LoginEmail']) && !empty($_POST['LoginMDP'])){
 
 }
 
-
-
 // déconnexion
 if (isset($_POST['btnDeco'])){
     $session->setFlash('danger', "Vous êtes maintenant déconnecté");
     $auth->logout("index.php");
 }
-//unset($_POST);
 
+// à executer si la page a été refreshed
+if ($pageRefreshed)
+{
+    unset($connexion, $RegisterError, $RegisterMailExists);
+} 
 ?>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
@@ -69,7 +74,6 @@ if (isset($_POST['btnDeco'])){
         </ul>
 
         <!-- affiche les boutons si pas authentifié, sinon, afficher pseudo et bouton de déconnexion -->
-
         <form method="POST">
             <div class="input-group">
                 <?php if (empty($_SESSION['auth']->pseudo_membres)) : ?>
