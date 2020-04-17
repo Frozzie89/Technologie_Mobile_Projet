@@ -20,7 +20,8 @@ class Session
 
     // Crée une nouvelle session flash
     public function setFlash($key, $msg){
-        $_SESSION['flash'][$key] = $msg;
+        $_SESSION['flash'] = $msg;
+        echo "<div class='container-fluid msg-flash alert alert-$key alert-dismissible fade show' role='alert'>". $_SESSION['flash'] ."</div>";
     }
 
     // Vérifie si la session flash existe

@@ -75,13 +75,13 @@ h1, h2, h3, h4, h5, h6{
 .display-4{
     font-weight: 500;
 }
-.msg-flash{
+.alert{
+    border-radius: 0;
     padding-left: 0;
     padding-right: 0;
-    /*margin-top: 85px;*/
-    z-index: 9999;
-}
-.msg-flash .alert{
+    padding-top: 60px;
+    text-align: center;
+    z-index: 1000;
     border-radius: 0;
 }
 
@@ -97,6 +97,12 @@ html{
     scroll-behavior: smooth; /* not working ? */
 }
 nav{
+    z-index: 9999;
     /*
     visibility: hidden;*/
+}
+
+/* Index */
+.input-group-prepend {
+    margin-right: -4px;
 }

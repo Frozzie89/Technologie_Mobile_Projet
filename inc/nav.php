@@ -21,21 +21,34 @@ if (!empty($_POST['RegisterEmail']) && !empty($_POST['RegisterMdp']) && !empty($
         $db->query('insert into membres(login_membres, motDePasse_membres, pseudo_membres) values (:RegisterEmail, :RegisterMdp, :RegisterPseudo)', ["RegisterEmail" => $_POST['RegisterEmail'], "RegisterMdp" =>$_POST['RegisterMdp'] , "RegisterPseudo" =>$_POST['RegisterPseudo']]);
 
         $connexion = $auth->login($db, $_POST['RegisterEmail'], $_POST['RegisterMdp']);
+        if ($connexion){
+            $session->setFlash('success', "Vous êtes maintenant enregistré");
+        }
     }
     else $RegisterError = true;
 }
 
 // authentification
-if (!empty($_POST['LoginEmail']) && !empty($_POST['LoginMDP']))
+if (!empty($_POST['LoginEmail']) && !empty($_POST['LoginMDP'])){
     $connexion = $auth->login($db, $_POST['LoginEmail'], $_POST['LoginMDP']);
+    if ($connexion){
+        $session->setFlash('success', "Vous êtes maintenant connecté");
+    }
+
+}
+
+
 
 // déconnexion
-if (isset($_POST['btnDeco'])) $auth->logout("../index.php");
-unset($_POST);
+if (isset($_POST['btnDeco'])){
+    $session->setFlash('danger', "Vous êtes maintenant déconnecté");
+    $auth->logout("index.php");
+}
+//unset($_POST);
 
 ?>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
     <a class="navbar-brand" href="../index.php"><i>The Good News</i></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
         aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">

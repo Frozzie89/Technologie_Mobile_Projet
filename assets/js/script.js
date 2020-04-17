@@ -6,6 +6,9 @@ $(document).ready(function () {
     // si le login n'a pas fonctionné, ré-afficher le modal d'authentification
     if ($('#WrongLogin').length > 0) $('#loginModal').modal('show')
     //<?php if ($_SESSION['auth'] -> pseudo_membres != "") echo "$('.toast').toast('show')"; ?>
+
+    $( ".alert" ).show().delay(3000).fadeOut(500);
+
 });
 
 

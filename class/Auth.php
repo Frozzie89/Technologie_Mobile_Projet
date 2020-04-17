@@ -18,7 +18,7 @@ class Auth
     // Restreint l'utilisateur si il n'est pas connecté (si la session auth n'existe pas)
     public function restrict($url){
         if(!$this->session->read('auth')){
-            $this->session->setFlash('danger',"<i class=\"fas fa-exclamation-circle\" style=\"margin-right: 5px;\"></i> " . $this->options['droit_msg']);
+            //$this->session->setFlash('danger',"<i class=\"fas fa-exclamation-circle\" style=\"margin-right: 5px;\"></i> " . $this->options['droit_msg']);
             header("Location: $url");
             exit();
         }
@@ -38,9 +38,11 @@ class Auth
         if ($utilisateur != "*")
         {
             $this->connect($utilisateur);
+            //$this->session->setFlash('success', "Vous êtes maintenant connecté");
             return $utilisateur;
         }
-        else return false;
+        $this->session->setFlash('danger', "Une erreur est survenue");
+        return false;
 
         // vieux code  : 
         // if(password_verify($password, $utilisateur->Password_Utilisateurs)){
@@ -52,7 +54,6 @@ class Auth
 
     // Déconnecte l'utilisateur
     public function logout($url){
-        $this->session->setFlash('success', "<i class=\"fas fa-check-circle\" style=\"margin-right: 5px;\"></i> Vous êtes maintenant déconnecté");
         $this->session->delete('auth');
         header("Location: $url");
         exit();
