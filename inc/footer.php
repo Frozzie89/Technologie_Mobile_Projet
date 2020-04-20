@@ -9,7 +9,15 @@
         </section>
     </div>
 </footer>
-
+<?php
+/*
+$p = dirname(__DIR__);
+$p = str_replace('\\', '/', $p);
+$p_jquery = $p."/assets/js/jquery-3.4.1.js";
+$p_bootstrap = $p."/assets/js/bootstrap.bundle.js";
+$p_script = $p."/assets/js/script.js";
+*/
+?>
 <script src="assets/js/jquery-3.4.1.js"></script>
 <script>window.jQuery || document.write('<script src="assets/js/jquery-3.4.1.js"><\/script>')</script>
 <script src="assets/js/bootstrap.bundle.js"></script>

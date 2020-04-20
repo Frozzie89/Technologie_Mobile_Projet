@@ -98,8 +98,8 @@ html{
 }
 nav{
     z-index: 9999;
-    /*
-    visibility: hidden;*/
+
+    visibility: hidden;
 }
 
 /* Index */

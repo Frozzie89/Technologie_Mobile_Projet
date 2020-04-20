@@ -8,8 +8,8 @@ $current_url = "localhost:".$_SERVER["SERVER_PORT"]."/".$_SERVER["REQUEST_URI"];
 function app_autoload($class){
     $path =  realpath("");
     $p = dirname(__DIR__);
-    //echo $path;
-    //echo "$path\\class\\$class.php";
+    echo $path;
+    echo $p;
     require "$p\\class\\$class.php";
 }
 
