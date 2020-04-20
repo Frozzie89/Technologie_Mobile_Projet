@@ -103,17 +103,6 @@ require "inc/nav.php";
     </div>
 </div>
 
-<!-- Va être changé en flash :  -->
-<!-- Notification : salue l'utilisateur qui vient de s'authentifier -->
-<!-- <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
-    <div class="toast" data-delay="3000"
-        style="position: absolute; top: 0; right: 0;background-color: rgb(60, 196, 60); box-shadow: 7px 6px 5px -1px rgba(186,186,186,0.65); color: white;">
-        <div class=" toast-body">
-            <h7>Heureux de vous revoir <?php echo $_SESSION['auth']->pseudo_membres;?></h7>
-        </div>
-    </div>
-</div> -->
-
 <?php
 require "inc/footer.php";
 ?>
