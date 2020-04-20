@@ -9,6 +9,7 @@ $auth = App::getAuth();
 $session = Session::getInstance();
 $tags = $db->query("SELECT * FROM tags")->fetchAll();
 
+$pageRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
 
 // Si l'utilisateur est déjà authentifié, vérifier qu'il est admin
 if (!empty($_SESSION['auth']->login_membres))
@@ -37,7 +38,9 @@ if (isset($_POST['btnDecoAdmin']))
 ?>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
-    <a class="navbar-brand" href="../index.php"><i>The Good News</i></a>
+    <!-- <a class="navbar-brand" href="../index.php"><i>The Good News</i></a> -->
+    <a href="../index.php"><img src="../assets/Logo.svg" alt="The Good News" width="200px"
+            style="padding-right: 5px; margin-bottom: 5px;"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
         aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

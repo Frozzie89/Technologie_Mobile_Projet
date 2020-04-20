@@ -5,9 +5,16 @@ $(document).ready(function () {
 
     // si le login n'a pas fonctionné, ré-afficher le modal d'authentification
     if ($('#WrongLogin').length > 0) $('#loginModal').modal('show')
-    //<?php if ($_SESSION['auth'] -> pseudo_membres != "") echo "$('.toast').toast('show')"; ?>
 
     $(".alert").show().delay(3000).fadeOut(500);
+
+    // new post effects
+    if ($("#newPostDone").length != 0)
+        $("#newPostDone").fadeIn().delay(3000).fadeOut(500);
+    if ($("#newPostMissingInfo").length != 0)
+        $("#newPostMissingInfo").fadeIn().delay(3000).fadeOut(500);
+    if ($("#newPostWrongFile").length != 0)
+        $("#newPostWrongFile").fadeIn().delay(3000).fadeOut(500);
 
 });
 
@@ -50,8 +57,3 @@ $('#file-upload').bind('change', function () {
     $('#file-selected').html(fileName);
 })
 
-$('#dropPost a').on('click', function () {
-    // $('#datebox').val($(this).text());
-    // alert($(this).val());
-    alert($('#dropPost').val($(this)).text());
-});
