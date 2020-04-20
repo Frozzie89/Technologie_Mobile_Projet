@@ -56,4 +56,3 @@ $('#file-upload').bind('change', function () {
     var fileName = $(this).val();
     $('#file-selected').html(fileName);
 })
-

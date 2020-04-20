@@ -133,3 +133,16 @@ input[type="file"] {
     background-color: gray;
     color: white;
 }
+
+/* style des publications */
+.card#indexPost{
+    width: 50%; 
+    margin: auto; 
+    margin-top: 15px; 
+    margin-bottom:15px;
+}
+
+.card#indexPost>img{
+    max-height: 25rem; 
+    object-fit: cover;
+}

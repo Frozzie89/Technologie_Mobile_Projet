@@ -13,6 +13,25 @@ require "inc/nav.php";
     </div>
 </section>
 
+<?php foreach($db->query("SELECT * FROM posts")->fetchAll() as $key => $post) : 
+    $img = $db->query("SELECT * FROM photos WHERE id_posts = :id", ["id"=>$post->id_posts])->fetch();
+// $post->titre_posts;
+// $post->texte_posts;
+// $post->autheur_posts;
+// $post->nbVue_posts;
+// $post->nbLike_posts;
+?>
+<div class="card" id="indexPost">
+    <img class=" card-img-top" src= <?= "extranet/" . $img->nom_photos ?> >
+    <div class="card-body">
+        <h5 class="card-title"><?= $post->titre_posts ?></h5>
+        <p class="card-text"><?= $post->texte_posts ?></p>
+    </div>
+</div>
+<?php endforeach; ?>
+
+
+
 <!-- modal login  -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
