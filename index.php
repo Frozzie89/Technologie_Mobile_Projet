@@ -21,13 +21,26 @@ require "inc/nav.php";
 // $post->nbVue_posts;
 // $post->nbLike_posts;
 ?>
-<div class="card" id="indexPost">
-    <img class=" card-img-top" src= <?= "extranet/" . $img->nom_photos ?> >
+<div class="card border-secondary" id="indexPost">
+    <img class=" card-img-top" src=<?= "extranet/" . $img->nom_photos ?>>
     <div class="card-body">
         <h5 class="card-title"><?= $post->titre_posts ?></h5>
         <p class="card-text"><?= $post->texte_posts ?></p>
+        <a>
+            <div class="upvote"></div>
+        </a>
+        <h3 style="display: inline-block;">
+            <?= $post->nbLike_posts ?>
+        </h3>
+        <a>
+            <div class="downvote"></div>
+        </a>
+        <a style="float: right;  font-variant: small-caps" href="">
+            <h3>Commenter</h3>
+        </a>
     </div>
 </div>
+
 <?php endforeach; ?>
 
 

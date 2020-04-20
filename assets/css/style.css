@@ -136,7 +136,7 @@ input[type="file"] {
 
 /* style des publications */
 .card#indexPost{
-    width: 50%; 
+    width: 60%; 
     margin: auto; 
     margin-top: 15px; 
     margin-bottom:15px;
@@ -145,4 +145,32 @@ input[type="file"] {
 .card#indexPost>img{
     max-height: 25rem; 
     object-fit: cover;
+}
+
+.upvote{
+    width: 20px;
+    height: 20px;
+    background:black;
+    display: inline-block;
+    clip-path: polygon(50% 0, 0 100%, 100% 100%);
+    opacity: 20%;
+}
+
+.upvote:hover{
+    opacity: 100%;
+    background:rgb(255, 139, 90);
+}
+
+.downvote{
+    width: 20px;
+    height: 20px;
+    background:black;
+    display: inline-block;
+    clip-path: polygon(50% 100%, 0 0, 100% 0);
+    opacity: 20%;
+}
+
+.downvote:hover{
+    opacity: 100%;
+    background:rgb(118, 116, 241);
 }
