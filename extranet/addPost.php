@@ -8,7 +8,7 @@ $error_wrongFile = false;
 // si bouton cliqué
 if(isset($_POST['submitNewPost']))
 {
-    // si tout est bien rempli
+    // si tout est bien rempli :
     if (!empty($_POST['newPostTitle']) && !empty($_POST['newPostText']) && !empty($_FILES['newPostFile']) && !empty($_POST['newPostTag']))
     {
         $titre = $_POST['newPostTitle'];
