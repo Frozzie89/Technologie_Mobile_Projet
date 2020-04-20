@@ -75,6 +75,7 @@ h1, h2, h3, h4, h5, h6{
 .display-4{
     font-weight: 500;
 }
+/* FLASH */
 .alert{
     border-radius: 0;
     padding-left: 0;
@@ -84,7 +85,6 @@ h1, h2, h3, h4, h5, h6{
     z-index: 1000;
     border-radius: 0;
 }
-
 .alert-succes{
     background-color: #02B875;
 }
@@ -102,6 +102,14 @@ nav{
     visibility: hidden;
 
  */
+}
+.title-page{
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.center-text{
+    text-align: center;
 }
 
 /* Index */

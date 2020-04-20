@@ -53,8 +53,9 @@ unset($_POST);
 <section id="homePage">
     <div class="container">
         <div class="col-lg-12">
-            <h1 style="margin-top: 100px; margin-bottom: 50px;">
-                Ajoutez une nouvelle publication</h1>
+            <h1 class="title-page center-text">
+                Ajoutez une nouvelle publication
+            </h1>
         </div>
     </div>
 </section>
