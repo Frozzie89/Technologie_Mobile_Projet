@@ -7,13 +7,12 @@ $(document).ready(function () {
     if ($('#WrongLogin').length > 0) $('#loginModal').modal('show')
     //<?php if ($_SESSION['auth'] -> pseudo_membres != "") echo "$('.toast').toast('show')"; ?>
 
-    $( ".alert" ).show().delay(3000).fadeOut(500);
+    $(".alert").show().delay(3000).fadeOut(500);
 
 });
 
-
-
 // jquery Modal Register
+//#region ModalRegister
 $('#RegisterMDPVerif').on('focusout', function () {
     if ($('#RegisterMDP').val() != "" && $('#InscriptionMDPVerif').val() != "") {
         if ($('#RegisterMDP').val() != $('#RegisterMDPVerif').val())
@@ -42,4 +41,17 @@ $('#RegisterMDP').on('keyup', function () {
     else if (mdpLen >= 0 && mdpLen < 6) $('#strongMDP').text("- Faible").css("color", "red")
     else if (mdpLen >= 6 && mdpLen < 12) $('#strongMDP').text("- Moyen").css("color", "grey")
     else $('#strongMDP').text("- Fort").css("color", "green")
+});
+//#endregion ModalRegister
+
+// affichage du path du fichier à upload
+$('#file-upload').bind('change', function () {
+    var fileName = $(this).val();
+    $('#file-selected').html(fileName);
+})
+
+$('#dropPost a').on('click', function () {
+    // $('#datebox').val($(this).text());
+    // alert($(this).val());
+    alert($('#dropPost').val($(this)).text());
 });

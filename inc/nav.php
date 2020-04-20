@@ -63,9 +63,6 @@ if ($pageRefreshed)
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <!-- <a class="nav-link" href="#">Home </a> -->
-            </li>
             <?php foreach ($tags as $key => $tag) : ?>
             <li class="nav-item">
                 <a class="nav-link" href="#"><?= $tag->affichage_tags ;?></a>

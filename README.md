@@ -12,16 +12,16 @@ Chaque individu connaîtra ses tâches en consultant ce fichier (en restant libr
 N'oubliez pas de mettre ce fichier à jour pour que tout le monde soit au courant de ce qui est à faire.
 
 # Tâches de Lucien Joly
-- page login admin
 - page création de post admin
 # Tâches de Linda Tatchou
 # Tâches de Nathan Lanzetti
-- Configurer BootSwatch
 - Fix les flashs
 
 # Tâches terminées
 - Créer la partie inscription - Lucien Joly
 - Créer la page authentification - Lucien Joly
+- Configurer BootSwatch - Nathan Lanzetti
+- Page login admin - Lucien Joly
 
 ---
 ---
