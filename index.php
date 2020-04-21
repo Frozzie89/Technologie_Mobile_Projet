@@ -15,23 +15,34 @@ require "inc/nav.php";
 
 <?php foreach($db->query("SELECT * FROM posts ORDER BY id_posts DESC")->fetchAll() as $key => $post) : 
     $img = $db->query("SELECT * FROM photos WHERE id_posts = :id", ["id"=>$post->id_posts])->fetch();
-// $post->titre_posts;
-// $post->texte_posts;
-// $post->autheur_posts;
-// $post->nbVue_posts;
-// $post->nbLike_posts;
+
+    $nbComments = $db->query("SELECT COUNT(*) AS nbComments FROM commentaires WHERE id_posts = :id",["id"=>$post->id_posts])->fetch();
+
+    $nbVotes =$db->query("SELECT COUNT(*) AS nbVotes FROM likes WHERE id_posts = :id",["id"=>$post->id_posts])->fetch();
 ?>
 <div class="card border-secondary" id="indexPost">
-    <img class="card-img-top border-bottom" src=<?= "extranet/" . $img->nom_photos ?>>
+    <img class="card-img-top border-bottom border-secondary" src=<?= "extranet/" . $img->nom_photos ?>>
     <div class="card-body">
-        <h5 class="card-title"><?= $post->titre_posts ?></h5>
-        <p class="card-text"><?= $post->texte_posts ?></p>
+        <h5 class="card-title"><b><?= $post->titre_posts ?></b></h5>
+        <p class="card-text">
+            <?php
+            if (strlen($post->texte_posts)<= 230)
+                $shortText = $post->texte_posts;
+            else
+                $shortText = substr($post->texte_posts,0,230) . '...';
+            echo $shortText;
+            ?></p>
 
-        <h3 style="display: inline-block;"><?= $post->nbVue_posts ?> vues</h3>
+        <i class="fas fa-eye fa-2x"></i>
+        <h3><?= $post->nbVue_posts ?></h3>
 
-        <a style="float: right;  font-variant: small-caps" href="">
-            <h3>Commenter</h3>
-        </a>
+        <i class="far fa-arrow-alt-circle-up fa-2x" style="margin-left:15px"></i>
+        <h3><?= $nbVotes->nbVotes ?></h3>
+
+
+        <h3 style="float: right; margin-left:5px"><?= $nbComments->nbComments ?></h3>
+        <i class="far fa-comments fa-2x" style="float: right;"></i>
+
     </div>
 </div>
 

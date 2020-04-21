@@ -147,30 +147,7 @@ input[type="file"] {
     object-fit: cover;
 }
 
-.upvote{
-    width: 20px;
-    height: 20px;
-    background:black;
+
+.card-body>i, h3{
     display: inline-block;
-    clip-path: polygon(50% 0, 0 100%, 100% 100%);
-    opacity: 20%;
-}
-
-.upvote:hover{
-    opacity: 100%;
-    background:rgb(255, 139, 90);
-}
-
-.downvote{
-    width: 20px;
-    height: 20px;
-    background:black;
-    display: inline-block;
-    clip-path: polygon(50% 100%, 0 0, 100% 0);
-    opacity: 20%;
-}
-
-.downvote:hover{
-    opacity: 100%;
-    background:rgb(118, 116, 241);
 }
