@@ -13,7 +13,7 @@ require "inc/nav.php";
     </div>
 </section>
 
-<?php foreach($db->query("SELECT * FROM posts")->fetchAll() as $key => $post) : 
+<?php foreach($db->query("SELECT * FROM posts ORDER BY id_posts DESC")->fetchAll() as $key => $post) : 
     $img = $db->query("SELECT * FROM photos WHERE id_posts = :id", ["id"=>$post->id_posts])->fetch();
 // $post->titre_posts;
 // $post->texte_posts;
@@ -22,19 +22,22 @@ require "inc/nav.php";
 // $post->nbLike_posts;
 ?>
 <div class="card border-secondary" id="indexPost">
-    <img class=" card-img-top" src=<?= "extranet/" . $img->nom_photos ?>>
+    <img class="card-img-top border-bottom" src=<?= "extranet/" . $img->nom_photos ?>>
     <div class="card-body">
         <h5 class="card-title"><?= $post->titre_posts ?></h5>
         <p class="card-text"><?= $post->texte_posts ?></p>
         <a>
-            <div class="upvote"></div>
+            <div class="upvote" id="<?= $post->id_posts?>"></div>
         </a>
         <h3 style="display: inline-block;">
             <?= $post->nbLike_posts ?>
         </h3>
         <a>
-            <div class="downvote"></div>
+            <div class="downvote" id="<?= $post->id_posts?>"></div>
         </a>
+
+        <h3 style="display: inline-block; margin-left: 50px;"><?= $post->nbVue_posts ?> vues</h3>
+
         <a style="float: right;  font-variant: small-caps" href="">
             <h3>Commenter</h3>
         </a>

@@ -56,3 +56,20 @@ $('#file-upload').bind('change', function () {
     var fileName = $(this).val();
     $('#file-selected').html(fileName);
 })
+
+// si upvote / downvote clické
+$('.upvote').click(function () {
+    $.ajax({
+        type: "POST",
+        data: "action=upvote&id=" + $(this).attr("id"),
+        url: "vote.php"
+    });
+})
+
+$('.downvote').click(function () {
+    $.ajax({
+        type: "POST",
+        data: "action=downvote&id=" + $(this).attr("id"),
+        url: "vote.php"
+    });
+})
