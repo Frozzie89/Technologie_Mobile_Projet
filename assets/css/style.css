@@ -98,10 +98,8 @@ html{
 }
 nav{
     z-index: 9999;
-/*
     visibility: hidden;
 
- */
 }
 .title-page{
     margin-top: 100px;
@@ -132,4 +130,68 @@ input[type="file"] {
 .custom-file-upload:hover{
     background-color: gray;
     color: white;
+}
+
+/* EXTRANET */
+.card-news-max-height{
+    max-height: 600px;
+    margin-top: 25px;
+}
+.card-img-top{
+    max-height: 225px;
+    height: 225px;
+}
+.card-btn-left{
+    width: 40%;
+    position: absolute;
+    left: 5%;
+    bottom: 3%;
+}
+.card-btn-right{
+    width: 40%;
+    position: absolute;
+    right: 5%;
+    bottom: 3%;
+}
+.card-height{
+    height: 440px;
+}
+p.tagPost{
+    display: none;
+}
+#searchbarPost{
+    border-width: 2px;
+    margin-top: 25px;
+    margin-bottom: 35px;
+}
+#formPhoto{
+    margin-top: 0px;
+}
+hr {
+    border: 0;
+    clear:both;
+    display:block;
+    width: 96%;
+    background-color:#3E3F3A;
+    height: 1px;
+}
+.secondary-title{
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+.img-update{
+    border-color: #3E3F3A;
+    border-width: 2px;
+    border-style: solid;
+}
+textarea{
+    resize : vertical!important;
+    height: 200px!important;
+}
+footer{
+    border-top: solid #3E3F3A 1px;
+    margin-top: 50px;
+    height: 150px;
+    background-color: #8E8C84;
+    line-height: 150px;
 }

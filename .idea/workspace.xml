@@ -24,12 +24,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="JsBowerSettings">
+    <node-interpreter value="project" />
+    <bower-package value="" />
+    <bower.json value="" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
   <component name="ProjectId" id="1ZtDPKERDUiYZMeIfd60NwQBYVT" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Cours/stage" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -61,7 +73,11 @@
       <workItem from="1587056009759" duration="3487000" />
       <workItem from="1587113809720" duration="10101000" />
       <workItem from="1587128072608" duration="2939000" />
-      <workItem from="1587390391940" duration="2299000" />
+      <workItem from="1587390391940" duration="7592000" />
+      <workItem from="1587404604287" duration="12000000" />
+      <workItem from="1587450010077" duration="14780000" />
+      <workItem from="1587471815450" duration="302000" />
+      <workItem from="1587474020794" duration="25966000" />
     </task>
     <servers />
   </component>
