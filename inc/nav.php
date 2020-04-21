@@ -34,7 +34,7 @@ if (!empty($_POST['RegisterEmail']) && !empty($_POST['RegisterMdp']) && !empty($
 // authentification
 if (!empty($_POST['LoginEmail']) && !empty($_POST['LoginMDP'])){
     $connexion = $auth->login($db, $_POST['LoginEmail'], $_POST['LoginMDP']);
-    if ($connexion){
+    if ($connexion && !$pageRefreshed){
         $session->setFlash('success', "Vous êtes maintenant connecté");
     }
 
@@ -53,53 +53,49 @@ if ($pageRefreshed)
 } 
 ?>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
-    <a href="index.php"><img src="assets/Logo.svg" alt="The Good News" width="200px"
-            style="padding-right: 5px; margin-bottom: 5px;"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-dark bg-primary navbar-fixed-top">
+    <div class="navbar-header navbar-left pull-left">
+        <a href="index.php"><img src="assets/Logo.svg" alt="The Good News" width="200px"
+                style="padding-right: 5px; margin-bottom: 5px;"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-
-        <ul class="navbar-nav mr-auto">
+    <div class="navbar-header navbar-right pull-right">
+        <ul class="nav navbar-nav navbar-right">
+            <form method="POST">
+                <div class="input-group">
+                    <?php if (empty($_SESSION['auth']->pseudo_membres)) : ?>
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-light" type="button" data-toggle="modal"
+                            data-target="#loginModal">S'authentifier</button>
+                    </div><span aria-hidden="true">&nbsp;</span>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-light" type="button" data-toggle="modal"
+                            data-target="#registerModal">S'enregistrer</button>
+                    </div>
+                    <?php else : ?>
+                    <div class="">
+                        <label for="btnDeco" style="color: white; margin-right: 20px;">Connecté en tant que
+                            <strong><?php echo $_SESSION['auth']->pseudo_membres;?></strong>
+                        </label>
+                        <button name="btnDeco" class="btn btn-outline-light" type="submit">Se
+                            déconnecter</button>
+                    </div>
+                    <?php endif ;?>
+                </div>
+            </form>
+        </ul>
+    </div>
+    <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-left">
             <?php foreach ($tags as $key => $tag) : ?>
             <li class="nav-item">
                 <a class="nav-link" href="#"><?= $tag->affichage_tags ;?></a>
             </li>
             <?php endforeach;?>
         </ul>
-
-        <!-- affiche les boutons si pas authentifié, sinon, afficher pseudo et bouton de déconnexion -->
-        <form method="POST">
-            <div class="input-group">
-                <?php if (empty($_SESSION['auth']->pseudo_membres)) : ?>
-                <div class="input-group-prepend">
-                    <button class="btn btn-outline-light" type="button" data-toggle="modal"
-                        data-target="#loginModal">S'authentifier</button>
-                </div><span aria-hidden="true">&nbsp;</span>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-light" type="button" data-toggle="modal"
-                        data-target="#registerModal">S'enregistrer</button>
-                </div>
-                <?php else : ?>
-                <div class="">
-                    <label for="btnDeco" style="color: white; margin-right: 20px;">Connecté en tant que
-                        <strong><?php echo $_SESSION['auth']->pseudo_membres;?></strong>
-                    </label>
-                    <button name="btnDeco" class="btn btn-outline-light" type="submit">Se déconnecter</button>
-                </div>
-                <?php endif ;?>
-            </div>
-        </form>
     </div>
-
-
-    <!-- la barre de recherhe qui doit bouger de place 
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-     -->
 </nav>

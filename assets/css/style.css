@@ -194,4 +194,40 @@ footer{
     height: 150px;
     background-color: #8E8C84;
     line-height: 150px;
+
+/* style des publications */
+.card#indexPost{
+    width: 60%; 
+    margin: auto; 
+    margin-top: 15px; 
+    margin-bottom:15px;
+}
+
+.card#indexPost>img{
+    max-height: 25rem; 
+    object-fit: cover;
+}
+
+/* mobile phone */
+@media all and (max-width: 768px) {
+    .card#indexPost{
+        width: 90%; 
+        margin: auto; 
+        margin-top: 15px; 
+        margin-bottom:15px;
+    }
+
+    .card#indexPost>img{
+    max-height: 15rem; 
+    object-fit: cover;
+    }
+}
+
+.card-body>i, h3{
+    display: inline-block;
+}
+
+
+body{
+    background-color: rgb(236, 216, 216);
 }
