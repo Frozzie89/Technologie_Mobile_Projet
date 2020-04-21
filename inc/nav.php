@@ -34,7 +34,7 @@ if (!empty($_POST['RegisterEmail']) && !empty($_POST['RegisterMdp']) && !empty($
 // authentification
 if (!empty($_POST['LoginEmail']) && !empty($_POST['LoginMDP'])){
     $connexion = $auth->login($db, $_POST['LoginEmail'], $_POST['LoginMDP']);
-    if ($connexion){
+    if ($connexion && !$pageRefreshed){
         $session->setFlash('success', "Vous êtes maintenant connecté");
     }
 

@@ -26,17 +26,8 @@ require "inc/nav.php";
     <div class="card-body">
         <h5 class="card-title"><?= $post->titre_posts ?></h5>
         <p class="card-text"><?= $post->texte_posts ?></p>
-        <a>
-            <div class="upvote" id="<?= $post->id_posts?>"></div>
-        </a>
-        <h3 style="display: inline-block;">
-            <?= $post->nbLike_posts ?>
-        </h3>
-        <a>
-            <div class="downvote" id="<?= $post->id_posts?>"></div>
-        </a>
 
-        <h3 style="display: inline-block; margin-left: 50px;"><?= $post->nbVue_posts ?> vues</h3>
+        <h3 style="display: inline-block;"><?= $post->nbVue_posts ?> vues</h3>
 
         <a style="float: right;  font-variant: small-caps" href="">
             <h3>Commenter</h3>
