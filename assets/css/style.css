@@ -147,6 +147,20 @@ input[type="file"] {
     object-fit: cover;
 }
 
+/* mobile phone */
+@media all and (max-width: 768px) {
+    .card#indexPost{
+        width: 90%; 
+        margin: auto; 
+        margin-top: 15px; 
+        margin-bottom:15px;
+    }
+
+    .card#indexPost>img{
+    max-height: 15rem; 
+    object-fit: cover;
+    }
+}
 
 .card-body>i, h3{
     display: inline-block;
