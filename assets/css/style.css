@@ -111,6 +111,10 @@ footer{
     height: 50px;
     background-color: #8E8C84;
     line-height: 50px;
+
+    position: absolute;
+    width: 100%;
+    bottom: 0;
 }
 hr {
     border: 0;
@@ -264,4 +268,11 @@ input[type="file"] {
 .custom-file-upload:hover{
     background-color: gray;
     color: white;
+}
+
+
+/** gestion user **/
+.deleteUser
+{
+    color: red;
 }

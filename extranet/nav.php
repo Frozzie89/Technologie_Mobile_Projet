@@ -64,7 +64,7 @@ if (isset($_POST['btnDecoAdmin']))
                         <a class="nav-link" href="gestion-post.php">Gestion des posts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Gestion des utilisateurs</a>
+                        <a class="nav-link" href="gestionUser.php">Gestion des utilisateurs</a>
                     </li>
                 </ul>
         </div>
