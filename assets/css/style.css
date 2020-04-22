@@ -137,6 +137,10 @@ hr {
 .input-group-prepend {
     margin-right: -4px;
 }
+
+body{
+    background-color: rgb(250, 242, 226);
+}
 /* style des publications */
 .card#indexPost{
     width: 60%; 

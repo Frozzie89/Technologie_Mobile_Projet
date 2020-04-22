@@ -42,38 +42,45 @@ if (isset($_POST['btnDecoAdmin']))
 ?>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
-    <!-- <a class="navbar-brand" href="../index.php"><i>The Good News</i></a> -->
-    <a href="../index.php"><img src="../assets/Logo.svg" alt="The Good News" width="200px"
-            style="padding-right: 5px; margin-bottom: 5px;"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="navbar-header navbar-left pull-left">
+        <a href="../index.php"><img src="../assets/Logo.svg" alt="The Good News" width="200px"
+                style="padding-right: 5px; margin-bottom: 5px;"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
 
+    <!-- Boutons affichés si authentifié -->
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-
-        <!-- Boutons à afficher si authentifié -->
-        <?php if (!empty($_SESSION['auth']->pseudo_membres)) : ?>
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="addPost.php">Ajouter un post</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="gestion-post.php">Gestion des posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Gestion des utilisateurs</a>
-            </li>
-        </ul>
+        <ul class="nav navbar-nav navbar-left">
+            <ul class="nav navbar-nav navbar-left">
+                <?php if (!empty($_SESSION['auth']->pseudo_membres)) : ?>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="addPost.php">Ajouter un post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gestion-post.php">Gestion des posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Gestion des utilisateurs</a>
+                    </li>
+                </ul>
+        </div>
 
         <!-- Bouton déconnexion à afficher si authentifié -->
-        <form method="POST">
-            <div class="">
-                <label for="btnDecoAdmin" style="color: white; margin-right: 20px;">Connecté en tant que
-                    <strong><?php echo $_SESSION['auth']->pseudo_membres;?></strong>
-                </label>
-                <button name="btnDecoAdmin" class="btn btn-outline-light" type="submit">Se déconnecter</button>
-        </form>
+        <div class="navbar-header navbar-right pull-right">
+            <ul class="nav navbar-nav navbar-right">
+                <form method="POST">
+                    <div class="">
+                        <label for="btnDecoAdmin" style="color: white; margin-right: 20px;">Connecté en tant que
+                            <strong><?php echo $_SESSION['auth']->pseudo_membres;?></strong>
+                        </label>
+                        <button name="btnDecoAdmin" class="btn btn-outline-light" type="submit">Se déconnecter</button>
+                </form>
+            </ul>
+        </div>
         <?php endif; ?>
 
 
