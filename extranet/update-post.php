@@ -65,7 +65,10 @@ if(isset($_GET)){
 }
 
 ?>
-
+<!-- Main Quill library -->
+<script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+<!-- Theme included stylesheets -->
+<link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
 <div class="container" style="width: 800px;">
     <div class="row">
@@ -78,7 +81,10 @@ if(isset($_GET)){
                 </div>
                 <div class="form-group">
                     <label for="postText" class="text-right">Corps de texte</label>
-                    <textarea class="form-control edit" name="postText" rows="3"><?= $post->texte_posts ?></textarea>
+                    <div id="editor">
+                        <?= $post->texte_posts ?>
+                    </div>
+                    <textarea class="form-control edit" name="postText" rows="3" style="opacity: 0;visibility: hidden;height: 0;overflow: hidden;"><?= $post->texte_posts ?></textarea>
                 </div>
                 <div class="form-group" style="float: right;">
                     <button type="submit" class="btn btn-dark" name="submitContent">Modifier un post</button>
@@ -116,7 +122,22 @@ if(isset($_GET)){
     </div>
 </div>
 
-
+<script>
+    var Delta = Quill.import('delta');
+    var quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+/*
+    function removeStuff(value) {
+        console.log(value.substr(1, value.length - 2));
+    }
+*/
+    quill.on('text-change', function(delta) {
+        var about = document.querySelector('textarea[name=postText]');
+        about.value = quill.root.innerHTML;
+        console.log(about.value);
+    });
+</script>
 
 <?php
 require "footer.php";

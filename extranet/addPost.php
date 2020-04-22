@@ -49,6 +49,10 @@ if(isset($_POST['submitNewPost']))
 unset($_POST);
 
 ?>
+    <!-- Main Quill library -->
+    <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+    <!-- Theme included stylesheets -->
+    <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
 <section id="homePage">
     <div class="container">
@@ -68,7 +72,10 @@ unset($_POST);
         </div>
         <div class="form-group">
             <label for="newPostText">Corps de texte</label>
-            <textarea class="form-control" name="newPostText" rows="3" style="resize:none;"></textarea>
+            <div id="editor">
+                <p><br></p>
+            </div>
+            <textarea class="form-control" name="newPostText" rows="3" style="opacity: 0;visibility: hidden;height: 0;overflow: hidden;"></textarea>
         </div>
         <div class="form-group">
             <label for="file-upload" class="custom-file-upload">
@@ -101,6 +108,24 @@ unset($_POST);
 </div>
 
 
+
+<!-- Initialize Quill editor -->
+<script>
+    var Delta = Quill.import('delta');
+    var quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+/*
+    function removeStuff(value) {
+        console.log(value.substr(1, value.length - 2));
+    }
+*/
+    quill.on('text-change', function(delta) {
+        var about = document.querySelector('textarea[name=newPostText]');
+        about.value = quill.root.innerHTML;
+        console.log(about.value);
+    });
+</script>
 
 <?php
 require "footer.php";
