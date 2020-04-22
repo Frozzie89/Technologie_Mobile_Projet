@@ -1,7 +1,7 @@
 <footer class="page-footer sticky-bottom">
-    <div class="container-fluid">
-        <section id="myfooter">
-            <div class="wrapper section-footer center-text">
+    <div class="container-fluid ">
+        <section id="myfooter ">
+            <div class="wrapper section-footer center-text ">
                 © 2020 The GOOD NEWS | Tous Droits Réservés
             </div>
 
