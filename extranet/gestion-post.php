@@ -65,7 +65,7 @@ $auth->restrict("login.php");
                 $.getJSON('getPhotoOfPost.php', {postID: post.id_posts}, function (photo) {
                     let postText = limitTextPost(post.texte_posts);
                     console.log(postText);
-                    $("<div class='col-lg-3 card-news-max-height" + post.id_tags + "'><div class='card card-height card-style'>" +
+                    $("<div class='col-lg-3 card-news-max-height " + post.id_tags + "'><div class='card card-height card-style'>" +
                         "<img class='card-img-top' src='" + photo.nom_photos + "' alt='ok'>" +
                         "<div class='card-body card-body-style'>" +
                         "<h5 class='card-title'>" + post.titre_posts + "</h5>" +

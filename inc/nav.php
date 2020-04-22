@@ -51,7 +51,7 @@ unset($_POST);
         <ul class="nav navbar-nav navbar-left">
             <?php foreach ($tags as $key => $tag) : ?>
             <li class="nav-item">
-                <a class="nav-link" href="#"><?= $tag->affichage_tags ;?></a>
+                <a class="nav-link" href="tag?id=<?= $tag->id_tags ;?>"><?= $tag->affichage_tags ;?></a>
             </li>
             <?php endforeach;?>
         </ul>

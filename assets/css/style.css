@@ -171,6 +171,17 @@ body{
 .card-body>i, h3{
     display: inline-block;
 }
+/******** TAG *********/
+.card-btn-block{
+    position: absolute;
+    bottom: 3%;
+    left: 6%;
+    right: 6%;
+}
+#title-every-post{
+    top: 27%;
+    position: relative;
+}
 /*------------------------------------------------------------------------------------------------------------------*/
 /* EXTRANET */
 /******** LOGIN ************/
