@@ -72,7 +72,7 @@ $auth->restrict("login.php");
                         "<p class='card-text'>" + postText + "</p>" +
                         "<p class='tagPost'>" + post.id_tags + "</p>" +
                         "<a href='update-post.php?id=" + post.id_posts + "' class='btn btn-primary btn-lg card-btn-left'> Update </a>" +
-                        "<a href='https://api.jquery.com/on/' id='" + post.id_posts + "' class='btn btn-primary btn-lg float-right card-btn-right'> Delete </a>").appendTo($(".maindiv"));
+                        "<a href='https://api.jquery.com/on/' id='" + post.id_posts + "' class='btn btn-primary btn-lg card-btn-right'> Delete </a>").appendTo($(".maindiv"));
                     // changer pour focntionne : delete
                     // "<a href='delete-post.php?id="+post.id_posts+"' class='btn btn-primary btn-lg float-right card-btn-right'> Delete </a>"
                 })
@@ -115,13 +115,16 @@ $auth->restrict("login.php");
         })
     });
 
+
     $("#searchbarPost").on("input", function() {
         var search = this.value;
+        console.log(search);
         $('.col-lg-3').hide().each(function() {
             var text = $(this).find(".card-title:contains('"+search+"')");
             if (text.length) $(this).show();
         });
     });
+
 </script>
 
 

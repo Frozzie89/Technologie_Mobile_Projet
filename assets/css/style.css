@@ -206,8 +206,14 @@ body{
 }
 .card-btn-right{
     width: 40%;
-    /* position: absolute; */
+    position: absolute;
     right: 5%;
+    bottom: 3%;
+}
+.card-btn-left{
+    width: 40%;
+    position: absolute;
+    left: 5%;
     bottom: 3%;
 }
 .card-height{
