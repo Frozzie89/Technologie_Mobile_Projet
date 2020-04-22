@@ -1,7 +1,7 @@
 <?php
 require "header.php";
 require "nav.php";
-
+$auth->restrict("login.php");
 $error_missingInfo = false;
 $error_wrongFile = false;
 

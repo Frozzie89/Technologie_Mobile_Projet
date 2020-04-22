@@ -15,7 +15,9 @@ $pageRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_C
 if (!empty($_SESSION['auth']->login_membres))
 {
     $connexion = $auth->loginAdmin($db, $_SESSION['auth']->login_membres, $_SESSION['auth']->motDePasse_membres);
-    if (!$connexion) $auth->logout("login.php");
+    if (!$connexion) {
+        $auth->logout("login.php");
+    }
 }
     
 
@@ -25,6 +27,7 @@ if (!empty($_POST['LoginEmailAdmin']) && !empty($_POST['LoginMDPAdmin'])){
     if ($connexion){
         //header('Location: ../index.php');    
         $session->setFlash('success', "Vous êtes maintenant connecté");
+        App::redirect("addPost.php");
     }
 }
 
@@ -32,7 +35,8 @@ if (!empty($_POST['LoginEmailAdmin']) && !empty($_POST['LoginMDPAdmin'])){
 if (isset($_POST['btnDecoAdmin']))
 {
     $session->setFlash('danger', "Vous êtes maintenant déconnecté");
-    $auth->logout("../index.php");
+    //App::redirect("addPost.php");
+    $auth->logout("login.php");
 }
 
 ?>
@@ -55,10 +59,7 @@ if (isset($_POST['btnDecoAdmin']))
                 <a class="nav-link" href="addPost.php">Ajouter un post</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Supprimer un post</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Modifier un post</a>
+                <a class="nav-link" href="gestion-post.php">Gestion des posts</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Gestion des utilisateurs</a>

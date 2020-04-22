@@ -2,6 +2,7 @@
 require "header.php";
 require "nav.php";
 
+$auth->restrict("login.php");
 ?>
 <script src="../assets/js/jquery-3.4.1.js"></script>
 <script>window.jQuery || document.write('<script src="../assets/js/jquery-3.4.1.js"><\/script>')</script>
@@ -63,9 +64,9 @@ require "nav.php";
                 $.getJSON('getPhotoOfPost.php', {postID: post.id_posts}, function (photo) {
                     let postText = limitTextPost(post.texte_posts);
                     console.log(postText);
-                    $("<div class='col-lg-3 card-news-max-height " + post.id_tags + "'><div class='card card-height'>" +
+                    $("<div class='col-lg-3 card-news-max-height" + post.id_tags + "'><div class='card card-height card-style'>" +
                         "<img class='card-img-top' src='" + photo.nom_photos + "' alt='ok'>" +
-                        "<div class='card-body'>" +
+                        "<div class='card-body card-body-style'>" +
                         "<h5 class='card-title'>" + post.titre_posts + "</h5>" +
                         "<p class='card-text'>" + postText + "</p>" +
                         "<p class='tagPost'>" + post.id_tags + "</p>" +

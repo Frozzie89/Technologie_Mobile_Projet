@@ -1,7 +1,7 @@
 <?php
 require "header.php";
 require "nav.php";
-
+$auth->restrict("login.php");
 if(isset($_GET)){
     $id = $_GET['id'];
     $post = $db->query("Select * from posts where id_posts =:id",["id"=>$id])->fetch();
@@ -97,21 +97,16 @@ if(isset($_GET)){
         </div>
 
         <hr>
+        <div class="col-lg-12">
             <form method="post" id="formPhoto" name="formPhoto" enctype="multipart/form-data">
-                <div class="col-lg-12">
-                    <h2 class="secondary-title center-text">Modifier la photo</h2>
-                </div>
-                <div class="col-lg-12">
-                    <img class="rounded img-update" src="<?= $photo->nom_photos ;?>" alt="ok" height="100%" width="100%">
-                </div>
-                <div class="col-lg-12" style="margin-top: 20px">
-                    <div class="form-group">
-                        <label for="file-upload" class="custom-file-upload">
-                            <input type="file" id="file-upload" name="postFile">Uploader une image
-                        </label>
-                        <small class="text-muted" style="float: right; margin-top: 9px;">.png ou .jpeg - 8 Mo max</small>
-                        <span id="file-selected"></span>
-                    </div>
+                <h2 class="secondary-title center-text">Modifier la photo</h2>
+                <img class="rounded img-update" src="<?= $photo->nom_photos ;?>" alt="ok" height="100%" width="100%">
+                <div class="form-group" style="margin-top: 20px;">
+                    <label for="file-upload" class="custom-file-upload">
+                        <input type="file" id="file-upload" name="postFile">Uploader une image
+                    </label>
+                    <small class="text-muted" style="float: right; margin-top: 9px;">.png ou .jpeg - 8 Mo max</small>
+                    <span id="file-selected"></span>
                 </div>
                 <div class="form-group" style="float: right;">
                     <button type="submit" class="btn btn-dark" name="submitPicture">Remplacer la photo</button>

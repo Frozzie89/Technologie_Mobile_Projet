@@ -45,7 +45,7 @@
     }
 }
 
-/***********HELPERS**********/
+/*********** GENERAL **********/
 .mr-icon{
     margin-right: 5px;
 }
@@ -75,7 +75,7 @@ h1, h2, h3, h4, h5, h6{
 .display-4{
     font-weight: 500;
 }
-/* FLASH */
+    /* FLASH */
 .alert{
     border-radius: 0;
     padding-left: 0;
@@ -98,74 +98,23 @@ html{
 }
 nav{
     z-index: 9999;
-    visibility: hidden;
-
+    /*visibility: hidden;*/
 }
-.title-page{
-    margin-top: 100px;
-    margin-bottom: 50px;
+textarea{
+    resize : vertical!important;
 }
-
-.center-text{
-    text-align: center;
-}
-
-/* Index */
-.input-group-prepend {
-    margin-right: -4px;
-}
-
-/* Bouton upload fichiers*/
-input[type="file"] {
-    display: none;
-}
-.custom-file-upload {
-    border: 1px solid #ccc;
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.custom-file-upload:hover{
-    background-color: gray;
-    color: white;
-}
-
-/* EXTRANET */
-.card-news-max-height{
-    max-height: 600px;
-    margin-top: 25px;
-}
-.card-img-top{
-    max-height: 225px;
-    height: 225px;
-}
-.card-btn-left{
-    width: 40%;
+footer{
+    border-top: solid #3E3F3A 1px;
+    margin-top: 50px;
+    height: 150px;
+    background-color: #8E8C84;
+    line-height: 150px;
+    /*
     position: absolute;
-    left: 5%;
-    bottom: 3%;
-}
-.card-btn-right{
-    width: 40%;
-    position: absolute;
-    right: 5%;
-    bottom: 3%;
-}
-.card-height{
-    height: 440px;
-}
-p.tagPost{
-    display: none;
-}
-#searchbarPost{
-    border-width: 2px;
-    margin-top: 25px;
-    margin-bottom: 35px;
-}
-#formPhoto{
-    margin-top: 0px;
+    width: 100vw;
+    bottom: 1px;
+
+     */
 }
 hr {
     border: 0;
@@ -175,26 +124,19 @@ hr {
     background-color:#3E3F3A;
     height: 1px;
 }
-.secondary-title{
-    margin-top: 30px;
+.center-text{
+    text-align: center;
+}
+.title-page{
+    margin-top: 100px;
     margin-bottom: 50px;
 }
-.img-update{
-    border-color: #3E3F3A;
-    border-width: 2px;
-    border-style: solid;
+/******** END GENERAL ************/
+/*------------------------------------------------------------------------------------------------------------------*/
+/* Index */
+.input-group-prepend {
+    margin-right: -4px;
 }
-textarea{
-    resize : vertical!important;
-    height: 200px!important;
-}
-footer{
-    border-top: solid #3E3F3A 1px;
-    margin-top: 50px;
-    height: 150px;
-    background-color: #8E8C84;
-    line-height: 150px;
-
 /* style des publications */
 .card#indexPost{
     width: 60%; 
@@ -222,12 +164,84 @@ footer{
     object-fit: cover;
     }
 }
-
 .card-body>i, h3{
     display: inline-block;
 }
-
-
-body{
-    background-color: rgb(236, 216, 216);
+/*------------------------------------------------------------------------------------------------------------------*/
+/* EXTRANET */
+/******** LOGIN ************/
+.formAdmin{
+    border-radius: 5px;
+    border: 2px solid #49617570;
+    padding: 30px 30px 10px 30px;
+}
+/******** GESTION POST *********/
+.card-news-max-height{
+    max-height: 600px;
+    margin-top: 25px;
+}
+.card-img-top{
+    max-height: 225px;
+    height: 225px;
+}
+.card-btn-left{
+    width: 40%;
+    position: absolute;
+    left: 5%;
+    bottom: 3%;
+}
+.card-btn-right{
+    width: 40%;
+    position: absolute;
+    right: 5%;
+    bottom: 3%;
+}
+.card-height{
+    height: 440px;
+}
+.card-style{
+    border: 1px solid #8E8C84;
+}
+.card-style:hover{
+    cursor : pointer;
+    /*transition-duration: 1s;*/
+    box-shadow: 1px 1px 2px 2px #325D8880;
+}
+.card-body-style{
+    border-top: 1px solid #3E3F3A;
+}
+p.tagPost{
+    display: none;
+}
+#searchbarPost{
+    border-width: 2px;
+    margin-top: 25px;
+    margin-bottom: 35px;
+}
+#formPhoto{
+    margin-top: 0px;
+}
+.secondary-title{
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+.img-update{
+    border-color: #3E3F3A;
+    border-width: 2px;
+    border-style: solid;
+}
+/****** Bouton upload fichiers ******/
+input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.custom-file-upload:hover{
+    background-color: gray;
+    color: white;
 }

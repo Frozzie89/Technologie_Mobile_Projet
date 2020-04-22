@@ -38,7 +38,7 @@
   <component name="ProjectId" id="1ZtDPKERDUiYZMeIfd60NwQBYVT" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Cours/stage" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../BTI/faa" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
@@ -78,6 +78,7 @@
       <workItem from="1587450010077" duration="14780000" />
       <workItem from="1587471815450" duration="302000" />
       <workItem from="1587474020794" duration="25966000" />
+      <workItem from="1587535416226" duration="5888000" />
     </task>
     <servers />
   </component>
