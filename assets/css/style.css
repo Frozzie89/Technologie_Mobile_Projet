@@ -52,11 +52,13 @@
 .ml-icon{
     margin-left: 5px;
 }
-body
+html, body
 {
     background-color: white;
     height: 100%;
+    margin: 0;
 }
+
 *, p {
     -webkit-transition: all 0.2s ease;
     -moz-transition:    all 0.2s ease;
@@ -106,15 +108,9 @@ textarea{
 footer{
     border-top: solid #3E3F3A 1px;
     margin-top: 50px;
-    height: 150px;
+    height: 50px;
     background-color: #8E8C84;
-    line-height: 150px;
-    /*
-    position: absolute;
-    width: 100vw;
-    bottom: 1px;
-
-     */
+    line-height: 50px;
 }
 hr {
     border: 0;
@@ -131,6 +127,7 @@ hr {
     margin-top: 100px;
     margin-bottom: 50px;
 }
+
 /******** END GENERAL ************/
 /*------------------------------------------------------------------------------------------------------------------*/
 /* Index */
@@ -196,18 +193,20 @@ body{
     margin-top: 25px;
 }
 .card-img-top{
-    max-height: 225px;
     height: 225px;
+    max-height: 25rem; 
+    object-fit: cover;
 }
-.card-btn-left{
-    width: 40%;
-    position: absolute;
-    left: 5%;
-    bottom: 3%;
+
+@media all and (max-width: 768px) {
+    .card-news-max-height1{
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
 }
 .card-btn-right{
     width: 40%;
-    position: absolute;
+    /* position: absolute; */
     right: 5%;
     bottom: 3%;
 }

@@ -2,6 +2,9 @@
 require "header.php";
 require "nav.php";
 
+if (isset($connexion) && $connexion != false)
+    header('Location: gestion-post.php');
+
 ?>
 
 <section id="homePage">
