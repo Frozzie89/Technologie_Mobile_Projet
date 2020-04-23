@@ -1,3 +1,4 @@
+<div style="margin-top: 50px;">&nbsp;</div>
 <footer class="page-footer sticky-bottom">
     <div class="container-fluid ">
         <section id="myfooter ">

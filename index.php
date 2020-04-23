@@ -10,21 +10,245 @@ require "inc/nav.php";
         <div class="col-lg-12">
             <h1 class="title-page center-text">Page d'accueil</h1>
         </div>
-        <div class="col-lg-12">
-            <div class="btn-group center-text" role="group" aria-label="Basic example">
-                <?php foreach($tags as $key=>$tag) :?>
-                <button type="button" class="btn btn-outline-secondary"><?= $tag->affichage_tags ?></button>
+        <!-- <div class="col-lg-12 center-text">
+            <div class="btn-group btn-group-lg " role="group" aria-label="Basic example" id="tagIndexGrp">
+                <?php foreach($tags as $key=>$tag) :
+                if (empty($idTagButton)) $idTagButton = 0;
+                $idTagButton++; ?>
+                <button type="button" id="<?= "tagIndex_". $idTagButton?>"
+                    class="btn btn-outline-secondary"><?= $tag->affichage_tags ?></button>
                 <?php endforeach; ?>
             </div>
-        </div>
+        </div> -->
     </div>
 </section>
 
 
-<!-- <button type="button" class="btn btn-outline-secondary">Left</button>
-    <button type="button" class="btn btn-outline-secondary">Middle</button>
-    <button type="button" class="btn btn-outline-secondary">Right</button> -->
 
+<div class="container">
+
+    <!--Carousel Wrapper-->
+    <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+        <!--Controls-->
+        <div class="controls-top">
+            <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
+            <a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
+        </div>
+        <!--/.Controls-->
+
+        <!--Slides-->
+        <div class="carousel-inner" role="listbox">
+
+            <!--First slide-->
+            <div class="carousel-item active my-auto">
+
+                <div class="row">
+                    <div class="col">
+                        <div class="card border-secondary">
+                            <img class="card-img-top border-bottom border-secondary"
+                                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title">Card title</h4>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the
+                                    card's content.</p>
+                                <i class="fas fa-eye fa-2x"></i>
+                                <h3>0</h3>
+
+                                <i class="far fa-arrow-alt-circle-up fa-2x" style="margin-left:15px"></i>
+                                <h3>0</h3>
+
+                                <h3 style="float: right; margin-left:5px">0</h3>
+                                <i class="far fa-comments fa-2x" style="float: right;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="card lg-2 border-secondary">
+                            <img class="card-img-top border-bottom border-secondary"
+                                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title">Card title</h4>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the
+                                    card's content.</p>
+                                <i class="fas fa-eye fa-2x"></i>
+                                <h3>0</h3>
+
+                                <i class="far fa-arrow-alt-circle-up fa-2x" style="margin-left:15px"></i>
+                                <h3>0</h3>
+
+                                <h3 style="float: right; margin-left:5px">0</h3>
+                                <i class="far fa-comments fa-2x" style="float: right;"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <div class="card lg-2 border-secondary">
+                            <img class="card-img-top border-bottom border-secondary"
+                                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title">Card title</h4>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the
+                                    card's content.</p>
+                                <i class="fas fa-eye fa-2x"></i>
+                                <h3>0</h3>
+
+                                <i class="far fa-arrow-alt-circle-up fa-2x" style="margin-left:15px"></i>
+                                <h3>0</h3>
+
+                                <h3 style="float: right; margin-left:5px">0</h3>
+                                <i class="far fa-comments fa-2x" style="float: right;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card lg-2 border-secondary">
+                            <img class="card-img-top border-bottom border-secondary"
+                                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title">Card title</h4>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the
+                                    card's content.</p>
+                                <i class="fas fa-eye fa-2x"></i>
+                                <h3>0</h3>
+
+                                <i class="far fa-arrow-alt-circle-up fa-2x" style="margin-left:15px"></i>
+                                <h3>0</h3>
+
+                                <h3 style="float: right; margin-left:5px">0</h3>
+                                <i class="far fa-comments fa-2x" style="float: right;"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card lg-2 border-secondary">
+                            <img class="card-img-top border-bottom border-secondary"
+                                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title">Card title</h4>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the
+                                    card's content.</p>
+                                <i class="fas fa-eye fa-2x"></i>
+                                <h3>0</h3>
+
+                                <i class="far fa-arrow-alt-circle-up fa-2x" style="margin-left:15px"></i>
+                                <h3>0</h3>
+
+                                <h3 style="float: right; margin-left:5px">0</h3>
+                                <i class="far fa-comments fa-2x" style="float: right;"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card lg-2 border-secondary">
+                            <img class="card-img-top border-bottom border-secondary"
+                                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title">Card title</h4>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the
+                                    card's content.</p>
+                                <i class="fas fa-eye fa-2x"></i>
+                                <h3>0</h3>
+
+                                <i class="far fa-arrow-alt-circle-up fa-2x" style="margin-left:15px"></i>
+                                <h3>0</h3>
+
+                                <h3 style="float: right; margin-left:5px">0</h3>
+                                <i class="far fa-comments fa-2x" style="float: right;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="card lg-2 border-secondary">
+                            <img class="card-img-top border-bottom border-secondary"
+                                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title">Card title</h4>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the
+                                    card's content.</p>
+                                <i class="fas fa-eye fa-2x"></i>
+                                <h3>0</h3>
+
+                                <i class="far fa-arrow-alt-circle-up fa-2x" style="margin-left:15px"></i>
+                                <h3>0</h3>
+
+                                <h3 style="float: right; margin-left:5px">0</h3>
+                                <i class="far fa-comments fa-2x" style="float: right;"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="card lg-2 border-secondary">
+                            <img class="card-img-top border-bottom border-secondary"
+                                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
+                                alt="Card image cap">
+                            <div class="card-body">
+                                <h4 class="card-title">Card title</h4>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the
+                                    card's content.</p>
+                                <i class="fas fa-eye fa-2x"></i>
+                                <h3>0</h3>
+
+                                <i class="far fa-arrow-alt-circle-up fa-2x" style="margin-left:15px"></i>
+                                <h3>0</h3>
+
+                                <h3 style="float: right; margin-left:5px">0</h3>
+                                <i class="far fa-comments fa-2x" style="float: right;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--/.First slide-->
+
+        <!--Second slide-->
+
+        <!--/.Second slide-->
+
+        <!--Third slide-->
+
+
+    </div>
+    <!--/.Third slide-->
+
+
+</div>
+<!--/.Slides-->
+
+</div>
+<!--/.Carousel Wrapper-->
+
+
+</div>
+<!-- 
 <?php foreach($db->query("SELECT * FROM posts ORDER BY id_posts DESC")->fetchAll() as $key => $post) : 
     $img = $db->query("SELECT * FROM photos WHERE id_posts = :id", ["id"=>$post->id_posts])->fetch();
 
@@ -58,7 +282,7 @@ require "inc/nav.php";
     </div>
 </div>
 
-<?php endforeach; ?>
+<?php endforeach; ?> -->
 
 
 
@@ -103,7 +327,8 @@ require "inc/nav.php";
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="loginTitle" style="text-align: center;"><strong>Inscrivez-vous et rejoignez
+                <h4 class="modal-title" id="loginTitle" style="text-align: center;"><strong>Inscrivez-vous et
+                        rejoignez
                         la communauté de <br> <i>The Good News</i></strong></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -128,7 +353,8 @@ require "inc/nav.php";
                         <label for="RegisterMDP" id="strongMDP"></label>
                         <input type="password" class="form-control" id="RegisterMDP"
                             placeholder="Doit contenir au moins un chiffre" name="RegisterMdp">
-                        <span id="mdpNoNum" style="display:none; color: red;">Le mot de passe doit contenir au moins un
+                        <span id="mdpNoNum" style="display:none; color: red;">Le mot de passe doit contenir au moins
+                            un
                             chiffre</span>
                     </div>
 

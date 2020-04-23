@@ -34,7 +34,7 @@ $auth->restrict("login.php");
     </div>
 </section>
 
-<div class="container" style="margin-bottom: 50px;">
+<div class="container">
     <div class="row maindiv">
         <!-- Posts go here -->
     </div>

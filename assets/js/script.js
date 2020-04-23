@@ -68,6 +68,12 @@ $(document).ready(function () {
         }
     })
 
+    // if ($('#tagIndexGrp').length > 0) {
+    //     $('#tagIndexGrp button').each(function (index, element) {
+
+    //     });
+    // }
+
 });
 
 // jquery Modal Register
@@ -189,4 +195,3 @@ $.expr[":"].contains = $.expr.createPseudo(function (arg) {
         return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
     };
 });
-
