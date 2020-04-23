@@ -63,7 +63,6 @@ unset($_POST);
             <form method="POST">
                 <div class="input-group">
                     <?php if (empty($_SESSION['auth']->pseudo_membres)) : ?>
-                        <!-- Ajouter le bouton customisation ici pour Linda -->	
                     <div class="input-group-prepend">
                         <button class="btn btn-outline-light" type="button" data-toggle="modal"
                             data-target="#loginModal">S'authentifier</button>
@@ -73,17 +72,12 @@ unset($_POST);
                             data-target="#registerModal">S'enregistrer</button>
                     </div>
                     <?php else : ?>
-                    <div class="">
-					<!--  -->
-						<div class="btn btn-outline-light">
-							<button class="btn btn-outline-light" type="button" data-toggle="modal" data-target="#changePseudo">
-								Connecté en tant que <strong><?php echo $_SESSION['auth']->pseudo_membres;?></strong>
-							</button>
-						</div>
-					<!-- -->
-                        <!--<label for="btnDeco" style="color: white; margin-right: 20px;">Connecté en tant que
+                    <div>
+                        <a data-toggle="modal" data-target="#changePseudo" id="cogCustomUser"><i
+                                class="fas fa-cog"></i></a>
+                        <label for="btnDeco" style="color: white; margin-right: 20px;">Connecté en tant que
                             <strong><?php echo $_SESSION['auth']->pseudo_membres;?></strong>
-                        </label>-->
+                        </label>
                         <button name="btnDeco" class="btn btn-outline-light" type="submit">Se
                             déconnecter</button>
                     </div>

@@ -186,7 +186,6 @@ $("#searchUser").on("input", function () {
         var email = $(this).find("#emailUser:contains('" + search + "')");
         if (pseudo.length || email.length) $(this).show();
     });
-    // $("#tableHeader>tr").show();
 });
 
 // pour case insensitive
@@ -194,4 +193,24 @@ $.expr[":"].contains = $.expr.createPseudo(function (arg) {
     return function (elem) {
         return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
     };
+});
+
+/* changement du thème */
+$('#changeTheme').click(function () {
+    if ($(this).hasClass("fa-sun")) {
+        $(this).fadeOut(100, function () {
+            $(this).removeClass("fa-sun");
+        });
+        $(this).fadeIn(100, function () {
+            $(this).addClass("fa-moon");
+        });
+    }
+    else {
+        $(this).fadeOut(100, function () {
+            $(this).removeClass("fa-moon");
+        });
+        $(this).fadeIn(100, function () {
+            $(this).addClass("fa-sun");
+        });
+    }
 });

@@ -74,6 +74,18 @@ h1, h2, h3, h4, h5, h6{
     background-color: #204689;
     border: 1px solid #fcfafa;
 }
+
+.fa-cog{
+    color: white; 
+    margin-right: 5px;
+}
+
+.fa-cog:hover{
+    color: rgb(8, 132, 235);
+    cursor: pointer;
+}
+
+
 .display-4{
     font-weight: 500;
 }
