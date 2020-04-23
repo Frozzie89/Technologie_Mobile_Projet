@@ -175,11 +175,12 @@ function fetchData(tagValue) {
 /* gestion utilisateurs */
 $("#searchUser").on("input", function () {
     var search = this.value;
-    $("tr:not(#tableHeader)").hide().each(function () {
+    $("tr:not(#tableHeader>tr)").hide().each(function () {
         var pseudo = $(this).find("#pseudoUser:contains('" + search + "')");
         var email = $(this).find("#emailUser:contains('" + search + "')");
         if (pseudo.length || email.length) $(this).show();
     });
+    // $("#tableHeader>tr").show();
 });
 
 // pour case insensitive
