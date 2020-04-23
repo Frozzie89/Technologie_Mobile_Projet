@@ -10,10 +10,20 @@ require "inc/nav.php";
         <div class="col-lg-12">
             <h1 class="title-page center-text">Page d'accueil</h1>
         </div>
+        <div class="col-lg-12">
+            <div class="btn-group center-text" role="group" aria-label="Basic example">
+                <?php foreach($tags as $key=>$tag) :?>
+                <button type="button" class="btn btn-outline-secondary"><?= $tag->affichage_tags ?></button>
+                <?php endforeach; ?>
+            </div>
+        </div>
     </div>
 </section>
 
 
+<!-- <button type="button" class="btn btn-outline-secondary">Left</button>
+    <button type="button" class="btn btn-outline-secondary">Middle</button>
+    <button type="button" class="btn btn-outline-secondary">Right</button> -->
 
 <?php foreach($db->query("SELECT * FROM posts ORDER BY id_posts DESC")->fetchAll() as $key => $post) : 
     $img = $db->query("SELECT * FROM photos WHERE id_posts = :id", ["id"=>$post->id_posts])->fetch();
@@ -141,6 +151,8 @@ require "inc/nav.php";
         </div>
     </div>
 </div>
+
+<!-- Modal customisation  -->
 
 <?php
 require "inc/footer.php";

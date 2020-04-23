@@ -46,8 +46,6 @@ unset($_POST);
     </div>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-
-
         <ul class="nav navbar-nav navbar-left">
             <?php foreach ($tags as $key => $tag) : ?>
             <li class="nav-item">
@@ -65,6 +63,7 @@ unset($_POST);
             <form method="POST">
                 <div class="input-group">
                     <?php if (empty($_SESSION['auth']->pseudo_membres)) : ?>
+                        <!-- Ajouter le bouton customisation ici pour Linda -->
                     <div class="input-group-prepend">
                         <button class="btn btn-outline-light" type="button" data-toggle="modal"
                             data-target="#loginModal">S'authentifier</button>
