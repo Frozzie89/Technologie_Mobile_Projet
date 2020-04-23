@@ -107,12 +107,13 @@ textarea{
 }
 footer{
     border-top: solid #3E3F3A 1px;
-    margin-top: 50px;
+    /* margin-top: 50px; */
     height: 50px;
     background-color: #8E8C84;
     line-height: 50px;
 
     position: absolute;
+    position: fixed;
     width: 100%;
     bottom: 0;
 }
@@ -194,7 +195,8 @@ body{
 /******** GESTION POST *********/
 .card-news-max-height{
     max-height: 600px;
-    margin-top: 25px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 .card-img-top{
     height: 225px;
@@ -202,8 +204,33 @@ body{
     object-fit: cover;
 }
 
+.card-news-max-height1{
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.card-news-max-height2{
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.card-news-max-height3{
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.card-news-max-height4{
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+
 @media all and (max-width: 768px) {
     .card-news-max-height1{
+        margin-bottom: 15px;
+        margin-top: 15px;
+    }
+    .card-news-max-height4{
         margin-bottom: 15px;
         margin-top: 15px;
     }

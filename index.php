@@ -13,6 +13,8 @@ require "inc/nav.php";
     </div>
 </section>
 
+
+
 <?php foreach($db->query("SELECT * FROM posts ORDER BY id_posts DESC")->fetchAll() as $key => $post) : 
     $img = $db->query("SELECT * FROM photos WHERE id_posts = :id", ["id"=>$post->id_posts])->fetch();
 
