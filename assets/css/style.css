@@ -204,26 +204,6 @@ body{
     object-fit: cover;
 }
 
-.card-news-max-height1{
-    margin-bottom: 15px;
-    margin-top: 15px;
-}
-
-.card-news-max-height2{
-    margin-bottom: 15px;
-    margin-top: 15px;
-}
-
-.card-news-max-height3{
-    margin-bottom: 15px;
-    margin-top: 15px;
-}
-
-.card-news-max-height4{
-    margin-bottom: 15px;
-    margin-top: 15px;
-}
-
 
 @media all and (max-width: 768px) {
     .card-news-max-height1{
