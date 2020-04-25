@@ -4,7 +4,7 @@ require "inc/nav.php";
 
 $tagPage = $db->query("Select * from tags where id_tags = :id", ["id"=>$_GET['id']])->fetch();
 $NB_POST = count($db->query("Select * from posts where id_tags = :id", ["id"=>$_GET['id']])->fetchAll());
-$NB_PER_PAGE = 1;
+$NB_PER_PAGE = 8;
 $OFFSET = 0;
 ?>
 <!-- JS, jquery and stuff -->
@@ -50,8 +50,8 @@ $OFFSET = 0;
             </div>
             <div class="col-lg-12">
                 <div class="controls">
-                    <button class="btn btn-primary previous-arrow" type="button"><i class="fa fa-angle-left"></i></button>
-                    <button class="btn btn-primary next-arrow" type="button"><i class="fa fa-angle-right"></i></button>
+                    <button id="previous-arrow" class="btn btn-primary " type="button"><i class="fa fa-angle-left"></i></button>
+                    <button id="next-arrow" class="btn btn-primary " type="button"><i class="fa fa-angle-right"></i></button>
                 </div>
             </div>
         </div>
@@ -70,8 +70,8 @@ $OFFSET = 0;
     let OFFSET = 0;
 
     $(document).ready(function (){
-        $(".next-arrow").prop("disabled", true);
-        $(".previous-arrow").prop("disabled", true);
+        $("#next-arrow").prop("disabled", true);
+        $("#previous-arrow").prop("disabled", true);
         const csstendance = 'td';
         const csseverypost = 'evr';
         fetchDataTag(<?= $_GET['id'] ?>, '.post-tendance', csstendance);
@@ -86,13 +86,24 @@ $OFFSET = 0;
     }
 
     function noPagination() {
-
+        $.ajax({
+            url:"pagination.php",
+            method:"GET",
+            data:{  tagID : <?= $_GET['id'] ?>,
+                nbppage : NB_PER_PAGE,
+                offset : OFFSET
+            },
+            dataType:"json",
+            success:function(posts){
+                console.log(posts);
+                displayPosts(posts);
+            }
+        });
     }
 
     function displayPosts(posts) {
         $('.evr').remove();
         $.each(posts, function (i, post) {
-
             $.getJSON('extranet/getPhotoOfPost.php', {postID: post.id_posts}, function (photo) {
                 let postText = limitTextPost(post.texte_posts);
                 $("<div class='col-lg-3 card-news-max-height evr " + post.id_tags + "'><div class='card card-height card-style'>" +
@@ -107,7 +118,7 @@ $OFFSET = 0;
     }
 
     function setUpPagination() {
-        $(".next-arrow").prop("disabled", false);
+        $("#next-arrow").prop("disabled", false);
         console.log(NB_POST, NB_PER_PAGE, OFFSET, <?= $_GET['id'] ?>);
         $.ajax({
             url:"pagination.php",
@@ -165,17 +176,17 @@ $OFFSET = 0;
     function checkPreviousArrow() {
         console.log(OFFSET);
         if (OFFSET <= 0){
-            $(".previous-arrow").prop("disabled", true);
+            $("#previous-arrow").prop("disabled", true);
         } else {
-            $(".previous-arrow").prop("disabled", false);
+            $("#previous-arrow").prop("disabled", false);
         }
     }
 
-    $(".previous-arrow").on("click", function(event) {
+    $("#previous-arrow").on("click", function(event) {
         event.preventDefault();
         console.log(event);
         OFFSET -= NB_PER_PAGE;
-        $(".next-arrow").prop("disabled", false);
+        $("#next-arrow").prop("disabled", false);
         console.log(NB_POST, NB_PER_PAGE, OFFSET, <?= $_GET['id'] ?>);
         $.ajax({
             url:"pagination.php",
@@ -197,16 +208,16 @@ $OFFSET = 0;
         console.log(OFFSET);
         console.log(NB_POST);
         if (OFFSET > NB_POST - 2){
-            $(".next-arrow").prop("disabled", true);
+            $("#next-arrow").prop("disabled", true);
         } else {
-            $(".next-arrow").prop("disabled", false);
+            $("#next-arrow").prop("disabled", false);
         }
     }
 
-    $(".next-arrow").on("click", function(event) {
+    $("#next-arrow").on("click", function(event) {
         event.preventDefault();
         OFFSET += NB_PER_PAGE;
-        $(".previous-arrow").prop("disabled", false);
+        $("#previous-arrow").prop("disabled", false);
         console.log(NB_POST, NB_PER_PAGE, OFFSET, <?= $_GET['id'] ?>);
         $.ajax({
             url:"pagination.php",
