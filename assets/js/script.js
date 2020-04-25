@@ -150,6 +150,8 @@ function bindH2ToSelect(nom_tag) {
 function fetchData(tagValue) {
     $.getJSON('getPostsByTag.php', { tagID: tagValue }, function (posts) {
         //console.log(posts);
+
+        console.log("../../assets/ajax/getPostsByTag.php");
         let j = 0;
         $.each(posts, function (i, post) {
 

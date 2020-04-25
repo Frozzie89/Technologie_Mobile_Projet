@@ -38,10 +38,15 @@
   <component name="ProjectId" id="1ZtDPKERDUiYZMeIfd60NwQBYVT" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../BTI/faa" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\wamp64\www\TI\Technologie_Mobile_Projet\assets\ajax" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -81,7 +86,8 @@
       <workItem from="1587535416226" duration="7831000" />
       <workItem from="1587553271426" duration="20057000" />
       <workItem from="1587578229722" duration="2334000" />
-      <workItem from="1587636590410" duration="187000" />
+      <workItem from="1587636590410" duration="5231000" />
+      <workItem from="1587672155310" duration="403000" />
     </task>
     <servers />
   </component>

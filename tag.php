@@ -58,8 +58,8 @@ $tagPage = $db->query("Select * from tags where id_tags = :id", ["id"=>$_GET['id
     $(document).ready(function (){
         const csstendance = 'td';
         const csseverypost = 'evr';
-        fetchData(<?= $_GET['id'] ?>, '.post-tendance', csstendance);
-        fetchData(<?= $_GET['id'] ?>, '.post-every-post', csseverypost);
+        fetchDataTag(<?= $_GET['id'] ?>, '.post-tendance', csstendance);
+        fetchDataTag(<?= $_GET['id'] ?>, '.post-every-post', csseverypost);
         /*
         $(document).on('click', '.btn-block', function(event) {
             event.preventDefault();
@@ -88,9 +88,9 @@ $tagPage = $db->query("Select * from tags where id_tags = :id", ["id"=>$_GET['id
         return texte_posts;
     }
 
-    function fetchData(tagValue, selector, cssclass) {
+    function fetchDataTag(tagValue, selector, cssclass) {
         $.getJSON('fetchPostTendance.php', {tagID: tagValue, tendance : false}, function (posts) {
-            //console.log(posts);
+            console.log(posts);
             let j = 0;
             $.each(posts, function (i, post) {
 
