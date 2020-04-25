@@ -13,6 +13,9 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.1/examples/starter-template/">
 
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/3d724ab10d.js" crossorigin="anonymous"></script>
+
     <!-- Bootstrap core CSS -->
     <link href="../assets/css/bootstrap.css" rel="stylesheet">
 

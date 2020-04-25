@@ -3,6 +3,9 @@ require "inc/header.php";
 require "inc/nav.php";
 
 $tagPage = $db->query("Select * from tags where id_tags = :id", ["id"=>$_GET['id']])->fetch();
+$NB_POST = count($db->query("Select * from posts where id_tags = :id", ["id"=>$_GET['id']])->fetchAll());
+$NB_PER_PAGE = 1;
+$OFFSET = 0;
 ?>
 <!-- JS, jquery and stuff -->
 <script src="assets/js/jquery-3.4.1.js"></script>
@@ -45,41 +48,35 @@ $tagPage = $db->query("Select * from tags where id_tags = :id", ["id"=>$_GET['id
             <div class="col-lg-4">
                 <input id="searchbarPost" class="form-control" type="text" class="form-control" placeholder="Search..">
             </div>
+            <div class="col-lg-12">
+                <div class="controls">
+                    <button class="btn btn-primary previous-arrow" type="button"><i class="fa fa-angle-left"></i></button>
+                    <button class="btn btn-primary next-arrow" type="button"><i class="fa fa-angle-right"></i></button>
+                </div>
+            </div>
         </div>
     </div>
     <div class="container">
         <div class="row post-every-post">
             <!-- Posts go here -->
+
         </div>
     </div>
 </section>
 
 <script>
+    let NB_POST = 0;
+    const NB_PER_PAGE = 3;
+    let OFFSET = 0;
+
     $(document).ready(function (){
+        $(".next-arrow").prop("disabled", true);
+        $(".previous-arrow").prop("disabled", true);
         const csstendance = 'td';
         const csseverypost = 'evr';
         fetchDataTag(<?= $_GET['id'] ?>, '.post-tendance', csstendance);
-        fetchDataTag(<?= $_GET['id'] ?>, '.post-every-post', csseverypost);
-        /*
-        $(document).on('click', '.btn-block', function(event) {
-            event.preventDefault();
-            let idPost = this.id;
-            if(confirm("Etes vous sur de supprimer ce post ?"))
-            {
-                $.ajax({
-                    url:"deletePost.php",
-                    method:"POST",
-                    data:{postID:idPost},
-                    dataType:"text",
-                    success:function(data){
-                        $('.col-lg-3').remove();
-                        fetchData(data);
-                        //flash ou autre
-                    }
-                });
-            }
-        })
-        */
+        //fetchDataTag(<?= $_GET['id'] ?>, '.post-every-post', csseverypost);
+
     });
 
     function limitTextPost(texte_posts) {
@@ -88,25 +85,72 @@ $tagPage = $db->query("Select * from tags where id_tags = :id", ["id"=>$_GET['id
         return texte_posts;
     }
 
+    function noPagination() {
+
+    }
+
+    function displayPosts(posts) {
+        $('.evr').remove();
+        $.each(posts, function (i, post) {
+
+            $.getJSON('extranet/getPhotoOfPost.php', {postID: post.id_posts}, function (photo) {
+                let postText = limitTextPost(post.texte_posts);
+                $("<div class='col-lg-3 card-news-max-height evr " + post.id_tags + "'><div class='card card-height card-style'>" +
+                    "<img class='card-img-top' src='extranet/" + photo.nom_photos + "' alt='ok'>" +
+                    "<div class='card-body card-body-style'>" +
+                    "<h5 class='card-title'>" + post.titre_posts + "</h5>" +
+                    "<p class='card-text'>" + postText + "</p>" +
+                    "<p class='tagPost'>" + post.id_tags + "</p>" +
+                    "<a href='post.php?id=" + post.id_posts + "' class='btn btn-primary btn-lg card-btn-block'> Visionner </a>").appendTo($('.post-every-post'));
+            })
+        })
+    }
+
+    function setUpPagination() {
+        $(".next-arrow").prop("disabled", false);
+        console.log(NB_POST, NB_PER_PAGE, OFFSET, <?= $_GET['id'] ?>);
+        $.ajax({
+            url:"pagination.php",
+            method:"GET",
+            data:{  tagID : <?= $_GET['id'] ?>,
+                    nbppage : NB_PER_PAGE,
+                    offset : OFFSET
+            },
+            dataType:"json",
+            success:function(posts){
+                console.log(posts);
+                displayPosts(posts);
+            }
+        });
+    }
+
     function fetchDataTag(tagValue, selector, cssclass) {
         $.getJSON('fetchPostTendance.php', {tagID: tagValue, tendance : false}, function (posts) {
             console.log(posts);
-            let j = 0;
+            NB_POST = posts.length;
             $.each(posts, function (i, post) {
 
                 $.getJSON('extranet/getPhotoOfPost.php', {postID: post.id_posts}, function (photo) {
                     let postText = limitTextPost(post.texte_posts);
-                    $("<div class='col-lg-3 card-news-max-height "+cssclass+" " + post.id_tags + "'><div class='card card-height card-style'>" +
+                    $("<div class='col-lg-3 card-news-max-height td " + post.id_tags + "'><div class='card card-height card-style'>" +
                         "<img class='card-img-top' src='extranet/" + photo.nom_photos + "' alt='ok'>" +
                         "<div class='card-body card-body-style'>" +
                         "<h5 class='card-title'>" + post.titre_posts + "</h5>" +
                         "<p class='card-text'>" + postText + "</p>" +
                         "<p class='tagPost'>" + post.id_tags + "</p>" +
-                        "<a href='post.php?id=" + post.id_posts + "' class='btn btn-primary btn-lg card-btn-block'> Visionner </a>").appendTo($(selector));
+                        "<a href='post.php?id=" + post.id_posts + "' class='btn btn-primary btn-lg card-btn-block'> Visionner </a>").appendTo($('.post-tendance'));
                 })
             })
+            if (NB_POST <= NB_PER_PAGE){
+                console.log(NB_POST);
+                console.log(NB_PER_PAGE);
+                noPagination();
+            } else {
+                console.log(NB_POST);
+                console.log(NB_PER_PAGE);
+                setUpPagination(NB_POST, NB_PER_PAGE, OFFSET);
+            }
         })
-
     }
 
 
@@ -117,6 +161,70 @@ $tagPage = $db->query("Select * from tags where id_tags = :id", ["id"=>$_GET['id
             if (text.length) $(this).show();
         });
     });
+
+    function checkPreviousArrow() {
+        console.log(OFFSET);
+        if (OFFSET <= 0){
+            $(".previous-arrow").prop("disabled", true);
+        } else {
+            $(".previous-arrow").prop("disabled", false);
+        }
+    }
+
+    $(".previous-arrow").on("click", function(event) {
+        event.preventDefault();
+        console.log(event);
+        OFFSET -= NB_PER_PAGE;
+        $(".next-arrow").prop("disabled", false);
+        console.log(NB_POST, NB_PER_PAGE, OFFSET, <?= $_GET['id'] ?>);
+        $.ajax({
+            url:"pagination.php",
+            method:"GET",
+            data:{  tagID : <?= $_GET['id'] ?>,
+                nbppage : NB_PER_PAGE,
+                offset : OFFSET
+            },
+            dataType:"json",
+            success:function(posts){
+                console.log(posts);
+                displayPosts(posts);
+                checkPreviousArrow();
+            }
+        });
+    });
+
+    function checkNextArrow() {
+        console.log(OFFSET);
+        console.log(NB_POST);
+        if (OFFSET > NB_POST - 2){
+            $(".next-arrow").prop("disabled", true);
+        } else {
+            $(".next-arrow").prop("disabled", false);
+        }
+    }
+
+    $(".next-arrow").on("click", function(event) {
+        event.preventDefault();
+        OFFSET += NB_PER_PAGE;
+        $(".previous-arrow").prop("disabled", false);
+        console.log(NB_POST, NB_PER_PAGE, OFFSET, <?= $_GET['id'] ?>);
+        $.ajax({
+            url:"pagination.php",
+            method:"GET",
+            data:{  tagID : <?= $_GET['id'] ?>,
+                nbppage : NB_PER_PAGE,
+                offset : OFFSET
+            },
+            dataType:"json",
+            success:function(posts){
+                console.log(posts);
+                displayPosts(posts);
+                checkNextArrow();
+            }
+        });
+    });
+
+
 </script>
 
 
