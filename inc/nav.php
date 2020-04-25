@@ -46,8 +46,6 @@ unset($_POST);
     </div>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-
-
         <ul class="nav navbar-nav navbar-left">
             <?php foreach ($tags as $key => $tag) : ?>
             <li class="nav-item">
@@ -74,7 +72,9 @@ unset($_POST);
                             data-target="#registerModal">S'enregistrer</button>
                     </div>
                     <?php else : ?>
-                    <div class="">
+                    <div>
+                        <a data-toggle="modal" data-target="#changePseudo" id="cogCustomUser"><i
+                                class="fas fa-cog"></i></a>
                         <label for="btnDeco" style="color: white; margin-right: 20px;">Connecté en tant que
                             <strong><?php echo $_SESSION['auth']->pseudo_membres;?></strong>
                         </label>

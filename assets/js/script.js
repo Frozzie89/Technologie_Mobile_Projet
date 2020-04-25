@@ -68,6 +68,12 @@ $(document).ready(function () {
         }
     })
 
+    // if ($('#tagIndexGrp').length > 0) {
+    //     $('#tagIndexGrp button').each(function (index, element) {
+
+    //     });
+    // }
+
 });
 
 // jquery Modal Register
@@ -182,7 +188,6 @@ $("#searchUser").on("input", function () {
         var email = $(this).find("#emailUser:contains('" + search + "')");
         if (pseudo.length || email.length) $(this).show();
     });
-    // $("#tableHeader>tr").show();
 });
 
 // pour case insensitive
@@ -192,3 +197,22 @@ $.expr[":"].contains = $.expr.createPseudo(function (arg) {
     };
 });
 
+/* changement du thème */
+$('#changeTheme').click(function () {
+    if ($(this).hasClass("fa-sun")) {
+        $(this).fadeOut(100, function () {
+            $(this).removeClass("fa-sun");
+        });
+        $(this).fadeIn(100, function () {
+            $(this).addClass("fa-moon");
+        });
+    }
+    else {
+        $(this).fadeOut(100, function () {
+            $(this).removeClass("fa-moon");
+        });
+        $(this).fadeIn(100, function () {
+            $(this).addClass("fa-sun");
+        });
+    }
+});
