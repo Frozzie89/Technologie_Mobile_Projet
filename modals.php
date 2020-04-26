@@ -1,4 +1,9 @@
+<!-- Canvas d'une page web, -->
+<?php
+require "inc/header.php";
+require "inc/nav.php";
 
+?>
 
 <!-- modal login  -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
@@ -105,17 +110,51 @@
             <div class="modal-body" style="background-color:rgb(238, 238, 238);">
                 <form ethod="POST" id="ModifyForm">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Changer de pseudonyme"
+                        <input type="text" name="newPseudo" class="form-control" placeholder="Changer de pseudonyme"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">OK</button>
+                            <button class="btn btn-outline-secondary" type="submit" name="ModifyPseudo">OK</button>
+							<?php
+								if (isset($_POST['newPseudo'])) {
+									$login = $_SESSION['auth']->login_membres;
+									
+									if ($login) {
+										$db->query(
+											"UPDATE membres SET pseudo_membres=:nPseudo WHERE login_membres=:login",
+											['nPseudo' => $_POST['newPseudo'], 'login' => $login]
+										);
+										$session->update('auth', 'pseudo_membres', $_POST['newPseudo']);
+										$session->setFlash('success', "Votre pseudo a bien été changé.");
+									} else {
+										$session->setFlash('danger', "Impossible de changer votre pseudo. déso");
+									}
+								}
+							?>
                         </div>
                     </div>
                 </form>
                 <label style="margin-right: 5px;">Changer le thème</label>
-                <a><i class="fas fa-sun fa-2x" style="vertical-align: middle;" id="changeTheme"></i></a>
+                <a onclick="toggleTheme()"><i class="fas fa-sun fa-2x" style="vertical-align: middle;" id="changeTheme"></i></a>
+				<script>
+					let is_dark = false;
+					
+					function toggleTheme() {
+						is_dark = !is_dark;
+						if (is_dark) {
+							document.body.style.backgroundColor = '#3a3a3a';
+							//document.body.style.color = '#dbdbdb';
+						} else {
+							document.body.style.backgroundColor = 'rgb(250, 242, 226)';
+							//document.body.style.color = '#3E3F3A';
+						}
+					}
+				</script>
+				
             </div>
         </div>
     </div>
 </div>
 
+<?php
+require "inc/footer.php";
+?>

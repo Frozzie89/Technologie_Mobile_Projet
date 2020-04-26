@@ -31,7 +31,7 @@ if (!empty($_POST['LoginEmail']) && !empty($_POST['LoginMDP']))
 
 // déconnexion
 if (isset($_POST['btnDeco'])) $auth->logout("index.php");
-unset($_POST);
+//unset($_POST);
 
 ?>
 
