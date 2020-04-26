@@ -50,8 +50,8 @@ $OFFSET = 0;
             </div>
             <div class="col-lg-12">
                 <div class="controls">
-                    <button id="previous-arrow" class="btn btn-primary " type="button"><i class="fa fa-angle-left"></i></button>
-                    <button id="next-arrow" class="btn btn-primary " type="button"><i class="fa fa-angle-right"></i></button>
+                    <button id="previous-arrow" class="btn btn-primary " type="submit"><i class="fa fa-angle-left"></i></button>
+                    <button id="next-arrow" class="btn btn-primary " type="submit"><i class="fa fa-angle-right"></i></button>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@ $OFFSET = 0;
 
 <script>
     let NB_POST = 0;
-    const NB_PER_PAGE = 3;
+    const NB_PER_PAGE = 2;
     let OFFSET = 0;
 
     $(document).ready(function (){
@@ -240,6 +240,7 @@ $OFFSET = 0;
 
 
 <?php
+include "modals.php";
 require "inc/footer.php";
 ?>
 

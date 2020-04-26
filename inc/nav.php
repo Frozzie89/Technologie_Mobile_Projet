@@ -30,7 +30,7 @@ if (!empty($_POST['LoginEmail']) && !empty($_POST['LoginMDP']))
     $connexion = $auth->login($db, $_POST['LoginEmail'], $_POST['LoginMDP']);
 
 // déconnexion
-if (isset($_POST['btnDeco'])) $auth->logout("../index.php");
+if (isset($_POST['btnDeco'])) $auth->logout("index.php");
 unset($_POST);
 
 ?>
