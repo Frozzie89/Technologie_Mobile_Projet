@@ -107,7 +107,7 @@ $OFFSET = 0;
             $.getJSON('extranet/getPhotoOfPost.php', {postID: post.id_posts}, function (photo) {
                 let postText = limitTextPost(post.texte_posts);
                 $("<div class='col-lg-3 card-news-max-height evr " + post.id_tags + "'><div class='card card-height card-style'>" +
-                    "<img class='card-img-top' src='extranet/" + photo.nom_photos + "' alt='ok'>" +
+                    "<a href='post.php?id=" + post.id_posts + "'><img class='card-img-top' src='extranet/" + photo.nom_photos + "' alt='ok'>" +
                     "<div class='card-body card-body-style'>" +
                     "<h5 class='card-title'>" + post.titre_posts + "</h5>" +
                     "<p class='card-text'>" + postText + "</p>" +
@@ -144,7 +144,7 @@ $OFFSET = 0;
                 $.getJSON('extranet/getPhotoOfPost.php', {postID: post.id_posts}, function (photo) {
                     let postText = limitTextPost(post.texte_posts);
                     $("<div class='col-lg-3 card-news-max-height td " + post.id_tags + "'><div class='card card-height card-style'>" +
-                        "<img class='card-img-top' src='extranet/" + photo.nom_photos + "' alt='ok'>" +
+                        "<a href='post.php?id=" + post.id_posts + "'><img class='card-img-top' src='extranet/" + photo.nom_photos + "' alt='ok'>" +
                         "<div class='card-body card-body-style'>" +
                         "<h5 class='card-title'>" + post.titre_posts + "</h5>" +
                         "<p class='card-text'>" + postText + "</p>" +

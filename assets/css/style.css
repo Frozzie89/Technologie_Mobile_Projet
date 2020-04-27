@@ -140,6 +140,10 @@ footer{
     width: 100%;
     bottom: 0;
 }
+a, a:hover{
+    text-decoration: none;
+    color: #3E3F3A;
+}
 hr {
     border: 0;
     clear:both;
@@ -284,6 +288,10 @@ input[type="text"]:disabled {
     margin-bottom: 15px;
     border-radius: 2px;
 }
+.single-com ~ .single-com{
+    border-top: 1px gray solid;
+}
+
 /*------------------------------------------------------------------------------------------------------------------*/
 /* EXTRANET */
 /******** LOGIN ************/
