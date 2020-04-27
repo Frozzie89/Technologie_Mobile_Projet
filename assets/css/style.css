@@ -234,6 +234,32 @@ body{
     text-align: center;
     margin-bottom: 35px;
 }
+.x-icon{
+    margin-left: 20px;
+}
+.edit-banner{
+    margin-bottom: 10px;
+    margin-top: -15px;
+}
+.icon-button:hover{
+    cursor: pointer;
+    border: 1px solid;
+    padding: 5px;
+    border-radius: 5px;
+}
+.ban:hover, .delete:hover{
+    color: #d9534f;
+    border-color: #d9534f;
+}
+.edit:hover{
+    color : #29ABE0;
+    border-color: #29ABE0;
+}
+.post-image{
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 2px;
+}
 /*------------------------------------------------------------------------------------------------------------------*/
 /* EXTRANET */
 /******** LOGIN ************/

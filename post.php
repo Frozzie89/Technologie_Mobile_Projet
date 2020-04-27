@@ -3,10 +3,12 @@ require "inc/header.php";
 require "inc/nav.php";
 
 $post = $db->query("Select * from posts where id_posts = :id", ["id"=>$_GET['id']])->fetch();
+$photo = $db->query("Select nom_photos from photos where id_posts = :post",["post" => $_GET["id"]])->fetch();
 $commentaires = $db->query("Select * from commentaires where id_posts like :idPost", ["idPost"=> $_GET['id']])->fetchAll();
 if (isset($_SESSION['auth']->pseudo_membres)){
     $membre = $db->query("Select * from membres where login_membres like :login", ["login"=>$_SESSION['auth']->login_membres])->fetch();
     $ad = isAdmin($db, $membre->id_membres);
+    App::debug($ad);
 }
 function isAdmin($db, $idMembre){
     $admin = $db->query("Select * from administrateurs where id_membres like :id", ["id"=> $idMembre])->fetch();
@@ -36,12 +38,13 @@ function isAdmin($db, $idMembre){
                 <?= $post->titre_posts ?>
             </h1>
             <p class="lead text-muted autheur">Ecrit par <?= $post->autheur_posts ?></p>
+            <img class="post-image" src="extranet/<?= $photo->nom_photos ?>" alt="ok">
             <?= $post->texte_posts ?>
             <div class="reaction-banner float-right">
                 <span class="comments"><i class="fas fa-comments"></i> Commentaires </span>
-                <span class="share"><i class="fas fa-share"></i> Partager </span>
-                <span class="like"><i class="fas fa-caret-up"></i> </span>
-                <span class="dislike"><i class="fas fa-caret-down"></i></span>
+                <span class="share x-icon"><i class="fas fa-share"></i> Partager </span>
+                <span class="like x-icon"><i class="fas fa-caret-up"></i> </span>
+                <span class="dislike x-icon"><i class="fas fa-caret-down"></i></span>
             </div>
         </div>
         <div class="col-lg-3 links">
@@ -53,13 +56,27 @@ function isAdmin($db, $idMembre){
             <!--<hr style="margin-top: -10px; width: 100%;"><br>-->
 
                 <?php if (!empty($commentaires)) : ?>
-                    <?php foreach ($commentaires as $key => $com) : ?>
-                    <?php $membre = $db->query("Select * from membres where id_membres = :id", ["id"=>$com->id_membres])->fetch(); ?>
                     <div class="col-lg-12 coms">
-                        <span class="pseudo-utilisateur text-secondary" style="margin-top: -20px;"><?= $membre->pseudo_membres ?></span><br>
-                        <p class="comment"><?= $com->texte_commentaires ?></p>
+                    <?php foreach ($commentaires as $key => $com) : ?>
+                    <div class="single-com" id="<?= $com->id_commentaires ?>">
+                    <?php $membre = $db->query("Select * from membres where id_membres = :id", ["id"=>$com->id_membres])->fetch(); ?>
+                        <span class="pseudo-utilisateur text-secondary" style="margin-top: -20px;"><?= $membre->pseudo_membres ?></span>
+                        <div class="comment-content" id="<?= $com->id_commentaires ?>">
+                            <?php if ($ad) : ?>
+                            <span class="ban icon-button float-right" id="<?= $com->id_commentaires ?>"> <i class="fas fa-ban"></i> </span>
+                            <?php endif; ?>
+                            <p class="comment" id="<?= $com->id_commentaires ?>"><?= $com->texte_commentaires ?></p>
+                            <div class="edit-banner" id="<?= $com->id_commentaires ?>">
+                                <span class="reply icon-button " id="<?= $com->id_commentaires ?>"><i class="fas fa-reply"></i> </span>
+                                <?php if ($_SESSION['auth']->login_membres == $membre->login_membres) : ?>
+                                <span class="edit x-icon icon-button " id="<?= $com->id_commentaires ?>"> <i class="fas fa-pen"></i> </span>
+                                <span class="delete x-icon icon-button " id="<?= $com->id_commentaires ?>"> <i class="fas fa-trash-alt"></i> </span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
                     </div>
                     <?php endforeach; ?>
+                    </div>
                 <?php else : ?>
                     <div class="no-comment"> Aucun commentaire </div>
                 <?php endif; ?>
@@ -84,9 +101,11 @@ function isAdmin($db, $idMembre){
     let idPost = <?= $_GET["id"] ?>;
     let idMembre = <?= $membre->id_membres ?>;
     let pseudoMembre = "<?= $membre->pseudo_membres ?>";
+    let editing = -1;
     $(document).ready(function () {
         $("#newComment").val("");
-    })
+    });
+
     $("#submitNewComment").on("click", function (event) {
         event.preventDefault();
         let textCommentaire = $("#newComment").val();
@@ -123,7 +142,92 @@ function isAdmin($db, $idMembre){
                 $("#newComment").removeClass('comment-error');
             }, 4000);
         }
-    })
+    });
+
+    $(".ban").on("click", function (event) {
+        let idOfComment = $(this).attr('id');
+        if (confirm("Êtes-vous sûr de supprimer ce commentaire ?")) {
+            $.ajax({
+                url: "deleteComment.php",
+                method: "POST",
+                data: { commentID : idOfComment },
+                dataType: "text",
+                success: function () {
+                    $('.coms div[id=' + idOfComment +']').remove();
+                }
+            });
+        }
+    });
+
+    $(".reply").on("click", function (event) {
+        console.log("click");
+    });
+
+
+    $(".edit").on("click", function (event) {
+        console.log($(this).attr('id'));
+        let idOfComment = $(this).attr('id');
+        let currentDiv = $('.coms div[id=' + idOfComment +'] .comment-content');
+        let currentComment = $('p[id=' + idOfComment +']');
+        let editableComment = $("<textarea class='form-control' id='"+ idOfComment +"' rows='1' style='margin-bottom: 5px;'/>");
+        //let updateButton = $("<button type='submit' class='btn btn-dark' id='updateComment' name='updateComment'>Modifier</button>");
+        let updateDiv = $("<div class='update-div' id='"+idOfComment+"'></div>");
+        updateDiv.append(editableComment);
+        //updateDiv.append(updateButton);
+        editableComment.val(currentComment.text());
+        currentDiv.replaceWith(updateDiv);
+        editableComment.focus();
+        /** Need some work, focus out can bug (from top to bottom) */
+        editableComment.on("focusout", function (event) {
+            updateDiv.replaceWith(currentDiv);
+            $(document).remove(updateDiv);
+        });
+
+        editableComment.on("keyup", function (event) {
+            if (event.key == "Escape") {
+                updateDiv.replaceWith(currentDiv);
+                $(document).remove(updateDiv);
+            }
+            if (event.keyCode == 13 && event.shiftKey) {
+
+            } else if (event.keyCode == 13){
+                if (editableComment.val() !== ""){
+                    $.ajax({
+                        url: "editComment.php",
+                        method: "POST",
+                        data: {
+                            commentID : idOfComment,
+                            textComment : editableComment.val()
+                        },
+                        dataType: "json",
+                        success: function (comment) {
+                            console.log(comment);
+                            updateDiv.replaceWith(currentDiv);
+                            $(document).remove(updateDiv);
+                            $('p[id=' + idOfComment +']').text(comment.texte_commentaires);
+                        }
+                    });
+                }
+            }
+        });
+    });
+
+    $(".delete").on("click", function (event) {
+        let idOfComment = $(this).attr('id');
+        if (confirm("Êtes-vous sûr de supprimer ce commentaire ?")) {
+            $.ajax({
+                url: "deleteComment.php",
+                method: "POST",
+                data: { commentID : idOfComment },
+                dataType: "text",
+                success: function () {
+                    $('.coms div[id=' + idOfComment +']').remove();
+                }
+            });
+        }
+    });
+
+
 </script>
 
 

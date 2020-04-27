@@ -1,9 +1,3 @@
-<!-- Canvas d'une page web, -->
-<?php
-require "inc/header.php";
-require "inc/nav.php";
-
-?>
 
 <!-- modal login  -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
@@ -154,7 +148,3 @@ require "inc/nav.php";
         </div>
     </div>
 </div>
-
-<?php
-require "inc/footer.php";
-?>
