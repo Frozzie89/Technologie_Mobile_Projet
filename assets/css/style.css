@@ -235,7 +235,7 @@ body{
 }
 /******* ARTICLE **********/
 .autheur{
-    margin-top: -55px;
+    /*margin-top: -55px;*/
 }
 .article{
     text-align: justify;
@@ -277,17 +277,24 @@ body{
 }
 .icon-button:hover{
     cursor: pointer;
-    border: 1px solid;
-    padding: 5px;
-    border-radius: 5px;
+}
+.like:hover{
+    color: #325D88;
+}
+.liked{
+    color: #325D88;
 }
 .ban:hover, .delete:hover{
+    padding: 5px;
     color: #d9534f;
-    border-color: #d9534f;
+    border: 1px solid #d9534f;
+    border-radius: 5px;
 }
 .edit:hover{
+    padding: 5px;
     color : #29ABE0;
-    border-color: #29ABE0;
+    border: 1px solid #29ABE0;
+    border-radius: 5px;
 }
 .post-image{
     width: 100%;

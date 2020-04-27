@@ -4,11 +4,13 @@ require "inc/nav.php";
 
 $post = $db->query("Select * from posts where id_posts = :id", ["id"=>$_GET['id']])->fetch();
 $photo = $db->query("Select nom_photos from photos where id_posts = :post",["post" => $_GET["id"]])->fetch();
-$commentaires = $db->query("Select * from commentaires where id_posts like :idPost", ["idPost"=> $_GET['id']])->fetchAll();
+$commentaires = $db->query("Select * from commentaires where id_posts = :idPost", ["idPost"=> $_GET['id']])->fetchAll();
+$likes = $db->query("Select * from likes where id_posts like :idPost", ["idPost"=> $_GET['id']])->fetchAll();
+
 if (isset($_SESSION['auth']->pseudo_membres)){
     $membre = $db->query("Select * from membres where login_membres like :login", ["login"=>$_SESSION['auth']->login_membres])->fetch();
+    $liked = $db->query("Select like_likes from likes where id_posts = :idPost and id_membres =:id_membres", ["idPost"=> $_GET['id'], "id_membres" => $membre->id_membres])->fetchAll();
     $ad = isAdmin($db, $membre->id_membres);
-    App::debug($ad);
 }
 function isAdmin($db, $idMembre){
     $admin = $db->query("Select * from administrateurs where id_membres like :id", ["id"=> $idMembre])->fetch();
@@ -40,11 +42,11 @@ function isAdmin($db, $idMembre){
             <p class="lead text-muted autheur">Ecrit par <?= $post->autheur_posts ?></p>
             <img class="post-image" src="extranet/<?= $photo->nom_photos ?>" alt="ok">
             <?= $post->texte_posts ?>
-            <div class="reaction-banner float-right">
-                <span class="comments"><i class="fas fa-comments"></i> Commentaires </span>
-                <span class="share x-icon"><i class="fas fa-share"></i> Partager </span>
-                <span class="like x-icon"><i class="fas fa-caret-up"></i> </span>
-                <span class="dislike x-icon"><i class="fas fa-caret-down"></i></span>
+            <div class="reaction-banner float-right" style="font-size: 20px;">
+                <span class="comments"><i class="fas fa-comments"></i></span>
+                <span id="nbComment"> <?= count($commentaires) ?> </span>
+                <span class="like x-icon icon-button <?php if (!empty($liked)) echo "liked" ?>"><i class="fas fa-thumbs-up"></i></span>
+                <span id="nbLike">  <?= count($likes) ?>  </span>
             </div>
         </div>
         <div class="col-lg-3 links">
@@ -132,6 +134,7 @@ function isAdmin($db, $idMembre){
                 success: function (comment) {
                     $("#newComment").val("");
                     console.log(comment);
+                    plusComment();
                     $("<span class='pseudo-utilisateur text-secondary' style='margin-top: -20px;'>" + pseudoMembre + "</span><br>" +
                         "<p class='comment'>" + comment.texte_commentaires + "</p>").appendTo($(".coms"));
                 }
@@ -144,6 +147,56 @@ function isAdmin($db, $idMembre){
         }
     });
 
+    function plusComment(){
+        console.log($("#nbComment").text());
+        let nbComment = parseInt($("#nbComment").text(), 10);
+        $("#nbComment").text(++nbComment);
+    }
+
+    function minusComment(){
+        console.log($("#nbComment").text());
+        let nbComment = parseInt($("#nbComment").text(), 10);
+        $("#nbComment").text(--nbComment);
+    }
+
+    $(".like").on("click", function (event) {
+        console.log($("#nbLike").text());
+        let nbLike = parseInt($("#nbLike").text(), 10);
+        if ($(this).hasClass("liked")){
+            $(this).removeClass("liked");
+            --nbLike;
+            $("#nbLike").text(nbLike);
+            $.ajax({
+                url: "deleteLike.php",
+                method: "POST",
+                data: {
+                    postID : <?= $_GET['id'] ?>,
+                    membreID : idMembre
+                },
+                dataType: "text",
+                success: function () {
+                    console.log("Don't like it");
+                }
+            });
+        } else {
+            $(this).addClass("liked");
+            ++nbLike;
+            $("#nbLike").text(nbLike);
+            $.ajax({
+                url: "addLike.php",
+                method: "POST",
+                data: {
+                    postID : <?= $_GET['id'] ?>,
+                    membreID : idMembre
+                },
+                dataType: "text",
+                success: function () {
+                    console.log("Like it");
+                }
+            });
+        }
+    });
+
     $(".ban").on("click", function (event) {
         let idOfComment = $(this).attr('id');
         if (confirm("Êtes-vous sûr de supprimer ce commentaire ?")) {
@@ -153,6 +206,7 @@ function isAdmin($db, $idMembre){
                 data: { commentID : idOfComment },
                 dataType: "text",
                 success: function () {
+                    minusComment()
                     $('.coms div[id=' + idOfComment +']').remove();
                 }
             });
@@ -221,6 +275,7 @@ function isAdmin($db, $idMembre){
                 data: { commentID : idOfComment },
                 dataType: "text",
                 success: function () {
+                    minusComment();
                     $('.coms div[id=' + idOfComment +']').remove();
                 }
             });
