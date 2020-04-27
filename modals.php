@@ -1,7 +1,7 @@
 <!-- Canvas d'une page web, -->
 <?php
-require "inc/header.php";
-require "inc/nav.php";
+// require "inc/header.php";
+// require "inc/nav.php";
 
 ?>
 
