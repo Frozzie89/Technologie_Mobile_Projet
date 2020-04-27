@@ -3,6 +3,34 @@
 require "inc/header.php";
 require "inc/nav.php";
 
+function printPost($col, $post, $db) {
+    $nbComments = $db->query("SELECT COUNT(*) AS val FROM commentaires WHERE id_posts = :id", ["id"=>$post->id_posts])->fetch();
+    $img = $db->query("SELECT nom_photos AS img FROM photos WHERE id_posts = :id", ["id"=>$post->id_posts])->fetch();
+    if (strlen($post->texte_posts)<= 230)
+        $shortText = $post->texte_posts;
+    else
+        $shortText = substr($post->texte_posts,0,230) . ' ...';
+
+    echo "<div class=\"". $col . "\">
+        <div class=\"card border-secondary\">
+            <img class=\"card-img-top border-bottom border-secondary\"
+                src=\"extranet/". $img->img ."\"
+                alt=\"Card image cap\">
+            <div class=\"card-body\">
+                <h4 class=\"card-title\">" .$post->titre_posts . "</h4>
+                <p class=\"card-text\">". $shortText ."</p>
+                <i class=\"fas fa-eye fa-2x\"></i>
+                <h3>". $post->nbVue_posts ."</h3>
+
+                <i class=\"far fa-arrow-alt-circle-up fa-2x\" style=\"margin-left:15px\"></i>
+                <h3>". $post->nbLike_posts ."</h3>
+
+                <h3 style=\"float: right; margin-left:5px\">". $nbComments->val ."</h3>
+                <i class=\"far fa-comments fa-2x\" style=\"float: right;\"></i>
+            </div>
+        </div>
+    </div>";
+}
 ?>
 
 <section id="homePage">
@@ -24,267 +52,61 @@ require "inc/nav.php";
 </section>
 
 
-
+<!-- Carousel -->
 <div class="container">
-
-    <!--Carousel Wrapper-->
     <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
 
-        <!--Controls-->
+        <!--Boutons de contrôle-->
         <div class="controls-top">
             <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
             <a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
         </div>
-        <!--/.Controls-->
 
         <!--Slides-->
         <div class="carousel-inner" role="listbox">
-
-            <!--First slide-->
-            <div class="carousel-item active my-auto">
-
+            <?php
+            $colType = array("col", "col-lg-5", "col-lg-7", "col-log-4, col-lg-4", "col-lg-4", "col-lg-4", "col-lg-7", "col-lg-5");
+            $post = array(); 
+            foreach($tags as $key=>$tag) : 
+        ?>
+            <div class="carousel-item <?php if($tag->id_tags == 1) echo "active" ?> my-auto">
+                <?php
+                $post = $db->query("SELECT * FROM posts WHERE id_tags = :tag ORDER BY id_posts DESC LIMIT 8", ["tag"=>$tag->id_tags])->fetchAll();
+                $current = 0;
+                ?>
                 <div class="row">
-                    <div class="col">
-                        <div class="card border-secondary">
-                            <img class="card-img-top border-bottom border-secondary"
-                                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
-                                alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class="card-title">Card title</h4>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the
-                                    card's content.</p>
-                                <i class="fas fa-eye fa-2x"></i>
-                                <h3>0</h3>
-
-                                <i class="far fa-arrow-alt-circle-up fa-2x" style="margin-left:15px"></i>
-                                <h3>0</h3>
-
-                                <h3 style="float: right; margin-left:5px">0</h3>
-                                <i class="far fa-comments fa-2x" style="float: right;"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5">
-                        <div class="card lg-2 border-secondary">
-                            <img class="card-img-top border-bottom border-secondary"
-                                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
-                                alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class="card-title">Card title</h4>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the
-                                    card's content.</p>
-                                <i class="fas fa-eye fa-2x"></i>
-                                <h3>0</h3>
-
-                                <i class="far fa-arrow-alt-circle-up fa-2x" style="margin-left:15px"></i>
-                                <h3>0</h3>
-
-                                <h3 style="float: right; margin-left:5px">0</h3>
-                                <i class="far fa-comments fa-2x" style="float: right;"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-7">
-                        <div class="card lg-2 border-secondary">
-                            <img class="card-img-top border-bottom border-secondary"
-                                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
-                                alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class="card-title">Card title</h4>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the
-                                    card's content.</p>
-                                <i class="fas fa-eye fa-2x"></i>
-                                <h3>0</h3>
-
-                                <i class="far fa-arrow-alt-circle-up fa-2x" style="margin-left:15px"></i>
-                                <h3>0</h3>
-
-                                <h3 style="float: right; margin-left:5px">0</h3>
-                                <i class="far fa-comments fa-2x" style="float: right;"></i>
-                            </div>
-                        </div>
-                    </div>
+                    <h3 style="margin-left : 50px;">
+                        <?= $tag->affichage_tags ?>
+                    </h3>
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card lg-2 border-secondary">
-                            <img class="card-img-top border-bottom border-secondary"
-                                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
-                                alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class="card-title">Card title</h4>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the
-                                    card's content.</p>
-                                <i class="fas fa-eye fa-2x"></i>
-                                <h3>0</h3>
-
-                                <i class="far fa-arrow-alt-circle-up fa-2x" style="margin-left:15px"></i>
-                                <h3>0</h3>
-
-                                <h3 style="float: right; margin-left:5px">0</h3>
-                                <i class="far fa-comments fa-2x" style="float: right;"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4">
-                        <div class="card lg-2 border-secondary">
-                            <img class="card-img-top border-bottom border-secondary"
-                                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
-                                alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class="card-title">Card title</h4>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the
-                                    card's content.</p>
-                                <i class="fas fa-eye fa-2x"></i>
-                                <h3>0</h3>
-
-                                <i class="far fa-arrow-alt-circle-up fa-2x" style="margin-left:15px"></i>
-                                <h3>0</h3>
-
-                                <h3 style="float: right; margin-left:5px">0</h3>
-                                <i class="far fa-comments fa-2x" style="float: right;"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4">
-                        <div class="card lg-2 border-secondary">
-                            <img class="card-img-top border-bottom border-secondary"
-                                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
-                                alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class="card-title">Card title</h4>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the
-                                    card's content.</p>
-                                <i class="fas fa-eye fa-2x"></i>
-                                <h3>0</h3>
-
-                                <i class="far fa-arrow-alt-circle-up fa-2x" style="margin-left:15px"></i>
-                                <h3>0</h3>
-
-                                <h3 style="float: right; margin-left:5px">0</h3>
-                                <i class="far fa-comments fa-2x" style="float: right;"></i>
-                            </div>
-                        </div>
-                    </div>
+                    <?php printPost($colType[0], $post[0], $db); ?>
                 </div>
                 <div class="row">
-                    <div class="col-lg-7">
-                        <div class="card lg-2 border-secondary">
-                            <img class="card-img-top border-bottom border-secondary"
-                                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
-                                alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class="card-title">Card title</h4>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the
-                                    card's content.</p>
-                                <i class="fas fa-eye fa-2x"></i>
-                                <h3>0</h3>
-
-                                <i class="far fa-arrow-alt-circle-up fa-2x" style="margin-left:15px"></i>
-                                <h3>0</h3>
-
-                                <h3 style="float: right; margin-left:5px">0</h3>
-                                <i class="far fa-comments fa-2x" style="float: right;"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-5">
-                        <div class="card lg-2 border-secondary">
-                            <img class="card-img-top border-bottom border-secondary"
-                                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
-                                alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class="card-title">Card title</h4>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the
-                                    card's content.</p>
-                                <i class="fas fa-eye fa-2x"></i>
-                                <h3>0</h3>
-
-                                <i class="far fa-arrow-alt-circle-up fa-2x" style="margin-left:15px"></i>
-                                <h3>0</h3>
-
-                                <h3 style="float: right; margin-left:5px">0</h3>
-                                <i class="far fa-comments fa-2x" style="float: right;"></i>
-                            </div>
-                        </div>
-                    </div>
+                    <?php 
+                    printPost($colType[1], $post[1], $db);
+                    printPost($colType[2], $post[2], $db); ?>
+                </div>
+                <div class="row">
+                    <?php printPost($colType[3], $post[3], $db); ?>
+                    <?php printPost($colType[4], $post[4], $db); ?>
+                    <?php printPost($colType[5], $post[5], $db); ?>
+                </div>
+                <div class="row">
+                    <?php printPost($colType[6], $post[6], $db); ?>
+                    <?php printPost($colType[7], $post[7], $db); ?>
                 </div>
             </div>
-
+            <?php endforeach; ?>
         </div>
-        <!--/.First slide-->
-
-        <!--Second slide-->
-
-        <!--/.Second slide-->
-
-        <!--Third slide-->
-
-
-    </div>
-    <!--/.Third slide-->
-
-
-</div>
-<!--/.Slides-->
-
-</div>
-<!--/.Carousel Wrapper-->
-
-
-</div>
-<!-- 
-<?php
-foreach($db->query("SELECT * FROM posts ORDER BY id_posts DESC")->fetchAll() as $key => $post) :
-    $img = $db->query("SELECT * FROM photos WHERE id_posts = :id", ["id"=>$post->id_posts])->fetch();
-
-    $nbComments = $db->query("SELECT COUNT(*) AS nbComments FROM commentaires WHERE id_posts = :id",["id"=>$post->id_posts])->fetch();
-
-    $nbVotes =$db->query("SELECT COUNT(*) AS nbVotes FROM likes WHERE id_posts = :id",["id"=>$post->id_posts])->fetch();
-?>
-<div class="card border-secondary" id="indexPost">
-    <img class="card-img-top border-bottom border-secondary" src=<?= "extranet/" . $img->nom_photos ?>>
-    <div class="card-body">
-        <h5 class="card-title"><b><?= $post->titre_posts ?></b></h5>
-        <p class="card-text">
-            <?php
-            if (strlen($post->texte_posts)<= 230)
-                $shortText = $post->texte_posts;
-            else
-                $shortText = substr($post->texte_posts,0,230) . '...';
-            echo $shortText;
-            ?></p>
-
-        <i class="fas fa-eye fa-2x"></i>
-        <h3><?= $post->nbVue_posts ?></h3>
-
-        <i class="far fa-arrow-alt-circle-up fa-2x" style="margin-left:15px"></i>
-        <h3><?= $nbVotes->nbVotes ?></h3>
-
-
-        <h3 style="float: right; margin-left:5px"><?= $nbComments->nbComments ?></h3>
-        <i class="far fa-comments fa-2x" style="float: right;"></i>
-
     </div>
 </div>
 
-<?php endforeach; ?> -->
+</div>
 
+
+</div>
 
 <?php
 include "modals.php";
