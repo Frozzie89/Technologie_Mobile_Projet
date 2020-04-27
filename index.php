@@ -66,7 +66,7 @@ function printPost($col, $post, $db) {
                 ?>
                 <div class="row">
                     <div class="col">
-                        <!--Boutons de contrôle-->
+                        <!--Boutons de contrôle TOP -->
                         <div class="input-group input-group-lg">
                             <div class="input-group-prepend">
                                 <span class="input-group-text btn-floating" id="basic-addon1" href="#multi-item-example"
@@ -101,6 +101,25 @@ function printPost($col, $post, $db) {
                 <div class="row">
                     <?php printPost($colType[6], $post[6], $db); ?>
                     <?php printPost($colType[7], $post[7], $db); ?>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <!--Boutons de contrôle BOTTOM -->
+                        <div class="input-group input-group-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text btn-floating" id="basic-addon1" href="#multi-item-example"
+                                    data-slide="prev"><i class="fa fa-chevron-left"></i></span>
+                            </div>
+
+                            <input type="text" class="form-control" value="<?= $tag->affichage_tags ?>"
+                                aria-label="Username" disabled aria-describedby="basic-addon1">
+
+                            <div class="input-group-append btn-floating">
+                                <span class="input-group-text" id="basic-addon1" href="#multi-item-example"
+                                    data-slide="next"><i class="fa fa-chevron-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <?php endforeach; ?>
