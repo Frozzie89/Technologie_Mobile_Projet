@@ -4,50 +4,47 @@ require "inc/header.php";
 require "inc/nav.php";
 
 function printPost($col, $post, $db) {
-    $nbComments = $db->query("SELECT COUNT(*) AS val FROM commentaires WHERE id_posts = :id", ["id"=>$post->id_posts])->fetch();
-    $img = $db->query("SELECT nom_photos AS img FROM photos WHERE id_posts = :id", ["id"=>$post->id_posts])->fetch();
-    if (strlen($post->texte_posts)<= 230)
-        $shortText = $post->texte_posts;
-    else
-        $shortText = substr($post->texte_posts,0,230) . ' ...';
+    if (isset($post))
+    {
+        $nbComments = $db->query("SELECT COUNT(*) AS val FROM commentaires WHERE id_posts = :id", ["id"=>$post->id_posts])->fetch();
+        $img = $db->query("SELECT nom_photos AS img FROM photos WHERE id_posts = :id", ["id"=>$post->id_posts])->fetch();
 
-    echo "<div class=\"". $col . "\">
-        <div class=\"card border-secondary\">
-            <img class=\"card-img-top border-bottom border-secondary\"
-                src=\"extranet/". $img->img ."\"
-                alt=\"Card image cap\">
-            <div class=\"card-body\">
-                <h4 class=\"card-title\">" .$post->titre_posts . "</h4>
-                <p class=\"card-text\">". $shortText ."</p>
-                <i class=\"fas fa-eye fa-2x\"></i>
-                <h3>". $post->nbVue_posts ."</h3>
+        if (strlen($post->texte_posts)<= 230)
+            $shortText = $post->texte_posts;
+        else
+            $shortText = substr($post->texte_posts,0,230) . ' ...';
 
-                <i class=\"far fa-arrow-alt-circle-up fa-2x\" style=\"margin-left:15px\"></i>
-                <h3>". $post->nbLike_posts ."</h3>
+        echo "<div class=\"". $col . " indexPostCard\">
+            <div class=\"card border-secondary\">
+                <img class=\"card-img-top border-bottom border-secondary\"
+                    src=\"extranet/". $img->img ."\"
+                    alt=\"Card image cap\">
+                <div class=\"card-body\">
+                    <h4 class=\"card-title\">" .$post->titre_posts . "</h4>
+                    <p class=\"card-text\">". $shortText ."</p>
+                    <div class=\"bottom-card-index\">
+                        <i class=\"fas fa-eye fa-2x\"></i>
+                        <h3>". $post->nbVue_posts ."</h3>
 
-                <h3 style=\"float: right; margin-left:5px\">". $nbComments->val ."</h3>
-                <i class=\"far fa-comments fa-2x\" style=\"float: right;\"></i>
+                        <i class=\"far fa-arrow-alt-circle-up fa-2x\" style=\"margin-left:15px\"></i>
+                        <h3>". $post->nbLike_posts ."</h3>
+
+                        <h3 style=\"float: right; margin-left:5px\">". $nbComments->val ."</h3>
+                        <i class=\"far fa-comments fa-2x\" style=\"float: right;\"></i>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>";
+        </div>";
+    }
 }
 ?>
 
 <section id="homePage">
     <div class="container">
         <div class="col-lg-12">
-            <h1 class="title-page center-text">Page d'accueil</h1>
+            <img src="assets/Logo.svg" alt="The Good News" class="title-page indexLogo center">
+            <h1 class="title-page center-text">Les dernières publications</h1>
         </div>
-        <!-- <div class="col-lg-12 center-text">
-            <div class="btn-group btn-group-lg " role="group" aria-label="Basic example" id="tagIndexGrp">
-                <?php foreach($tags as $key=>$tag) :
-                if (empty($idTagButton)) $idTagButton = 0;
-                $idTagButton++; ?>
-                <button type="button" id="<?= "tagIndex_". $idTagButton?>"
-                    class="btn btn-outline-secondary"><?= $tag->affichage_tags ?></button>
-                <?php endforeach; ?>
-            </div>
-        </div> -->
     </div>
 </section>
 
@@ -55,13 +52,6 @@ function printPost($col, $post, $db) {
 <!-- Carousel -->
 <div class="container">
     <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-
-        <!--Boutons de contrôle-->
-        <div class="controls-top">
-            <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
-            <a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
-        </div>
-
         <!--Slides-->
         <div class="carousel-inner" role="listbox">
             <?php
@@ -75,10 +65,25 @@ function printPost($col, $post, $db) {
                 $current = 0;
                 ?>
                 <div class="row">
-                    <h3 style="margin-left : 50px;">
-                        <?= $tag->affichage_tags ?>
-                    </h3>
+                    <div class="col">
+                        <!--Boutons de contrôle-->
+                        <div class="input-group input-group-lg">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text btn-floating" id="basic-addon1" href="#multi-item-example"
+                                    data-slide="prev"><i class="fa fa-chevron-left"></i></span>
+                            </div>
+
+                            <input type="text" class="form-control" value="<?= $tag->affichage_tags ?>"
+                                aria-label="Username" disabled aria-describedby="basic-addon1">
+
+                            <div class="input-group-append btn-floating">
+                                <span class="input-group-text" id="basic-addon1" href="#multi-item-example"
+                                    data-slide="next"><i class="fa fa-chevron-right"></i></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <hr>
 
                 <div class="row">
                     <?php printPost($colType[0], $post[0], $db); ?>

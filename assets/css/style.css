@@ -70,6 +70,7 @@ body
 h1, h2, h3, h4, h5, h6{
     font-weight: 500;
 }
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link{
     background-color: #204689;
     border: 1px solid #fcfafa;
@@ -140,12 +141,45 @@ hr {
 }
 .title-page{
     margin-top: 100px;
-    margin-bottom: 50px;
 }
 
 /******** END GENERAL ************/
 /*------------------------------------------------------------------------------------------------------------------*/
 /* Index */
+
+.indexLogo {
+    filter: invert(1);
+    width: 70vm;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.indexPostCard{
+    display: flex;
+    position: relative;
+}
+
+.card-body {
+    margin-bottom: 20px;
+}
+
+.bottom-card-index{
+    width: 91%;
+    position: absolute;
+    bottom: 1%;
+}
+
+.controls-top>*{
+    display: inline-block;
+}
+
+input[type="text"]:disabled {
+    text-align: center;
+    font-weight: bold; 
+}
+
 .carousel-item>.row>*>.card
 {
     margin-bottom: 10px;
@@ -249,11 +283,10 @@ body{
     margin-bottom: 15px;
 }
 .card-img-top{
-    height: 225px;
-    max-height: 25rem; 
+    height: 300px;
+    max-height: 30rem; 
     object-fit: cover;
 }
-
 
 @media all and (max-width: 768px) {
     .card-news-max-height1{
@@ -332,4 +365,5 @@ input[type="file"] {
 .deleteUser
 {
     color: red;
+    font-weight: bold;
 }
