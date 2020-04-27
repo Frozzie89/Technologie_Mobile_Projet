@@ -51,7 +51,6 @@ function printPost($col, $post, $db) {
 <!-- Carousel -->
 <div class="container">
     <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-        <!--Slides-->
         <div class="carousel-inner" role="listbox">
             <?php
             $colType = array("col", "col-lg-5", "col-lg-7", "col-log-4, col-lg-4", "col-lg-4", "col-lg-4", "col-lg-7", "col-lg-5");
@@ -83,22 +82,15 @@ function printPost($col, $post, $db) {
                     </div>
                 </div>
                 <hr>
-
+                <!-- 8 posts par tag -->
                 <div class="row">
-                    <?php if(isset($post[0])) printPost($colType[0], $post[0], $db); ?>
-                </div>
-                <div class="row">
-                    <?php if(isset($post[1])) printPost($colType[1], $post[1], $db); ?>
-                    <?php if(isset($post[2])) printPost($colType[2], $post[2], $db); ?>
-                </div>
-                <div class="row">
-                    <?php if(isset($post[3])) printPost($colType[3], $post[3], $db); ?>
-                    <?php if(isset($post[4])) printPost($colType[4], $post[4], $db); ?>
-                    <?php if(isset($post[5])) printPost($colType[5], $post[5], $db); ?>
-                </div>
-                <div class="row">
-                    <?php if(isset($post[6])) printPost($colType[6], $post[6], $db); ?>
-                    <?php if(isset($post[7])) printPost($colType[7], $post[7], $db); ?>
+                <?php
+                for ($i=0; $i < 8; $i++) 
+                { 
+                    if (in_array($i, array(1, 3, 6))) echo "</div> <div class=\"row\">";
+                    if(isset($post[$i])) printPost($colType[$i], $post[$i], $db);
+                }
+                ?>
                 </div>
                 <div class="row">
                     <div class="col">
