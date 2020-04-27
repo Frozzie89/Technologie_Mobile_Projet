@@ -54,7 +54,7 @@
 }
 body
 {
-    background-color: white;
+    background-color: rgb(250, 242, 226);
     height: 100%;
     margin: 0;
 }
@@ -75,6 +75,18 @@ h1, h2, h3, h4, h5, h6{
     background-color: #204689;
     border: 1px solid #fcfafa;
 }
+
+.fa-history{
+    color: white;
+    margin-right: 5px;
+}
+
+.fa-history:hover{
+    color: rgb(8, 132, 235);
+    cursor: pointer;
+}
+
+
 .fa-cog{
     color: white; 
     margin-right: 5px;
@@ -166,7 +178,7 @@ hr {
 }
 
 .bottom-card-index{
-    width: 91%;
+    width: 93%;
     position: absolute;
     bottom: 1%;
 }
@@ -189,39 +201,10 @@ input[type="text"]:disabled {
     margin-right: -4px;
 }
 
-body{
-    background-color: rgb(250, 242, 226);
-}
-/* style des publications */
-.card#indexPost{
-    width: 60%; 
-    margin: auto; 
-    margin-top: 15px; 
-    margin-bottom:15px;
-}
-
-.card#indexPost>img{
-    max-height: 25rem; 
-    object-fit: cover;
-}
-
-/* mobile phone */
-@media all and (max-width: 768px) {
-    .card#indexPost{
-        width: 90%; 
-        margin: auto; 
-        margin-top: 15px; 
-        margin-bottom:15px;
-    }
-
-    .card#indexPost>img{
-    max-height: 15rem; 
-    object-fit: cover;
-    }
-}
 .card-body>i, h3{
     display: inline-block;
 }
+
 /******** TAG *********/
 .card-btn-block{
     position: absolute;
@@ -240,9 +223,9 @@ body{
 .article{
     text-align: justify;
 }
-.links{
+/* .links{
 
-}
+} */
 .commentaires{
     margin-top: 50px;
 }
@@ -337,7 +320,7 @@ body{
     bottom: 3%;
 }
 .card-height{
-    height: 440px;
+    height: 540px;
 }
 .card-style{
     border: 1px solid #8E8C84;

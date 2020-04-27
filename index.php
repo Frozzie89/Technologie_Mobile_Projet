@@ -1,4 +1,3 @@
-<!-- Canvas d'une page web, -->
 <?php
 require "inc/header.php";
 require "inc/nav.php";
@@ -15,26 +14,26 @@ function printPost($col, $post, $db) {
             $shortText = substr($post->texte_posts,0,230) . ' ...';
 
         echo "<div class=\"". $col . " indexPostCard\">
-            <div class=\"card border-secondary\">
-                <img class=\"card-img-top border-bottom border-secondary\"
-                    src=\"extranet/". $img->img ."\"
-                    alt=\"Card image cap\">
-                <div class=\"card-body\">
-                    <h4 class=\"card-title\">" .$post->titre_posts . "</h4>
-                    <p class=\"card-text\">". $shortText ."</p>
-                    <div class=\"bottom-card-index\">
-                        <i class=\"fas fa-eye fa-2x\"></i>
-                        <h3>". $post->nbVue_posts ."</h3>
+                <div class=\"card border-secondary\">
+                    <img class=\"card-img-top border-bottom border-secondary\"
+                        src=\"extranet/". $img->img ."\"
+                        alt=\"Card image cap\">
+                    <div class=\"card-body\">
+                        <h4 class=\"card-title\">" .$post->titre_posts . "</h4>
+                        <p class=\"card-text\">". $shortText ."</p>
+                        <div class=\"bottom-card-index\">
+                            <i class=\"fas fa-eye fa-2x\"></i>
+                            <h3>". $post->nbVue_posts ."</h3>
 
-                        <i class=\"far fa-arrow-alt-circle-up fa-2x\" style=\"margin-left:15px\"></i>
-                        <h3>". $post->nbLike_posts ."</h3>
+                            <i class=\"far fa-arrow-alt-circle-up fa-2x\" style=\"margin-left:15px\"></i>
+                            <h3>". $post->nbLike_posts ."</h3>
 
-                        <h3 style=\"float: right; margin-left:5px\">". $nbComments->val ."</h3>
-                        <i class=\"far fa-comments fa-2x\" style=\"float: right;\"></i>
+                            <h3 style=\"float: right; margin-left:5px\">". $nbComments->val ."</h3>
+                            <i class=\"far fa-comments fa-2x\" style=\"float: right;\"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>";
+            </div>";
     }
 }
 ?>
@@ -86,21 +85,20 @@ function printPost($col, $post, $db) {
                 <hr>
 
                 <div class="row">
-                    <?php printPost($colType[0], $post[0], $db); ?>
+                    <?php if(isset($post[0])) printPost($colType[0], $post[0], $db); ?>
                 </div>
                 <div class="row">
-                    <?php 
-                    printPost($colType[1], $post[1], $db);
-                    printPost($colType[2], $post[2], $db); ?>
+                    <?php if(isset($post[1])) printPost($colType[1], $post[1], $db); ?>
+                    <?php if(isset($post[2])) printPost($colType[2], $post[2], $db); ?>
                 </div>
                 <div class="row">
-                    <?php printPost($colType[3], $post[3], $db); ?>
-                    <?php printPost($colType[4], $post[4], $db); ?>
-                    <?php printPost($colType[5], $post[5], $db); ?>
+                    <?php if(isset($post[3])) printPost($colType[3], $post[3], $db); ?>
+                    <?php if(isset($post[4])) printPost($colType[4], $post[4], $db); ?>
+                    <?php if(isset($post[5])) printPost($colType[5], $post[5], $db); ?>
                 </div>
                 <div class="row">
-                    <?php printPost($colType[6], $post[6], $db); ?>
-                    <?php printPost($colType[7], $post[7], $db); ?>
+                    <?php if(isset($post[6])) printPost($colType[6], $post[6], $db); ?>
+                    <?php if(isset($post[7])) printPost($colType[7], $post[7], $db); ?>
                 </div>
                 <div class="row">
                     <div class="col">

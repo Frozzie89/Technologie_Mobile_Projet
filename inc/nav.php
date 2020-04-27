@@ -67,24 +67,24 @@ if (isset($_POST['btnDeco'])) $auth->logout("index.php");
                         <button class="btn btn-outline-light" type="button" data-toggle="modal"
                             data-target="#loginModal">S'authentifier</button>
                     </div><span aria-hidden="true">&nbsp;</span>
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-light" type="button" data-toggle="modal"
-                            data-target="#registerModal">S'enregistrer</button>
-                    </div>
-                    <?php else : ?>
-                    <div>
-                        <a data-toggle="modal" data-target="#changePseudo" id="cogCustomUser"><i
-                                class="fas fa-cog"></i></a>
-                        <label for="btnDeco" style="color: white; margin-right: 20px;">Connecté en tant que
-                            <strong><?php echo $_SESSION['auth']->pseudo_membres;?></strong>
-                        </label>
-                        <button name="btnDeco" class="btn btn-outline-light" type="submit">Se
-                            déconnecter</button>
-                    </div>
-                    <?php endif ;?>
+                    <div class="input-group-append"></div>
+                    <button class="btn btn-outline-light" type="button" data-toggle="modal"
+                        data-target="#registerModal">S'enregistrer</button>
                 </div>
-            </form>
-        </ul>
+                <?php else : ?>
+                <div>
+                    <a href="history.php"><i class="fas fa-history"></i></a>
+                    <a data-toggle="modal" data-target="#changePseudo" id="cogCustomUser"><i class="fas fa-cog"></i></a>
+                    <label for="btnDeco" style="color: white; margin-right: 20px;">Connecté en tant que
+                        <strong><?php echo $_SESSION['auth']->pseudo_membres;?></strong>
+                    </label>
+                    <button name="btnDeco" class="btn btn-outline-light" type="submit">Se
+                        déconnecter</button>
+                </div>
+                <?php endif ;?>
+    </div>
+    </form>
+    </ul>
     </div>
 
 </nav>
