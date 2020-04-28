@@ -15,6 +15,7 @@ function printPost($col, $post, $db) {
 
         echo "<div class=\"". $col . " indexPostCard\">
                 <div class=\"card border-secondary\">
+                <a href='post.php?id=". $post->id_posts. " '>
                     <img class=\"card-img-top border-bottom border-secondary\"
                         src=\"extranet/". $img->img ."\"
                         alt=\"Card image cap\">
@@ -31,8 +32,10 @@ function printPost($col, $post, $db) {
                             <h3 style=\"float: right; margin-left:5px\">". $nbComments->val ."</h3>
                             <i class=\"far fa-comments fa-2x\" style=\"float: right;\"></i>
                         </div>
-                    </div>
+                    </div>  
+                    </a>             
                 </div>
+                </a>
             </div>";
     }
 }

@@ -391,3 +391,23 @@ input[type="file"] {
     color: red;
     font-weight: bold;
 }
+
+/*** historique ***/
+.tableFixHead { 
+    overflow-y: auto; 
+    max-height: 320px;
+
+}
+.tableFixHead thead th { 
+    position: sticky;
+    top: 0;
+}
+
+#accordionExample h5{
+    text-align: center;
+}
+
+#accordionExample .btn-link{
+    color: #3E3F3A;
+}
+

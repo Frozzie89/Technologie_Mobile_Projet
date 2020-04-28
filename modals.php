@@ -102,7 +102,7 @@
                 </button>
             </div>
             <div class="modal-body" style="background-color:rgb(238, 238, 238);">
-                <form ethod="POST" id="ModifyForm">
+                <form method="POST" id="ModifyForm">
                     <div class="input-group mb-3">
                         <input type="text" name="newPseudo" class="form-control" placeholder="Changer de pseudonyme"
                                aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -118,9 +118,9 @@
 											['nPseudo' => $_POST['newPseudo'], 'login' => $login]
 										);
 										$session->update('auth', 'pseudo_membres', $_POST['newPseudo']);
-										$session->setFlash('success', "Votre pseudo a bien été changé.");
+										$session->setFlash('success', "Votre pseudo a bien été modifié.");
 									} else {
-										$session->setFlash('danger', "Impossible de changer votre pseudo. déso");
+										$session->setFlash('danger', "Impossible de modifier votre pseudo");
 									}
 								}
 							?>

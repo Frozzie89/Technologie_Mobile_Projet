@@ -55,9 +55,6 @@ if (isset($_POST['btnDeco'])) $auth->logout("index.php");
         </ul>
     </div>
 
-
-
-
     <div class="navbar-header navbar-right pull-right">
         <ul class="nav navbar-nav navbar-right">
             <form method="POST">
