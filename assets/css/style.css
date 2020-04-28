@@ -182,7 +182,6 @@ hr {
 }
 
 .bottom-card-index{
-    width: 93%;
     position: absolute;
     bottom: 1%;
 }
@@ -393,14 +392,14 @@ input[type="file"] {
 }
 
 /*** historique ***/
-.tableFixHead { 
+.fixHead { 
     overflow-y: auto; 
     max-height: 320px;
-
 }
-.tableFixHead thead th { 
-    position: sticky;
-    top: 0;
+
+.fixHead i{
+    margin-left : 15px;
+    max-width:calc(100% - 200px);
 }
 
 #accordionExample h5{
@@ -410,4 +409,5 @@ input[type="file"] {
 #accordionExample .btn-link{
     color: #3E3F3A;
 }
+
 

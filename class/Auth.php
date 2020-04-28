@@ -33,7 +33,7 @@ class Auth
     // Vérifie si l'utilisateur a bien entré ses identifiants lors de la connexion
     public function login($db, $mail, $password){
         $utilisateur = "*";
-        $utilisateur = $db->query('select pseudo_membres, login_membres, motDePasse_membres from membres where login_membres = :login and motDePasse_membres = :mdp', ["login" => $mail, "mdp" => $password])->fetch();
+        $utilisateur = $db->query('SELECT id_membres, pseudo_membres, login_membres, motDePasse_membres FROM membres WHERE login_membres = :login AND motDePasse_membres = :mdp', ["login" => $mail, "mdp" => $password])->fetch();
 
         if ($utilisateur != "*")
         {
@@ -43,18 +43,11 @@ class Auth
         }
         $this->session->setFlash('danger', "Une erreur est survenue");
         return false;
-
-        // vieux code  : 
-        // if(password_verify($password, $utilisateur->Password_Utilisateurs)){
-        //     $this->connect($utilisateur);
-        //     return $utilisateur;
-        // }
-        // return false;
     }
 
         public function loginAdmin($db, $mail, $password){
         $utilisateur = "*";
-        $utilisateur = $db->query('SELECT pseudo_membres, login_membres, motDePasse_membres FROM membres where id_membres = (SELECT id_membres from administrateurs) and login_membres = :EmailAdmin and motDePasse_membres = :MdpAdmin', ["EmailAdmin" => $mail, "MdpAdmin" => $password])->fetch();
+        $utilisateur = $db->query('SELECT id_membres, pseudo_membres, login_membres, motDePasse_membres FROM membres WHERE id_membres = (SELECT id_membres FROM administrateurs) AND login_membres = :EmailAdmin AND motDePasse_membres = :MdpAdmin', ["EmailAdmin" => $mail, "MdpAdmin" => $password])->fetch();
 
         if ($utilisateur != "*")
         {
@@ -64,13 +57,6 @@ class Auth
         }
         $this->session->setFlash('danger', "Une erreur est survenue");
         return false;
-
-        // vieux code  : 
-        // if(password_verify($password, $utilisateur->Password_Utilisateurs)){
-        //     $this->connect($utilisateur);
-        //     return $utilisateur;
-        // }
-        // return false;
     }
 
     // Déconnecte l'utilisateur

@@ -6,12 +6,10 @@ function printPost($col, $post, $db) {
     if (isset($post))
     {
         $nbComments = $db->query("SELECT COUNT(*) AS val FROM commentaires WHERE id_posts = :id", ["id"=>$post->id_posts])->fetch();
+        $likes = $db->query("SELECT COUNT(*) AS likes FROM likes WHERE id_posts like :idPost", ["idPost"=> $post->id_posts])->fetch();
         $img = $db->query("SELECT nom_photos AS img FROM photos WHERE id_posts = :id", ["id"=>$post->id_posts])->fetch();
 
-        if (strlen($post->texte_posts)<= 230)
-            $shortText = $post->texte_posts;
-        else
-            $shortText = substr($post->texte_posts,0,230) . ' ...';
+        $shortText = (strlen($post->texte_posts)<= 230) ? $post->texte_posts : substr($post->texte_posts,0,230) . ' ...';
 
         echo "<div class=\"". $col . " indexPostCard\">
                 <div class=\"card border-secondary\">
@@ -23,14 +21,11 @@ function printPost($col, $post, $db) {
                         <h4 class=\"card-title\">" .$post->titre_posts . "</h4>
                         <p class=\"card-text\">". $shortText ."</p>
                         <div class=\"bottom-card-index\">
-                            <i class=\"fas fa-eye fa-2x\"></i>
-                            <h3>". $post->nbVue_posts ."</h3>
+                            <i class=\"far fa-arrow-alt-circle-up fa-2x\"></i>
+                            <h3>". $likes->likes ."</h3>
 
-                            <i class=\"far fa-arrow-alt-circle-up fa-2x\" style=\"margin-left:15px\"></i>
-                            <h3>". $post->nbLike_posts ."</h3>
-
-                            <h3 style=\"float: right; margin-left:5px\">". $nbComments->val ."</h3>
-                            <i class=\"far fa-comments fa-2x\" style=\"float: right;\"></i>
+                            <i class=\"far fa-comments fa-2x\" style=\"margin-left:15px\"></i>
+                            <h3 style=\"margin-left:5px\">". $nbComments->val ."</h3>
                         </div>
                     </div>  
                     </a>             
@@ -50,7 +45,6 @@ function printPost($col, $post, $db) {
     </div>
 </section>
 
-
 <!-- Carousel -->
 <div class="container">
     <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
@@ -63,7 +57,6 @@ function printPost($col, $post, $db) {
             <div class="carousel-item <?php if($tag->id_tags == 1) echo "active" ?> my-auto">
                 <?php
                 $post = $db->query("SELECT * FROM posts WHERE id_tags = :tag ORDER BY id_posts DESC LIMIT 8", ["tag"=>$tag->id_tags])->fetchAll();
-                $current = 0;
                 ?>
                 <div class="row">
                     <div class="col">

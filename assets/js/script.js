@@ -6,7 +6,9 @@ $(document).ready(function () {
     // si le login n'a pas fonctionné, ré-afficher le modal d'authentification
     if ($('#WrongLogin').length > 0) $('#loginModal').modal('show')
 
-    $(".alert").show().delay(3000).fadeOut(500);
+    $(".alert").show().delay(3000).fadeOut(500)
+
+    $(".fixHead tr:even").css("background-color", "rgb(226, 226, 226")
 
     // new post effects
     if ($("#newPostDone").length != 0)

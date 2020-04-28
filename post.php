@@ -2,18 +2,18 @@
 require "inc/header.php";
 require "inc/nav.php";
 
-$post = $db->query("Select * from posts where id_posts = :id", ["id"=>$_GET['id']])->fetch();
-$photo = $db->query("Select nom_photos from photos where id_posts = :post",["post" => $_GET["id"]])->fetch();
-$commentaires = $db->query("Select * from commentaires where id_posts = :idPost", ["idPost"=> $_GET['id']])->fetchAll();
-$likes = $db->query("Select * from likes where id_posts like :idPost", ["idPost"=> $_GET['id']])->fetchAll();
+$post = $db->query("SELECT * FROM posts WHERE id_posts = :id", ["id"=>$_GET['id']])->fetch();
+$photo = $db->query("SELECT nom_photos FROM photos WHERE id_posts = :post",["post" => $_GET["id"]])->fetch();
+$commentaires = $db->query("SELECT * FROM commentaires WHERE id_posts = :idPost", ["idPost"=> $_GET['id']])->fetchAll();
+$likes = $db->query("SELECT * FROM likes WHERE id_posts like :idPost", ["idPost"=> $_GET['id']])->fetchAll();
 
 if (isset($_SESSION['auth']->pseudo_membres)){
-    $membre = $db->query("Select * from membres where login_membres like :login", ["login"=>$_SESSION['auth']->login_membres])->fetch();
-    $liked = $db->query("Select like_likes from likes where id_posts = :idPost and id_membres =:id_membres", ["idPost"=> $_GET['id'], "id_membres" => $membre->id_membres])->fetchAll();
+    $membre = $db->query("SELECT * FROM membres WHERE login_membres like :login", ["login"=>$_SESSION['auth']->login_membres])->fetch();
+    $liked = $db->query("SELECT like_likes FROM likes WHERE id_posts = :idPost AND id_membres =:id_membres", ["idPost"=> $_GET['id'], "id_membres" => $membre->id_membres])->fetchAll();
     $ad = isAdmin($db, $membre->id_membres);
 }
 function isAdmin($db, $idMembre){
-    $admin = $db->query("Select * from administrateurs where id_membres like :id", ["id"=> $idMembre])->fetch();
+    $admin = $db->query("SELECT * FROM administrateurs WHERE id_membres like :id", ["id"=> $idMembre])->fetch();
     if (empty($admin)){
         return false;
     }
@@ -61,7 +61,7 @@ function isAdmin($db, $idMembre){
                     <div class="col-lg-12 coms">
                     <?php foreach ($commentaires as $key => $com) : ?>
                     <div class="single-com" id="<?= $com->id_commentaires ?>">
-                    <?php $membre = $db->query("Select * from membres where id_membres = :id", ["id"=>$com->id_membres])->fetch(); ?>
+                    <?php $membre = $db->query("SELECT * FROM membres WHERE id_membres = :id", ["id"=>$com->id_membres])->fetch(); ?>
                         <span class="pseudo-utilisateur text-secondary" style="margin-top: -20px;"><?= $membre->pseudo_membres ?></span>
                         <div class="comment-content" id="<?= $com->id_commentaires ?>">
                             <?php if ($ad) : ?>
@@ -231,7 +231,7 @@ function isAdmin($db, $idMembre){
         editableComment.val(currentComment.text());
         currentDiv.replaceWith(updateDiv);
         editableComment.focus();
-        /** Need some work, focus out can bug (from top to bottom) */
+        /** Need some work, focus out can bug (FROM top to bottom) */
         editableComment.on("focusout", function (event) {
             updateDiv.replaceWith(currentDiv);
             $(document).remove(updateDiv);
