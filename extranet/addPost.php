@@ -75,7 +75,7 @@ unset($_POST);
             <div id="editor">
                 <p><br></p>
             </div>
-            <textarea class="form-control" name="newPostText" rows="3" style="opacity: 0;visibility: hidden;height: 0;overflow: hidden;"></textarea>
+            <textarea class="form-control" id="newPostText" name="newPostText" rows="3"></textarea>
         </div>
         <div class="form-group">
             <label for="file-upload" class="custom-file-upload">

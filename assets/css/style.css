@@ -127,8 +127,10 @@ nav{
     /*visibility: hidden;*/
 }
 textarea{
-    resize : vertical!important;
+    /* resize : vertical!important; */
+    resize: none;
 }
+
 footer{
     border-top: solid #3E3F3A 1px;
     height: 50px;
@@ -367,6 +369,14 @@ p.tagPost{
     border-width: 2px;
     border-style: solid;
 }
+
+textarea#newPostText{
+    opacity: 1;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+}
+
 /****** Bouton upload fichiers ******/
 input[type="file"] {
     display: none;
@@ -395,6 +405,10 @@ input[type="file"] {
 .fixHead { 
     overflow-y: auto; 
     max-height: 320px;
+}
+
+.fixHead a:hover{
+    text-decoration: underline;
 }
 
 .fixHead i{

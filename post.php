@@ -86,7 +86,7 @@ function isAdmin($db, $idMembre){
             <?php if (isset($_SESSION['auth'])) : ?>
             <form method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                    <textarea class="form-control" id="newComment" name="newComment" rows="3" style="resize: vertical;"></textarea>
+                    <textarea class="form-control" id="newComment" name="newComment" rows="3" placeholder="Écrivez un commentaire ..."></textarea>
                 </div>
                 <div class="form-group" style="float: right;">
                     <button type="submit" class="btn btn-dark" id="submitNewComment" name="submitNewComment">Ajouter un nouveau post</button>
