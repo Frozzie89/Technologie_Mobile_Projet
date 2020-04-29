@@ -81,7 +81,7 @@ function printPost($col, $post) {
                 <hr>
                 <!-- 8 posts par tag -->
                 <div class="row">
-                <?php
+                    <?php
                 for ($i=0; $i < 8; $i++) 
                 { 
                     if (in_array($i, array(1, 3, 6))) echo "</div> <div class=\"row\">";
@@ -89,8 +89,10 @@ function printPost($col, $post) {
                 }
                 ?>
                 </div>
+                <br><br><br>
                 <div class="row">
-                    <div class="col">
+                    <div class="col" style="position:absolute; bottom:0">
+                    <hr>
                         <!--Boutons de contrôle BOTTOM -->
                         <div class="input-group input-group-lg">
                             <div class="input-group-prepend">
