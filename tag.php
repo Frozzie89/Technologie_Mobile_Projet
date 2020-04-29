@@ -94,9 +94,9 @@ $OFFSET = 0;
                 offset : OFFSET
             },
             dataType:"json",
-            success:function(posts){
-                console.log(posts);
-                displayPosts(posts);
+            success:function(posts, nbComments, nbLikes){
+                console.log(posts, nbComments, nbLikes);
+                displayPosts(posts, nbComments, nbLikes);
             }
         });
     }
@@ -112,7 +112,11 @@ $OFFSET = 0;
                     "<h5 class='card-title'>" + post.titre_posts + "</h5>" +
                     "<p class='card-text'>" + postText + "</p>" +
                     "<p class='tagPost'>" + post.id_tags + "</p>" +
-                    "<a href='post.php?id=" + post.id_posts + "' class='btn btn-primary btn-lg card-btn-block'> Visionner </a>").appendTo($('.post-every-post'));
+                    "<div class='tagLikesComments' style='position:absolute'>"+
+                    "<i class='far fa-arrow-alt-circle-up fa-2x'></i>"+
+                    "<h3>"+ "-Likes-" +"</h3>"+
+                    "<i class='far fa-comments fa-2x' style='margin-left:15px'></i>"+
+                    "<h3 style='margin-left:5px'>" + "-Co-" +"</h3></div>").appendTo($('.post-every-post'));
             })
         })
     }
@@ -149,7 +153,11 @@ $OFFSET = 0;
                         "<h5 class='card-title'>" + post.titre_posts + "</h5>" +
                         "<p class='card-text'>" + postText + "</p>" +
                         "<p class='tagPost'>" + post.id_tags + "</p>" +
-                        "<a href='post.php?id=" + post.id_posts + "' class='btn btn-primary btn-lg card-btn-block'> Visionner </a>").appendTo($('.post-tendance'));
+                        "<div class='tagLikesComments' style='position:absolute'>"+
+                        "<i class='far fa-arrow-alt-circle-up fa-2x'></i>"+
+                        "<h3>"+ "-Likes-" +"</h3>"+
+                        "<i class='far fa-comments fa-2x' style='margin-left:15px'></i>"+
+                        "<h3 style='margin-left:5px'>" + "-Co-" +"</h3></div>").appendTo($('.post-tendance'));
                 })
             })
             if (NB_POST <= NB_PER_PAGE){

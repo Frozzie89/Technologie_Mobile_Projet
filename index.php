@@ -2,9 +2,10 @@
 require "inc/header.php";
 require "inc/nav.php";
 
-function printPost($col, $post, $db) {
+function printPost($col, $post) {
     if (isset($post))
     {
+        $db = App::getDatabase();
         $nbComments = $db->query("SELECT COUNT(*) AS val FROM commentaires WHERE id_posts = :id", ["id"=>$post->id_posts])->fetch();
         $likes = $db->query("SELECT COUNT(*) AS likes FROM likes WHERE id_posts like :idPost", ["idPost"=> $post->id_posts])->fetch();
         $img = $db->query("SELECT nom_photos AS img FROM photos WHERE id_posts = :id", ["id"=>$post->id_posts])->fetch();
@@ -84,7 +85,7 @@ function printPost($col, $post, $db) {
                 for ($i=0; $i < 8; $i++) 
                 { 
                     if (in_array($i, array(1, 3, 6))) echo "</div> <div class=\"row\">";
-                    if(isset($post[$i])) printPost($colType[$i], $post[$i], $db);
+                    if(isset($post[$i])) printPost($colType[$i], $post[$i]);
                 }
                 ?>
                 </div>

@@ -1,6 +1,10 @@
 <?php
 require "inc/header.php";
 require "inc/nav.php";
+
+$totPostLike = $db->query("SELECT COUNT(*) AS val FROM likes WHERE id_membres = :idUser", ["idUser"=>$_SESSION['auth']->id_membres])->fetch();
+
+$totPostCommented = $db->query("SELECT COUNT(*) AS val FROM likes WHERE id_membres = :idUser", ["idUser"=>$_SESSION['auth']->id_membres])->fetch();
 ?>
 
 <section id="homePage">
@@ -20,7 +24,7 @@ require "inc/nav.php";
                     <h5 class="mb-0">
                         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
                             aria-expanded="true" aria-controls="collapseOne">
-                            Publications likées
+                            Publications likées <?= "(".$totPostLike->val.")" ?>
                         </button>
                     </h5>
                 </div>
@@ -57,7 +61,7 @@ require "inc/nav.php";
                     <h5 class="mb-0">
                         <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                             data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Publications commentées
+                            Publications commentées <?= "(".$totPostCommented->val.")" ?>
                         </button>
                     </h5>
                 </div>
