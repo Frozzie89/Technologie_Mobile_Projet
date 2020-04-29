@@ -12,7 +12,7 @@ function printPost($col, $post) {
 
         $shortText = (strlen($post->texte_posts)<= 230) ? $post->texte_posts : substr($post->texte_posts,0,230) . ' ...';
 
-        echo "<div class=\"". $col . " indexPostCard\">
+        echo "<div class=\"". $col . " indexPostCard \">
                 <div class=\"card border-secondary\">
                 <a href='post.php?id=". $post->id_posts. " '>
                     <img class=\"card-img-top border-bottom border-secondary\"

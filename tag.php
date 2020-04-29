@@ -7,11 +7,13 @@ $NB_POST = count($db->query("Select * from posts where id_tags = :id", ["id"=>$_
 $NB_PER_PAGE = 8;
 $OFFSET = 0;
 ?>
+
 <!-- JS, jquery and stuff -->
 <script src="assets/js/jquery-3.4.1.js"></script>
 <script>window.jQuery || document.write('<script src="assets/js/jquery-3.4.1.js"><\/script>')</script>
 <script src="assets/js/bootstrap.bundle.js"></script>
 <script src="assets/js/script.js"></script>
+
 
 <section id="tendance">
     <div class="container">
@@ -94,9 +96,9 @@ $OFFSET = 0;
                 offset : OFFSET
             },
             dataType:"json",
-            success:function(posts, nbComments, nbLikes){
-                console.log(posts, nbComments, nbLikes);
-                displayPosts(posts, nbComments, nbLikes);
+            success:function(posts){
+                console.log(posts);
+                displayPosts(posts);
             }
         });
     }
@@ -114,9 +116,9 @@ $OFFSET = 0;
                     "<p class='tagPost'>" + post.id_tags + "</p>" +
                     "<div class='tagLikesComments' style='position:absolute'>"+
                     "<i class='far fa-arrow-alt-circle-up fa-2x'></i>"+
-                    "<h3>"+ "-Likes-" +"</h3>"+
+                    "<h3 style='margin-left:5px'>"+ post.nbLikes +"</h3>"+
                     "<i class='far fa-comments fa-2x' style='margin-left:15px'></i>"+
-                    "<h3 style='margin-left:5px'>" + "-Co-" +"</h3></div>").appendTo($('.post-every-post'));
+                    "<h3 style='margin-left:5px'>" + post.nbComments +"</h3></div>").appendTo($('.post-every-post'));
             })
         })
     }
@@ -144,7 +146,6 @@ $OFFSET = 0;
             console.log(posts);
             NB_POST = posts.length;
             $.each(posts, function (i, post) {
-
                 $.getJSON('extranet/getPhotoOfPost.php', {postID: post.id_posts}, function (photo) {
                     let postText = limitTextPost(post.texte_posts);
                     $("<div class='col-lg-3 card-news-max-height td " + post.id_tags + "'><div class='card card-height card-style'>" +
@@ -154,10 +155,10 @@ $OFFSET = 0;
                         "<p class='card-text'>" + postText + "</p>" +
                         "<p class='tagPost'>" + post.id_tags + "</p>" +
                         "<div class='tagLikesComments' style='position:absolute'>"+
-                        "<i class='far fa-arrow-alt-circle-up fa-2x'></i>"+
-                        "<h3>"+ "-Likes-" +"</h3>"+
+                        "<i class='far fa-arrow-alt-circle-up fa-2x' ></i>"+
+                        "<h3 style='margin-left:5px'>"+ post.nbLikes +"</h3>"+
                         "<i class='far fa-comments fa-2x' style='margin-left:15px'></i>"+
-                        "<h3 style='margin-left:5px'>" + "-Co-" +"</h3></div>").appendTo($('.post-tendance'));
+                        "<h3 style='margin-left:5px'>" + post.nbComments+"</h3></div>").appendTo($('.post-tendance'));
                 })
             })
             if (NB_POST <= NB_PER_PAGE){

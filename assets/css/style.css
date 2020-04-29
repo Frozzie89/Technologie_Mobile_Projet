@@ -71,10 +71,6 @@ h1, h2, h3, h4, h5, h6{
     font-weight: 500;
 }
 
-.navbar-collapse.navRight>ul>*{
-    display: inline-block;
-}
-
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link{
     background-color: #204689;
     border: 1px solid #fcfafa;
