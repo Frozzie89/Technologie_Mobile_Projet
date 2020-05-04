@@ -6,6 +6,7 @@ $post = $db->query("SELECT * FROM posts WHERE id_posts = :id", ["id"=>$_GET['id'
 $photo = $db->query("SELECT nom_photos FROM photos WHERE id_posts = :post",["post" => $_GET["id"]])->fetch();
 $commentaires = $db->query("SELECT * FROM commentaires WHERE id_posts = :idPost", ["idPost"=> $_GET['id']])->fetchAll();
 $likes = $db->query("SELECT * FROM likes WHERE id_posts like :idPost", ["idPost"=> $_GET['id']])->fetchAll();
+$links = $db->query("Select * from posts order by id_posts limit 3")->fetchAll();
 
 if (isset($_SESSION['auth']->pseudo_membres)){
     $membre = $db->query("SELECT * FROM membres WHERE login_membres like :login", ["login"=>$_SESSION['auth']->login_membres])->fetch();
@@ -50,6 +51,18 @@ function isAdmin($db, $idMembre){
             </div>
         </div>
         <div class="col-lg-3 links">
+            <h3 style="margin-top: 150px;"> Autres Articles </h3>
+            <?php if (!empty($links)) : ?>
+                <?php foreach ($links as $key => $link) : ?>
+                <div class="link">
+                    <div class="col-lg-5 link-image">
+                        <?php $link_photo = $db->query("SELECT nom_photos FROM photos WHERE id_posts = :post",["post" => $link->id_posts])->fetch(); ?>
+                        <img class="post-image" src="extranet/<?= $link_photo->nom_photos ?>" alt="ok">
+                    </div>
+                    <div class="col-lg-7 link-title"><?= $link->titre_posts ?></div>
+                </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
     <div class="row">
@@ -80,7 +93,7 @@ function isAdmin($db, $idMembre){
                     <?php endforeach; ?>
                     </div>
                 <?php else : ?>
-                    <div class="no-comment"> Aucun commentaire </div>
+                    <div class="col-lg-12 coms"> Aucun commentaire </div>
                 <?php endif; ?>
 
             <?php if (isset($_SESSION['auth'])) : ?>
@@ -103,9 +116,10 @@ function isAdmin($db, $idMembre){
     let idPost = <?= $_GET["id"] ?>;
     let idMembre = <?= $membre->id_membres ?>;
     let pseudoMembre = "<?= $membre->pseudo_membres ?>";
-    let editing = -1;
+    let editing = <?php if (!empty($commentaires)) echo 1; else echo 0?>;
     $(document).ready(function () {
         $("#newComment").val("");
+        console.log(editing);
     });
 
     $("#submitNewComment").on("click", function (event) {
@@ -132,11 +146,20 @@ function isAdmin($db, $idMembre){
                 },
                 dataType: "json",
                 success: function (comment) {
+                    if (editing === 0){
+                        $('.coms').text("");
+                        editing = 1;
+                    }
                     $("#newComment").val("");
                     console.log(comment);
                     plusComment();
-                    $("<span class='pseudo-utilisateur text-secondary' style='margin-top: -20px;'>" + pseudoMembre + "</span><br>" +
-                        "<p class='comment'>" + comment.texte_commentaires + "</p>").appendTo($(".coms"));
+                    $("<div class='single-com' id='"+comment.id_commentaires+"'>" +
+                        "<span class='pseudo-utilisateur text-secondary' style='margin-top: -20px;'>" + pseudoMembre + "</span>" +
+                        "<p class='comment'>" + comment.texte_commentaires + "</p>" +
+                        "<div class='edit-banner' id='"+comment.id_commentaires+"'>" +
+                        "<span class='reply icon-button ' id='"+comment.id_commentaires+"'><i class='fas fa-reply'></i> </span>" +
+                        "<span class='edit x-icon icon-button ' id='"+comment.id_commentaires+"'> <i class='fas fa-pen'></i> </span>" +
+                        "<span class='delete x-icon icon-button ' id='"+comment.id_commentaires+"'> <i class='fas fa-trash-alt'></i> </span>").appendTo($(".coms"));
                 }
             });
         } else {
