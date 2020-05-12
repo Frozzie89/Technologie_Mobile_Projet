@@ -29,7 +29,7 @@ class Session
         return isset($_SESSION['flash']);
     }
 
-    // Récupère la sassion pour l'afficher, puis supprime-la
+    // Récupère la session pour l'afficher, puis supprime-la
     public function getFashes(){
         $flash = $_SESSION['flash'];
         unset($_SESSION['flash']);

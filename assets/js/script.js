@@ -233,6 +233,8 @@ function normalizeSlideHeights() {
     })
 }
 
+
+
 $(window).on(
     'load resize orientationchange',
     normalizeSlideHeights);

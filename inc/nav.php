@@ -33,6 +33,25 @@ if (!empty($_POST['LoginEmail']) && !empty($_POST['LoginMDP']))
 if (isset($_POST['btnDeco'])) $auth->logout("index.php");
 //unset($_POST);
 
+
+// update pseudo
+if (isset($_POST['newPseudo'])) {
+    $login = $_SESSION['auth']->login_membres;
+    
+    if ($login) {
+        $db->query(
+            "UPDATE membres SET pseudo_membres=:nPseudo WHERE login_membres=:login",
+            ['nPseudo' => $_POST['newPseudo'], 'login' => $login]
+        );
+        $session->update('auth', 'pseudo_membres', $_POST['newPseudo']);
+        $session->setFlash('success', "Votre pseudo a bien été modifié.");
+    } 
+    else 
+        $session->setFlash('danger', "Impossible de modifier votre pseudo");
+
+    unset($_POST['newPseudo']);
+}
+
 ?>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
@@ -77,7 +96,7 @@ if (isset($_POST['btnDeco'])) $auth->logout("index.php");
                     </div>
                     <label for="btnDeco" style="color: white; margin-right: 20px; margin-top:5px">Connecté
                         en tant que
-                        <strong><?php echo $_SESSION['auth']->pseudo_membres;?></strong>
+                        <strong id="currentPseudo"><?php echo $_SESSION['auth']->pseudo_membres;?></strong>
                     </label>
                     <div class="collapse navbar-collapse navRight" id="navbarsExampleDefault">
                         <button name="btnDeco" class="btn btn-outline-light" type="submit">Se
