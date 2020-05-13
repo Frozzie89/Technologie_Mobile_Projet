@@ -120,7 +120,7 @@ function isAdmin($db, $idMembre){
     $(document).ready(function () {
         $("#newComment").val("");
 
-        console.log("<?= $_SESSION['auth']->login_membres ?>");
+        //console.log("<?= $_SESSION['auth']->login_membres ?>");
         /* AJAX pour recupérer le membre */
         $.ajax({
             url: "getMembre.php",
@@ -130,14 +130,14 @@ function isAdmin($db, $idMembre){
             },
             dataType: "json",
             success: function (membre) {
-                console.log(membre);
+                //console.log(membre);
                 idMembre = membre.id_membres;
                 pseudoMembre = membre.pseudo_membres;
             },
             error : function(resultat, statut, erreur){
-                console.log(resultat);
-                console.log(statut);
-                console.log(erreur);
+                //console.log(resultat);
+                //console.log(statut);
+                //console.log(erreur);
             },
         });
 
@@ -146,9 +146,9 @@ function isAdmin($db, $idMembre){
     $("#submitNewComment").on("click", function (event) {
         event.preventDefault();
         let textCommentaire = $("#newComment").val();
-        console.log(idPost);
-        console.log(idMembre);
-        console.log(textCommentaire);
+        //console.log(idPost);
+        //console.log(idMembre);
+        //console.log(textCommentaire);
         $("#newComment").removeClass('comment-success');
         $("#newComment").removeClass('comment-error');
         //$("#newComment").addClass('border-comment');
@@ -172,7 +172,7 @@ function isAdmin($db, $idMembre){
                         editing = 1;
                     }
                     $("#newComment").val("");
-                    console.log(comment);
+                    //console.log(comment);
                     plusComment();
                     $("<div class='single-com' id='"+comment.id_commentaires+"'>" +
                         "<span class='pseudo-utilisateur text-secondary' style='margin-top: -20px;'>" + pseudoMembre + "</span>" +
@@ -193,19 +193,19 @@ function isAdmin($db, $idMembre){
     });
 
     function plusComment(){
-        console.log($("#nbComment").text());
+        //console.log($("#nbComment").text());
         let nbComment = parseInt($("#nbComment").text(), 10);
         $("#nbComment").text(++nbComment);
     }
 
     function minusComment(){
-        console.log($("#nbComment").text());
+        //console.log($("#nbComment").text());
         let nbComment = parseInt($("#nbComment").text(), 10);
         $("#nbComment").text(--nbComment);
     }
 
     $(".like").on("click", function (event) {
-        console.log($("#nbLike").text());
+        //console.log($("#nbLike").text());
         let nbLike = parseInt($("#nbLike").text(), 10);
         if ($(this).hasClass("liked")){
             $(this).removeClass("liked");
@@ -220,7 +220,7 @@ function isAdmin($db, $idMembre){
                 },
                 dataType: "text",
                 success: function () {
-                    console.log("Don't like it");
+                    //console.log("Don't like it");
                 }
             });
         } else {
@@ -236,7 +236,7 @@ function isAdmin($db, $idMembre){
                 },
                 dataType: "text",
                 success: function () {
-                    console.log("Like it");
+                    //console.log("Like it");
                 }
             });
         }
@@ -259,11 +259,11 @@ function isAdmin($db, $idMembre){
     });
 
     $(".reply").on("click", function (event) {
-        console.log("click");
+        //console.log("click");
     });
 
     $(".edit").on("click", function (event) {
-        console.log($(this).attr('id'));
+        //console.log($(this).attr('id'));
         let idOfComment = $(this).attr('id');
         let currentDiv = $('.coms div[id=' + idOfComment +'] .comment-content');
         let currentComment = $('p[id=' + idOfComment +']');
@@ -298,7 +298,7 @@ function isAdmin($db, $idMembre){
                         },
                         dataType: "json",
                         success: function (comment) {
-                            console.log(comment);
+                            //console.log(comment);
                             updateDiv.replaceWith(currentDiv);
                             $(document).remove(updateDiv);
                             $('p[id=' + idOfComment +']').text(comment.texte_commentaires);

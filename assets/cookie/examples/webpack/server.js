@@ -12,4 +12,4 @@ require('http')
   })
   .listen(port)
 
-console.log(`Example available at http://localhost:${port}`)
+//console.log(`Example available at http://localhost:${port}`)

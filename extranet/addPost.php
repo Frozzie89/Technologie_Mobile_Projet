@@ -117,13 +117,13 @@ unset($_POST);
     });
 /*
     function removeStuff(value) {
-        console.log(value.substr(1, value.length - 2));
+        //console.log(value.substr(1, value.length - 2));
     }
 */
     quill.on('text-change', function(delta) {
         var about = document.querySelector('textarea[name=newPostText]');
         about.value = quill.root.innerHTML;
-        console.log(about.value);
+        //console.log(about.value);
     });
 </script>
 

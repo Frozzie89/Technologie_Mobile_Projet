@@ -97,7 +97,6 @@ $OFFSET = 0;
             },
             dataType:"json",
             success:function(posts){
-                console.log(posts);
                 displayPosts(posts);
             }
         });
@@ -125,7 +124,6 @@ $OFFSET = 0;
 
     function setUpPagination() {
         $("#next-arrow").prop("disabled", false);
-        console.log(NB_POST, NB_PER_PAGE, OFFSET, <?= $_GET['id'] ?>);
         $.ajax({
             url:"pagination.php",
             method:"GET",
@@ -135,7 +133,6 @@ $OFFSET = 0;
             },
             dataType:"json",
             success:function(posts){
-                console.log(posts);
                 displayPosts(posts);
             }
         });
@@ -143,13 +140,14 @@ $OFFSET = 0;
 
     function fetchDataTag(tagValue, selector, cssclass) {
         $.getJSON('fetchPostTendance.php', {tagID: tagValue, tendance : false}, function (posts) {
-            console.log(posts);
+            var styleCard = Cookies.get('theme') == 'light' ? ['white', '#e1e3e1'] : ['#1A1A1B', 'black'];
+            //console.log(Cookies.get('theme') +' '+styleCard[0]+' '+ styleCard[1]);
             NB_POST = posts.length;
             $.each(posts, function (i, post) {
                 $.getJSON('extranet/getPhotoOfPost.php', {postID: post.id_posts}, function (photo) {
                     let postText = limitTextPost(post.texte_posts);
-                    $("<div class='col-lg-3 card-news-max-height td " + post.id_tags + "'><div class='card card-height card-style'>" +
-                        "<a href='post.php?id=" + post.id_posts + "'><img class='card-img-top' src='extranet/" + photo.nom_photos + "' alt='ok'>" +
+                    $("<div class='col-lg-3 card-news-max-height td " + post.id_tags + "'><div class='card card-height card-style' style='background-color: "+ styleCard[0]+ "; color: "+ styleCard[1]+">" +
+                        "<a href='post.php?id=" + post.id_posts + "'><img class='card-img-top' src='extranet/" + photo.nom_photos + "' alt= " + post.titre_posts +" >" +
                         "<div class='card-body card-body-style'>" +
                         "<h5 class='card-title'>" + post.titre_posts + "</h5>" +
                         "<p class='card-text'>" + postText + "</p>" +
@@ -162,12 +160,8 @@ $OFFSET = 0;
                 })
             })
             if (NB_POST <= NB_PER_PAGE){
-                console.log(NB_POST);
-                console.log(NB_PER_PAGE);
                 noPagination();
             } else {
-                console.log(NB_POST);
-                console.log(NB_PER_PAGE);
                 setUpPagination(NB_POST, NB_PER_PAGE, OFFSET);
             }
         })
@@ -183,7 +177,6 @@ $OFFSET = 0;
     });
 
     function checkPreviousArrow() {
-        console.log(OFFSET);
         if (OFFSET <= 0){
             $("#previous-arrow").prop("disabled", true);
         } else {
@@ -193,10 +186,8 @@ $OFFSET = 0;
 
     $("#previous-arrow").on("click", function(event) {
         event.preventDefault();
-        console.log(event);
         OFFSET -= NB_PER_PAGE;
         $("#next-arrow").prop("disabled", false);
-        console.log(NB_POST, NB_PER_PAGE, OFFSET, <?= $_GET['id'] ?>);
         $.ajax({
             url:"pagination.php",
             method:"GET",
@@ -206,7 +197,6 @@ $OFFSET = 0;
             },
             dataType:"json",
             success:function(posts){
-                console.log(posts);
                 displayPosts(posts);
                 checkPreviousArrow();
             }
@@ -214,8 +204,6 @@ $OFFSET = 0;
     });
 
     function checkNextArrow() {
-        console.log(OFFSET);
-        console.log(NB_POST);
         if (OFFSET > NB_POST - 2){
             $("#next-arrow").prop("disabled", true);
         } else {
@@ -227,7 +215,6 @@ $OFFSET = 0;
         event.preventDefault();
         OFFSET += NB_PER_PAGE;
         $("#previous-arrow").prop("disabled", false);
-        console.log(NB_POST, NB_PER_PAGE, OFFSET, <?= $_GET['id'] ?>);
         $.ajax({
             url:"pagination.php",
             method:"GET",
@@ -237,7 +224,6 @@ $OFFSET = 0;
             },
             dataType:"json",
             success:function(posts){
-                console.log(posts);
                 displayPosts(posts);
                 checkNextArrow();
             }

@@ -1,9 +1,7 @@
 // code exécuté au démarrage
 $(document).ready(function () {
     // thème 
-    if (Cookies.get('theme') == undefined)
-        Cookies.set('theme', 'light');
-    logoTheme()
+    logoTheme();
     setTheme();
 
     // si lors de l'inscription, l'email est déjà pris ou autre erreur, ré-afficher le modal d'inscription
@@ -159,13 +157,13 @@ function bindH2ToSelect(nom_tag) {
 function fetchData(tagValue) {
     $.getJSON('getPostsByTag.php', { tagID: tagValue }, function (posts) {
 
-        console.log("../../assets/ajax/getPostsByTag.php");
+        //console.log("../../assets/ajax/getPostsByTag.php");
         let j = 0;
         $.each(posts, function (i, post) {
 
             $.getJSON('getPhotoOfPost.php', { postID: post.id_posts }, function (photo) {
                 let postText = limitTextPost(post.texte_posts);
-                console.log(postText);
+                //console.log(postText);
                 $("<div class='col-lg-3 card-news-max-height " + post.id_tags + "'><div class='card card-height card-style'>" +
                     "<img class='card-img-top' src='" + photo.nom_photos + "' alt='ok'>" +
                     "<div class='card-body card-body-style card-post'>" +
@@ -249,43 +247,17 @@ function logoTheme() {
 
 function setTheme() {
     if (Cookies.get('theme') == 'dark') {
-        // general
-        $('body').css('background-color', 'rgb(58, 58, 58)');
-        $('body').css('color', 'white');
-
+        $('body, .carousel-tag-selector>*, .modal-content, .modal-content>*').css('background-color', 'rgb(58, 58, 58)');
+        $('body, .carousel-tag-selector>*, .post-link, .btn-link').css('color', 'white');
         $('.card').css('background-color', '#1A1A1B');
         $('.card>*').css('color', '#e1e3e1');
-
-        $('.indexLogo').css('filter', 'invert(0)')
-
-        $('.carousel-tag-selector>*').css('background-color', 'rgb(58, 58, 58)')
-        $('.carousel-tag-selector>*').css('color', 'white');
-
-        $('.post-link').css('color', 'white');
-
-        // modals
-        $('.modal-content').css('background-color', 'rgb(58, 58, 58)');
-        $('.modal-content>*').css('background-color', 'rgb(58, 58, 58)');
+        $('.indexLogo').css('filter', 'invert(0)');
     }
     else {
-        // general
         $('body').css('background-color', 'rgb(250, 242, 226)');
-        $('body').css('color', 'black');
-
-        $('.card').css('background-color', 'white');
-        $('.card>*').css('color', 'black');
-
+        $('body, .card>*, .carousel-tag-selector>*, .post-link, .btn-link').css('color', 'black');
+        $('.card, .carousel-tag-selector>*, .modal-content, .modal-content>*').css('background-color', 'white');
         $('.indexLogo').css('filter', 'invert(1)')
-
-        $('.carousel-tag-selector>*').css('background-color', 'white');
-        $('.carousel-tag-selector>*').css('color', 'black');
-
-        $('.post-link').css('color', 'black');
-
-        // modal
-        $('.modal-content').css('background-color', 'white');
-        $('.modal-content>*').css('background-color', 'white');
-
     }
 }
 
@@ -308,3 +280,6 @@ function normalizeSlideHeights() {
 $(window).on(
     'load resize orientationchange',
     normalizeSlideHeights);
+
+
+// TAG

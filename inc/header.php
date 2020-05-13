@@ -28,7 +28,6 @@
     <!-- Cookie JQuery -->
     <script type="module" src="assets/cookie/js.cookie.min.js"></script>
 
-
 </head>
 <div class="container-fluid msg-flash" id="top">
     <?php if(isset($_SESSION['flash'])): ?>

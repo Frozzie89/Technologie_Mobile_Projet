@@ -1,3 +1,3 @@
 import Cookies from 'js-cookie'
 
-console.log(Cookies.get)
+//console.log(Cookies.get)

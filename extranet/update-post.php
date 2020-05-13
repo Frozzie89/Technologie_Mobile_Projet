@@ -129,13 +129,13 @@ if(isset($_GET)){
     });
 /*
     function removeStuff(value) {
-        console.log(value.substr(1, value.length - 2));
+        //console.log(value.substr(1, value.length - 2));
     }
 */
     quill.on('text-change', function(delta) {
         var about = document.querySelector('textarea[name=postText]');
         about.value = quill.root.innerHTML;
-        console.log(about.value);
+        //console.log(about.value);
     });
 </script>
 
