@@ -26,7 +26,7 @@
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,700&display=swap" rel="stylesheet">
 
     <!-- Cookie JQuery -->
-    <script type="module" src="../assets/cookie/js.cookie.min.js"></script>
+    <script type="module" src="assets/cookie/js.cookie.min.js"></script>
 
 
 </head>
