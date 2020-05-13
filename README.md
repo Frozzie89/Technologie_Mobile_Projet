@@ -1,23 +1,5 @@
 # Todo list
-Ceci est la liste des tâches à faire / en cours.
-
-Elle est divisée en 4 parties : 
-- Tâches de Lucien Joly
-- Tâches de Linda Tatchou
-- Tâches de Nathan Lanzetti
-- Tâches terminées
-
-Chaque individu connaîtra ses tâches en consultant ce fichier (en restant libre de choisir ce sur quoi il souhaite travailler).
-
-N'oubliez pas de mettre ce fichier à jour pour que tout le monde soit au courant de ce qui est à faire.
-
-# Tâches de Lucien Joly
-- Modifications mineures
-# Tâches de Linda Tatchou
-- Mettre en place le dark theme
-# Tâches de Nathan Lanzetti
-- Affichage dynamique des commentaires
-- Afficher des posts sur le côté droit sur la page d'affichage d'un post
+Il n'y a plus de tâches
 
 # Tâches terminées
 - Créer la partie inscription - Lucien Joly
@@ -31,6 +13,9 @@ N'oubliez pas de mettre ce fichier à jour pour que tout le monde soit au couran
 - Page d'affichage d'un post - Nathan Lanzetti
 - Page historique - Lucien Joly
 - Modal customisation - Linda Tatchou
+- Mettre en place le dark theme - Lucien Joly / Linda Tatchou
+- Affichage dynamique des commentaires - Nathan Lanzetti
+- Afficher des posts sur le côté droit sur la page d'affichage d'un post - Nathan Lanzetti
 
 ---
 ---
