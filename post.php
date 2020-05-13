@@ -59,7 +59,7 @@ function isAdmin($db, $idMembre){
                         <?php $link_photo = $db->query("SELECT nom_photos FROM photos WHERE id_posts = :post",["post" => $link->id_posts])->fetch(); ?>
                         <img class="post-image" src="extranet/<?= $link_photo->nom_photos ?>" alt="ok">
                     </div>
-                    <div class="col-lg-7 link-title"><?= $link->titre_posts ?></div>
+                    <div class="col-lg-7 link-title"><a class="post-link" href="post.php?id=<?= $link->id_posts ?>"><?= $link->titre_posts ?></a></div>
                 </div>
                 <?php endforeach; ?>
             <?php endif; ?>
@@ -119,7 +119,28 @@ function isAdmin($db, $idMembre){
     let editing = <?php if (!empty($commentaires)) echo 1; else echo 0?>;
     $(document).ready(function () {
         $("#newComment").val("");
-        console.log(editing);
+
+        console.log("<?= $_SESSION['auth']->login_membres ?>");
+        /* AJAX pour recupérer le membre */
+        $.ajax({
+            url: "getMembre.php",
+            method: "GET",
+            data: {
+                membreLogin : "<?= $_SESSION['auth']->login_membres ?>",
+            },
+            dataType: "json",
+            success: function (membre) {
+                console.log(membre);
+                idMembre = membre.id_membres;
+                pseudoMembre = membre.pseudo_membres;
+            },
+            error : function(resultat, statut, erreur){
+                console.log(resultat);
+                console.log(statut);
+                console.log(erreur);
+            },
+        });
+
     });
 
     $("#submitNewComment").on("click", function (event) {
@@ -155,7 +176,8 @@ function isAdmin($db, $idMembre){
                     plusComment();
                     $("<div class='single-com' id='"+comment.id_commentaires+"'>" +
                         "<span class='pseudo-utilisateur text-secondary' style='margin-top: -20px;'>" + pseudoMembre + "</span>" +
-                        "<p class='comment'>" + comment.texte_commentaires + "</p>" +
+                        "<div class='comment-content' id='"+comment.id_commentaires+"'>" +
+                        "<p id='"+comment.id_commentaires+"' class='comment'>" + comment.texte_commentaires + "</p>" +
                         "<div class='edit-banner' id='"+comment.id_commentaires+"'>" +
                         "<span class='reply icon-button ' id='"+comment.id_commentaires+"'><i class='fas fa-reply'></i> </span>" +
                         "<span class='edit x-icon icon-button ' id='"+comment.id_commentaires+"'> <i class='fas fa-pen'></i> </span>" +
@@ -240,7 +262,6 @@ function isAdmin($db, $idMembre){
         console.log("click");
     });
 
-
     $(".edit").on("click", function (event) {
         console.log($(this).attr('id'));
         let idOfComment = $(this).attr('id');
@@ -254,7 +275,6 @@ function isAdmin($db, $idMembre){
         editableComment.val(currentComment.text());
         currentDiv.replaceWith(updateDiv);
         editableComment.focus();
-        /** Need some work, focus out can bug (FROM top to bottom) */
         editableComment.on("focusout", function (event) {
             updateDiv.replaceWith(currentDiv);
             $(document).remove(updateDiv);

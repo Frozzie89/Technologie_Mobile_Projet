@@ -232,9 +232,10 @@ input[type="text"]:disabled {
 .article{
     text-align: justify;
 }
-/* .links{
-
-} */
+.post-link:hover{
+    text-decoration: underline!important;
+    color: #29ABE0;
+}
 .commentaires{
     margin-top: 50px;
 }
