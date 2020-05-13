@@ -1,6 +1,8 @@
 // code exécuté au démarrage
 $(document).ready(function () {
     // thème 
+    if (Cookies.get('theme') == undefined)
+        Cookies.set('theme', 'light');
     logoTheme()
     setTheme();
 
