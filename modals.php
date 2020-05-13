@@ -111,23 +111,8 @@
                     </div>
                 </form>
                 <label style="margin-right: 5px;">Changer le thème</label>
-                <a onclick="toggleTheme()"><i class="fas fa-sun fa-2x" style="vertical-align: middle;"
+                <a><i class="fas fa-sun fa-2x" style="vertical-align: middle;"
                         id="changeTheme"></i></a>
-                <script>
-                    let is_dark = false;
-
-                    function toggleTheme() {
-                        is_dark = !is_dark;
-                        if (is_dark) {
-                            document.body.style.backgroundColor = '#3a3a3a';
-                            //document.body.style.color = '#dbdbdb';
-                        } else {
-                            document.body.style.backgroundColor = 'rgb(250, 242, 226)';
-                            //document.body.style.color = '#3E3F3A';
-                        }
-                    }
-                </script>
-
             </div>
         </div>
     </div>

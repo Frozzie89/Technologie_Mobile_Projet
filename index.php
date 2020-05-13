@@ -62,7 +62,7 @@ function printPost($col, $post) {
                 <div class="row">
                     <div class="col">
                         <!--Boutons de contrôle TOP -->
-                        <div class="input-group input-group-lg">
+                        <div class="input-group input-group-lg carousel-tag-selector">
                             <div class="input-group-prepend">
                                 <span class="input-group-text btn-floating" id="basic-addon1" href="#multi-item-example"
                                     data-slide="prev"><i class="fa fa-chevron-left"></i></span>
@@ -94,7 +94,7 @@ function printPost($col, $post) {
                     <div class="col" style="position:absolute; bottom:0">
                     <hr>
                         <!--Boutons de contrôle BOTTOM -->
-                        <div class="input-group input-group-lg">
+                        <div class="input-group input-group-lg carousel-tag-selector">
                             <div class="input-group-prepend">
                                 <span class="input-group-text btn-floating" id="basic-addon1" href="#multi-item-example"
                                     data-slide="prev"><i class="fa fa-chevron-left"></i></span>

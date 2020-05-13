@@ -1,5 +1,9 @@
 // code exécuté au démarrage
 $(document).ready(function () {
+    // thème 
+    logoTheme()
+    setTheme();
+
     // si lors de l'inscription, l'email est déjà pris ou autre erreur, ré-afficher le modal d'inscription
     if ($('#RegisterMailExists').length > 0 || $('#ErrorMDPRegister').length > 0) $('#registerModal').modal('show')
 
@@ -70,11 +74,6 @@ $(document).ready(function () {
         }
     })
 
-    // if ($('#tagIndexGrp').length > 0) {
-    //     $('#tagIndexGrp button').each(function (index, element) {
-
-    //     });
-    // }
 
 });
 
@@ -200,6 +199,7 @@ $.expr[":"].contains = $.expr.createPseudo(function (arg) {
 
 /* changement du thème */
 $('#changeTheme').click(function () {
+    // passage light vers dark
     if ($(this).hasClass("fa-sun")) {
         $(this).fadeOut(100, function () {
             $(this).removeClass("fa-sun");
@@ -207,7 +207,11 @@ $('#changeTheme').click(function () {
         $(this).fadeIn(100, function () {
             $(this).addClass("fa-moon");
         });
+
+        Cookies.set('theme', 'dark');
+        setTheme();
     }
+    // passage dark vers light
     else {
         $(this).fadeOut(100, function () {
             $(this).removeClass("fa-moon");
@@ -215,8 +219,73 @@ $('#changeTheme').click(function () {
         $(this).fadeIn(100, function () {
             $(this).addClass("fa-sun");
         });
+
+        Cookies.set('theme', 'light');
+        setTheme();
     }
 });
+
+function logoTheme() {
+    if (Cookies.get('theme') == 'dark') {
+        $('#changeTheme').fadeOut(100, function () {
+            $('#changeTheme').removeClass("fa-sun");
+        });
+        $('#changeTheme').fadeIn(100, function () {
+            $('#changeTheme').addClass("fa-moon");
+        });
+    }
+    else {
+        $('#changeTheme').fadeOut(100, function () {
+            $('#changeTheme').removeClass("fa-moon");
+        });
+        $('#changeTheme').fadeIn(100, function () {
+            $('#changeTheme').addClass("fa-sun");
+        });
+    }
+
+}
+
+function setTheme() {
+    if (Cookies.get('theme') == 'dark') {
+        // general
+        $('body').css('background-color', 'rgb(58, 58, 58)');
+        $('body').css('color', 'white');
+
+        $('.card').css('background-color', '#1A1A1B');
+        $('.card>*').css('color', '#e1e3e1');
+
+        $('.indexLogo').css('filter', 'invert(0)')
+
+        $('.carousel-tag-selector>*').css('background-color', 'rgb(58, 58, 58)')
+        $('.carousel-tag-selector>*').css('color', 'white');
+
+        $('.post-link').css('color', 'white');
+
+        // modals
+        $('.modal-content').css('background-color', 'rgb(58, 58, 58)');
+        $('.modal-content>*').css('background-color', 'rgb(58, 58, 58)');
+    }
+    else {
+        // general
+        $('body').css('background-color', 'rgb(250, 242, 226)');
+        $('body').css('color', 'black');
+
+        $('.card').css('background-color', 'white');
+        $('.card>*').css('color', 'black');
+
+        $('.indexLogo').css('filter', 'invert(1)')
+
+        $('.carousel-tag-selector>*').css('background-color', 'white');
+        $('.carousel-tag-selector>*').css('color', 'black');
+
+        $('.post-link').css('color', 'black');
+
+        // modal
+        $('.modal-content').css('background-color', 'white');
+        $('.modal-content>*').css('background-color', 'white');
+
+    }
+}
 
 
 function normalizeSlideHeights() {
@@ -232,7 +301,6 @@ function normalizeSlideHeights() {
         items.css('min-height', maxHeight + 'px');
     })
 }
-
 
 
 $(window).on(
