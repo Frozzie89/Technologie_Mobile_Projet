@@ -103,11 +103,12 @@ $OFFSET = 0;
     }
 
     function displayPosts(posts) {
+        var styleCard = Cookies.get('theme') == 'light' ? ['white', '#e1e3e1'] : ['#1A1A1B', 'black'];
         $('.evr').remove();
         $.each(posts, function (i, post) {
             $.getJSON('extranet/getPhotoOfPost.php', {postID: post.id_posts}, function (photo) {
                 let postText = limitTextPost(post.texte_posts);
-                $("<div class='col-lg-3 card-news-max-height evr " + post.id_tags + "'><div class='card card-height card-style'>" +
+                $("<div class='col-lg-3 card-news-max-height evr " + post.id_tags + "'><div class='card card-height card-style' style='background-color: "+ styleCard[0]+ "; color: "+ styleCard[1]+"'>" +
                     "<a href='post.php?id=" + post.id_posts + "'><img class='card-img-top' src='extranet/" + photo.nom_photos + "' alt='ok'>" +
                     "<div class='card-body card-body-style'>" +
                     "<h5 class='card-title'>" + post.titre_posts + "</h5>" +
@@ -141,12 +142,11 @@ $OFFSET = 0;
     function fetchDataTag(tagValue, selector, cssclass) {
         $.getJSON('fetchPostTendance.php', {tagID: tagValue, tendance : false}, function (posts) {
             var styleCard = Cookies.get('theme') == 'light' ? ['white', '#e1e3e1'] : ['#1A1A1B', 'black'];
-            //console.log(Cookies.get('theme') +' '+styleCard[0]+' '+ styleCard[1]);
             NB_POST = posts.length;
             $.each(posts, function (i, post) {
                 $.getJSON('extranet/getPhotoOfPost.php', {postID: post.id_posts}, function (photo) {
                     let postText = limitTextPost(post.texte_posts);
-                    $("<div class='col-lg-3 card-news-max-height td " + post.id_tags + "'><div class='card card-height card-style' style='background-color: "+ styleCard[0]+ "; color: "+ styleCard[1]+">" +
+                    $("<div class='col-lg-3 card-news-max-height td " + post.id_tags + "'><div class='card card-height card-style' style='background-color: "+ styleCard[0]+ "; color: "+ styleCard[1]+" '>"+
                         "<a href='post.php?id=" + post.id_posts + "'><img class='card-img-top' src='extranet/" + photo.nom_photos + "' alt= " + post.titre_posts +" >" +
                         "<div class='card-body card-body-style'>" +
                         "<h5 class='card-title'>" + post.titre_posts + "</h5>" +
