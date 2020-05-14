@@ -11,6 +11,9 @@ function app_autoload($class){
 
     require "$p\\class\\$class.php";
 }
-
+/*
 ini_set('display_errors',1);
 error_reporting(E_ALL);
+*/
+/* To not display errors */
+error_reporting(E_ERROR | E_PARSE);
