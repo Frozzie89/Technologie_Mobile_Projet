@@ -145,6 +145,22 @@ INSERT INTO `tags` (`id_tags`, `nom_tags`, `affichage_tags`) VALUES
 (3, 'sport', 'Sport'),
 (4, 'divertissement', 'Divertissement');
 
+
+--
+-- Dumping data for table `membres`
+--
+INSERT INTO `membres` (`login_membres`, `motDePasse_membres`, `pseudo_membres`) VALUES
+('admin1@admin.com', 'f1cIuOkopoji2', 'AdminLucien'),
+('admin2@admin.com', 'f1EH9z9t53mpU', 'AdminNathan'),
+('admin3@admin.com', 'f1TFWkNyVlv2g', 'AdminLinda');
+
+--
+-- Dumping data for table `administrateurs`
+--
+INSERT INTO administrateurs (id_membres) SELECT id_membres FROM membres WHERE login_membres LIKE 'admin1@admin.com';
+INSERT INTO administrateurs (id_membres) SELECT id_membres FROM membres WHERE login_membres LIKE 'admin2@admin.com';
+INSERT INTO administrateurs (id_membres) SELECT id_membres FROM membres WHERE login_membres LIKE 'admin3@admin.com';
+
 --
 -- Constraints for dumped tables
 --

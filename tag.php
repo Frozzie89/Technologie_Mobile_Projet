@@ -103,7 +103,7 @@ $OFFSET = 0;
     }
 
     function displayPosts(posts) {
-        var styleCard = Cookies.get('theme') == 'light' ? ['white', '#e1e3e1'] : ['#1A1A1B', 'black'];
+        var styleCard = Cookies.get('theme') == 'dark' ? ['#1A1A1B', 'black'] : ['white', '#e1e3e1'];
         $('.evr').remove();
         $.each(posts, function (i, post) {
             $.getJSON('extranet/getPhotoOfPost.php', {postID: post.id_posts}, function (photo) {
@@ -141,7 +141,7 @@ $OFFSET = 0;
 
     function fetchDataTag(tagValue, selector, cssclass) {
         $.getJSON('fetchPostTendance.php', {tagID: tagValue, tendance : false}, function (posts) {
-            var styleCard = Cookies.get('theme') == 'light' ? ['white', '#e1e3e1'] : ['#1A1A1B', 'black'];
+            var styleCard = Cookies.get('theme') == 'dark' ? ['#1A1A1B', 'black'] : ['white', '#e1e3e1'];
             NB_POST = posts.length;
             $.each(posts, function (i, post) {
                 $.getJSON('extranet/getPhotoOfPost.php', {postID: post.id_posts}, function (photo) {

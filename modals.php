@@ -1,3 +1,7 @@
+<?php $pageRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0'; 
+    
+?>
+
 <!-- modal login  -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -18,7 +22,7 @@
                     <div class="form-group">
                         <label for="LoginMDP">Mot de passe</label>
                         <input type="password" class="form-control" id="LoginMDP" placeholder="" name="LoginMDP">
-                        <?php if (isset($connexion) && $connexion == false)
+                        <?php if (isset($connexion) && $connexion == false && !$pageRefreshed && !isset($_POST['RegisterEmail']))
                             echo "<span id=\"WrongLogin\" style=\"color: red;\">
                             L'adresse email ou le mot de passe est erroné</span>";
                         ?>
@@ -51,7 +55,7 @@
                     <div class="form-group">
                         <label for="RegisterMail">Adresse Email</label>
                         <input type="email" class="form-control" id="RegisterMail" placeholder="" name="RegisterEmail">
-                        <?php if (!empty($RegisterMailExists)) echo "<span id=\"RegisterMailExists\" style=\"color: red;\">Cette adresse mail est déjà prise</span>" ?>
+                        <?php if (!empty($RegisterMailExists) && !$pageRefreshed) echo "<span id=\"RegisterMailExists\" style=\"color: red;\">Cette adresse mail est déjà prise</span>" ?>
                     </div>
 
                     <div class="form-group">
@@ -76,7 +80,7 @@
                             name="RegisterMdpVerif">
                         <span id="mdpUnmatch" style="display:none; color: red;">Les mots de passes ne correspondent
                             pas</span>
-                        <?php if(isset($RegisterError))
+                        <?php if(isset($RegisterError) && !$pageRefreshed)
                             echo "<span id=\"ErrorMDPRegister\" style=\"color: red;\">Une erreur est survenue, l'inscription n'a pas pu être faite</span>" ?>
                         <br>
                     </div>
@@ -99,7 +103,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
+            </div>  
             <div class="modal-body" style="background-color:rgb(238, 238, 238);">
                 <form method="POST" id="ModifyForm">
                     <div class="input-group mb-3">
