@@ -27,6 +27,9 @@ error_reporting(E_ERROR | E_PARSE);
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,700&display=swap" rel="stylesheet">
 
+    <!-- Cookie JQuery -->
+    <script type="module" src="../assets/cookie/js.cookie.min.js"></script>
+
 </head>
 <div class="container-fluid msg-flash" id="top">
     <?php if(isset($_SESSION['flash'])): ?>
