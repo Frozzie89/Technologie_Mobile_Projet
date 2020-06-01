@@ -8,6 +8,7 @@
                     © 2020 The GOOD NEWS | Tous Droits Réservés
                 </div>
             </center>
+            <!-- -->
 
         </section>
     </div>
