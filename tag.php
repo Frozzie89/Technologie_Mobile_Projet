@@ -7,7 +7,7 @@ $NB_POST = count($db->query("Select * from posts where id_tags = :id", ["id" => 
 $NB_PER_PAGE = 8;
 $OFFSET = 0;
 ?>
-/* Petit test avec VS */
+/* Petit test avec VS encore un*/
 <!-- JS, jquery and stuff -->
 <script src="assets/js/jquery-3.4.1.js"></script>
 <script>
